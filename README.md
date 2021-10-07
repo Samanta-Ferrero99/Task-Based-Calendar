@@ -1,5 +1,19 @@
 # WEBAPPS-10
 
+## M1
+
+### Milestone Report
+
+**delete later**
+
+In your submission's README.md, provide a report of your progress. Include the following information:
+
+What's done.
+What's not done.
+List all the pages/components of the web app. Provide wireframes for pages not complete.
+List all the endpoints of the web app. For each endpoint, provide a description of the route, and expected behavior of the endpoint.
+You might find using a markdown table useful, such as the following:
+
 ## M0
 
 ### Elevator Pitch
