@@ -4,15 +4,28 @@
 
 ### Milestone Report
 
-**delete later**
+**In your submission's README.md, provide a report of your progress. Include the following information:
 
-In your submission's README.md, provide a report of your progress. Include the following information:
-
-What's done.
+**What's done.
 What's not done.
 List all the pages/components of the web app. Provide wireframes for pages not complete.
 List all the endpoints of the web app. For each endpoint, provide a description of the route, and expected behavior of the endpoint.
-You might find using a markdown table useful, such as the following:
+
+We have made significant strides in the Landing Page. We currently have a hero image and a unique selling proposition as well as everything laid out. We have also decided
+to use React as it is simpler to use.
+
+Right now, we are in the process of making the necessary wireframes to base the rest of our pages off of. We would like to implement a login page, a page showing the calendar, and a settings page.
+
+We currently do not have any endpoints. (List endpoints here).
+
+❌ - Not Started, 🔶 - In Progress, ✔️ - Finished
+
+Page | Status | Wireframe 
+--- | --- | --- 
+Landing | 🔶 | 
+Login | ❌ | 
+Calendar | ❌ | 
+Settings | ❌ |
 
 ## M0
 
