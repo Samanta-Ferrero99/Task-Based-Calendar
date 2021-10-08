@@ -1,6 +1,6 @@
 # WEBAPPS-10
 
-[Setting Up For Local Development]()
+[Setting Up For Local Development](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/blob/94086617bc64e6c5e77728b1e364f6c1b6813442/SETUP.md)
 
 ## M1
 
