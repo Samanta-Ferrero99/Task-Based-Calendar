@@ -23,6 +23,7 @@ Page | Status | Wireframe
 --- | --- | --- 
 Landing | 🔶 | [Link](https://cdn.discordapp.com/attachments/890627955439599616/895855229852078110/unknown.png)
 Login | ❌ | 
+About us/Contact us | ❌ | 
 Calendar | ❌ | 
 Settings | ❌ |
 
