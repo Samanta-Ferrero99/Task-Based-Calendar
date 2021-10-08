@@ -22,7 +22,7 @@ Right now, we are in the process of making the necessary wireframes to base the 
 Page | Status | Wireframe 
 --- | --- | --- 
 Landing | 🔶 | [Link](https://cdn.discordapp.com/attachments/890627955439599616/895855229852078110/unknown.png)
-Login | ❌ | 
+Login | ❌ | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896071794535063582/login_wireframe.PNG)
 About us/Contact us | ❌ | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896023874725101598/unknown.png)
 Calendar | ❌ | 
 Settings | ❌ |
