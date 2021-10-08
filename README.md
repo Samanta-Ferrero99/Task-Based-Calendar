@@ -24,7 +24,7 @@ Page | Status | Wireframe
 Landing | 🔶 | [Link](https://cdn.discordapp.com/attachments/890627955439599616/895855229852078110/unknown.png)
 Login | ❌ | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896071794535063582/login_wireframe.PNG)
 About us/Contact us | ❌ | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896023874725101598/unknown.png)
-Calendar | ❌ | 
+Calendar | ❌ | [Link](https://cdn.discordapp.com/attachments/878271460697841675/892921014080639046/unknown.png)
 Settings | ❌ |
 
 **List all the endpoints of the web app. For each endpoint, provide a description of the route, and expected behavior of the endpoint.**
