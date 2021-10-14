@@ -39,7 +39,7 @@ export default function LoginPage() {
   const bottomNote = {
     fontSize: "1.0em",
     fontWeight: "200",
-    maxWidth: "490px",
+    maxWidth: "430px",
     minWidth: "380px",
     marginTop: "20px",
   };
