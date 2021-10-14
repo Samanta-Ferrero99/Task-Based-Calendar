@@ -10,12 +10,11 @@
 
 **What's done.**
 
-We have made significant strides in the Landing Page. We currently have a hero image and a unique selling proposition as well as everything laid out. We have also decided
-to use React as it is simpler to use.
+We have finished up the landing page! It has the necessary unique selling proposition, a hero image, the benefits, and a call to action. We have created wireframes for all the necessary pages right now (we don't have one for settings as we created the page before the design). There is a static about us/contact us page and a settings page. The calendar and login pages are finished on the front end and we have made a good start in implementing the back-end.
 
 **What's not done.**
 
-Right now, we are in the process of making the necessary wireframes to base the rest of our pages off of. We would like to implement a login page, a page showing the calendar, and a settings page.
+We need to finish up the implementation behind the calendar and the login page. We also need to make the about us/contact us and settings pages have a back-end implementation. Calendar relies on the log in so that may not be completely visible yet, and the backend behind the settings page will rely on the calendar's main functionality being finished.
 
 **List all the pages/components of the web app. Provide wireframes for pages not complete.**
 
@@ -24,14 +23,15 @@ Right now, we are in the process of making the necessary wireframes to base the 
 Page | Status | Wireframe 
 --- | --- | --- 
 Landing | 🔶 | [Link](https://cdn.discordapp.com/attachments/890627955439599616/895855229852078110/unknown.png)
-Login | ❌ | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896071794535063582/login_wireframe.PNG)
-About us/Contact us | ❌ | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896023874725101598/unknown.png)
-Calendar | ❌ | [Link](https://cdn.discordapp.com/attachments/878271460697841675/892921014080639046/unknown.png)
-Settings | ❌ |
+Login | 🔶 | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896071794535063582/login_wireframe.PNG)
+About us/Contact us | 🔶 | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896023874725101598/unknown.png)
+Calendar | 🔶 | [Link](https://cdn.discordapp.com/attachments/878271460697841675/892921014080639046/unknown.png)
+Settings | 🔶 |
 
 **List all the endpoints of the web app. For each endpoint, provide a description of the route, and expected behavior of the endpoint.**
 
-We currently do not have any endpoints. (List endpoints here).
+Endpoints | Status | Purpose | Response
+--- | --- | --- | ---
 
 ## M0
 
