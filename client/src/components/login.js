@@ -9,19 +9,26 @@ export default function LoginPage() {
     padding: "70px 0px",
   };
 
-  const rightPane = {
-    marginTop: "90px",
-    marginLeft: "20px",
+  const leftPane = {
+    
   };
 
-  const hook = {
+  const title = {
     fontSize: "2.7em",
     fontWeight: "800",
     maxWidth: "500px",
     minWidth: "480px",
   };
 
-  const subHook = {
+  const loginInfo = {
+    fontSize: "2.0em",
+    fontWeight: "700",
+    maxWidth: "490px",
+    minWidth: "380px",
+    marginTop: "20px",
+  };
+
+  const inputLabel = {
     fontSize: "1.2em",
     fontWeight: "300",
     maxWidth: "490px",
@@ -29,8 +36,17 @@ export default function LoginPage() {
     marginTop: "20px",
   };
 
-  const leftPane = {
-   
+  const bottomNote = {
+    fontSize: "1.0em",
+    fontWeight: "200",
+    maxWidth: "490px",
+    minWidth: "380px",
+    marginTop: "20px",
+  };
+
+  const rightPane = {
+    marginTop: "90px",
+    marginLeft: "20px",
   };
 
   const loginImageStyle = {
@@ -49,25 +65,28 @@ export default function LoginPage() {
   return (
     <Container className="loginPage" style={loginPage}>
       <Row>
-        <Col className="rightPane" md="6" style={rightPane}>
-          <h1 className="hook" style={hook}>
+        <Col className="leftPane" md="6" style={leftPane}>
+          <h1 className="hook" style={title}>
             Log in
           </h1>
           <img
             src={loginImage}
-            alt="Login Image"
+            alt="Login"
             className="loginImage"
             style={loginImageStyle}
           />
         </Col>
-        <Col className="leftPane" md="auto" style={leftPane}>
-            <h3 className="subHook" style={subHook}>
+        <Col className="rightPane" md="auto" style={rightPane}>
+            <h2 className="subHook" style={loginInfo}>
+              Enter your username and password.
+            </h2>
+            <h3 className="subHook" style={inputLabel}>
                 Username
             </h3>
             <label>
                 <input type="text" name="username" />
             </label>
-            <h3 className="subHook" style={subHook}>
+            <h3 className="subHook" style={inputLabel}>
                 Password
             </h3>
             <label>
@@ -77,6 +96,9 @@ export default function LoginPage() {
         <Button className="getStartedButton" style={getStartedButton} input type="submit" name="login">
             Log In
           </Button>
+          <h4 className="bottomNote" style={bottomNote}>
+            Please note that you will be redirected to GitHub's OAuth page to authenticate your login details.
+          </h4>
         </Col>
       </Row>
     </Container>

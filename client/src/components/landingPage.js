@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button, Container, Row, Col }  from "react-bootstrap";
 import heroImage from "../assets/hero-image.svg";
 
@@ -62,9 +63,10 @@ export default function LandingPage() {
             imperdiet ipsum ut tortor euismod elementum. Quisque nec molestie
             ligula, mattis viverra dolor.
           </h3>
-          <Button className="getStartedButton" style={getStartedButton}>
+          <Link to="/login"><Button className="getStartedButton" style={getStartedButton}>
             Get Organized
           </Button>
+          </Link>
         </Col>
         <Col className="leftPane" md="auto" style={leftPane}>
           <img
