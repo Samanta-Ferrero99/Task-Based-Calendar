@@ -35,7 +35,7 @@ export default function NavBar() {
               How it Works
             </Nav.Link>
             <Nav.Link
-              href="/"
+              href="/login"
               style={{ color: "#1c1c1c", fontSize: "15px", fontWeight: 400 }}
             >
               Log In

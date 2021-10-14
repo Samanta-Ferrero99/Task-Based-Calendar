@@ -7,13 +7,17 @@ import { Route } from "react-router-dom";
 import LandingPage from "./components/landingPage";
 import NavBar from "./components/navbar";
 import "./App.css";
+import LoginPage from "./components/login";
 
 const App = () => {
   return (
     <div>
+      <NavBar />
       <Route exact path="/">
-        <NavBar />
         <LandingPage />
+      </Route>
+      <Route exact path="/login">
+        <LoginPage />
       </Route>
     </div>
   );
