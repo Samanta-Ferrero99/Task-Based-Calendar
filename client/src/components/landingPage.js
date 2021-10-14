@@ -45,6 +45,8 @@ export default function LandingPage() {
   // light green: #b8cd48
   const getStartedButton = {
     marginTop: "20px",
+    marginLeft: "5px",
+    marginRight: "5px",
     backgroundColor: "#b8cd48",
     border: "0px solid #b8cd48",
   };
@@ -59,12 +61,22 @@ export default function LandingPage() {
             We're not your average task planner
           </h1>
           <h3 className="subHook" style={subHook}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            imperdiet ipsum ut tortor euismod elementum. Quisque nec molestie
-            ligula, mattis viverra dolor.
+            College can be stressful, and looking at all of the tasks inside 
+            of your calendar can sometimes be overwhelming. We at Chronicle 
+            are offering a solution that will help you stay on top of your 
+            responsibilities.
+            <br /><br />
+            Your day will be arranged conditionally by sections such as what
+            classes you are taking and what homework is due, as well as life
+            activities such as exercise and general reminders so that you will
+            maintain a good work-life balance.
           </h3>
           <Link to="/login"><Button className="getStartedButton" style={getStartedButton}>
             Get Organized
+          </Button>
+          </Link>
+          <Link to="/aboutUs"><Button className="getStartedButton" style={getStartedButton}>
+            Contact Us
           </Button>
           </Link>
         </Col>
