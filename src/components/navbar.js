@@ -3,9 +3,7 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-
 export default function NavBar() {
-
   return (
     <Navbar variant="light" expand="lg" style={{ marginTop: "25px" }}>
       <Container>
@@ -28,15 +26,33 @@ export default function NavBar() {
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link
-              href="/"
+            {/* <Nav.Link
+              href="/dashboard"
               style={{ color: "#1c1c1c", fontSize: "15px", fontWeight: 400 }}
             >
-              How it Works
+              Dashboard
+            </Nav.Link> */}
+            <Nav.Link
+              href="/calendar"
+              style={{ color: "#1c1c1c", fontSize: "15px", fontWeight: 400 }}
+            >
+              Calendar
+            </Nav.Link>
+            <Nav.Link
+              href="/about-us"
+              style={{ color: "#1c1c1c", fontSize: "15px", fontWeight: 400 }}
+            >
+              About Us
+            </Nav.Link>
+            <Nav.Link
+              href="/settings"
+              style={{ color: "#1c1c1c", fontSize: "15px", fontWeight: 400 }}
+            >
+              Settings
             </Nav.Link>
             <Nav.Link
               href="/login"
-              style={{ color: "#1c1c1c", fontSize: "15px", fontWeight: 400 }}
+              style={{ color: "#91a434", fontSize: "15px", fontWeight: 400 }}
             >
               Log In
             </Nav.Link>

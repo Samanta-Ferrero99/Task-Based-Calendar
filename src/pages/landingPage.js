@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, Container, Row, Col }  from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import heroImage from "../assets/hero-image.svg";
 
 /**
@@ -9,7 +9,7 @@ import heroImage from "../assets/hero-image.svg";
 export default function LandingPage() {
   // Styles
   const landingPage = {
-    padding: "70px 0px",
+    padding: "0px 0px",
   };
 
   const rightPane = {
@@ -32,9 +32,7 @@ export default function LandingPage() {
     marginTop: "20px",
   };
 
-  const leftPane = {
-   
-  };
+  const leftPane = {};
 
   const heroImageStyle = {
     width: "33em",
@@ -61,23 +59,26 @@ export default function LandingPage() {
             We're not your average task planner
           </h1>
           <h3 className="subHook" style={subHook}>
-            College can be stressful, and looking at all of the tasks inside 
-            of your calendar can sometimes be overwhelming. We at Chronicle 
-            are offering a solution that will help you stay on top of your 
+            College can be stressful, and looking at all of the tasks inside of
+            your calendar can sometimes be overwhelming. We at Chronicle are
+            offering a solution that will help you stay on top of your
             responsibilities.
-            <br /><br />
+            <br />
+            <br />
             Your day will be arranged conditionally by sections such as what
             classes you are taking and what homework is due, as well as life
             activities such as exercise and general reminders so that you will
             maintain a good work-life balance.
           </h3>
-          <Link to="/login"><Button className="getStartedButton" style={getStartedButton}>
-            Get Organized
-          </Button>
+          <Link to="/login">
+            <Button className="getStartedButton" style={getStartedButton}>
+              Get Organized
+            </Button>
           </Link>
-          <Link to="/aboutUs"><Button className="getStartedButton" style={getStartedButton}>
-            Contact Us
-          </Button>
+          <Link to="/about-us">
+            <Button className="getStartedButton" style={getStartedButton}>
+              Contact Us
+            </Button>
           </Link>
         </Col>
         <Col className="leftPane" md="auto" style={leftPane}>
@@ -91,4 +92,4 @@ export default function LandingPage() {
       </Row>
     </Container>
   );
-} 
+}
