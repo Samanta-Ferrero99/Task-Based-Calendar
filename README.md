@@ -21,6 +21,10 @@
 - There is a static about us/contact us page and a settings page. 
 - The calendar page is partially implemented on the front end and we have made a good start in implementing the back-end.
 - We have implemented a Login page that authenticates with Google OAuth.
+- We have set up our persistance using MongoDB for our database and connected it to the express server.
+- We have created schema/models for tasks and users, using mongoose.
+- We have created and implemented >70% of the REST API endpoints for tasks and users.
+
 
 **What's not done.**
 
@@ -28,6 +32,8 @@
 - We need to implement the settings page back-end. 
     - Backend behind the settings page will rely on the calendar's main functionality being finished.
 - We need to implement responsive behaviors on all pages. They are sort of responsive currently, but become awkward at some screen sizes.
+- We are planning out dependency structured task models and working on a few other collections for the database, along with the API endpoints needed for them.
+- We are working to create smaller reusable components for task input and to visually display tasks and their dependency relationships.
 
 **List all the pages/components of the web app. Provide wireframes for pages not complete.**
 
