@@ -11,6 +11,8 @@
 
 ### Milestone Report
 
+> [Screencast](https://drive.google.com/file/d/1Dg-EpxPeYPx2wKGqzKbkJnGihknm19qL/view?usp=sharing)
+
 **What's done.**
 
 - We have finished up the landing page! 
