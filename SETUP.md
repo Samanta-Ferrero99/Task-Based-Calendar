@@ -51,7 +51,7 @@ You should already have installed
 
 7. In the **server** terminal, enter the following commands:
 
-- ```cd server```
+- ```cd backend```
 - ```npm install```
 - _After the prevoius command has finished installing server dependencies_ ```nodemon server.js```
 
@@ -59,7 +59,6 @@ You should already have installed
 
 8. In the **client** terminal, enter the following commands:
 
-- ```cd client```
 - ```npm install```
 - _After the prevoius command has finished installing server dependencies_ ```npm start```
 
