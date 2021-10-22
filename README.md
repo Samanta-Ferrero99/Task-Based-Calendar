@@ -1,5 +1,9 @@
 # WEBAPPS-10
 
+### Setup
+
+> [Instructions to Start Web Application](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/blob/main/SETUP.md)
+
 ### Contents
 
 - [M0](#M0)
@@ -11,11 +15,11 @@
 
 ### Milestone Report
 
-Screencast: TODO
+> Screencast: TODO
 
 ### Branch
 
-M2: TODO
+> M2: TODO
 
 **What's done.**
 
