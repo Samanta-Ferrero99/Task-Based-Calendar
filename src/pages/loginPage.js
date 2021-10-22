@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Nav } from "react-bootstrap";
 import loginImage from "../assets/login.svg";
 import Login from "../components/login";
 
@@ -18,21 +18,21 @@ export default function LoginPage() {
     minWidth: "480px",
   };
 
-  const loginInfo = {
-    fontSize: "2.0em",
-    fontWeight: "700",
-    maxWidth: "490px",
-    minWidth: "380px",
-    marginTop: "20px",
-  };
+  // const loginInfo = {
+  //   fontSize: "2.0em",
+  //   fontWeight: "700",
+  //   maxWidth: "490px",
+  //   minWidth: "380px",
+  //   marginTop: "20px",
+  // };
 
-  const inputLabel = {
-    fontSize: "1.2em",
-    fontWeight: "300",
-    maxWidth: "490px",
-    minWidth: "380px",
-    marginTop: "20px",
-  };
+  // const inputLabel = {
+  //   fontSize: "1.2em",
+  //   fontWeight: "300",
+  //   maxWidth: "490px",
+  //   minWidth: "380px",
+  //   marginTop: "20px",
+  // };
 
   const bottomNote = {
     fontSize: "1.2em",
@@ -40,10 +40,10 @@ export default function LoginPage() {
     marginTop: "20px",
   };
 
-  const rightPane = {
-    marginTop: "90px",
-    marginLeft: "20px",
-  };
+  // const rightPane = {
+  //   marginTop: "90px",
+  //   marginLeft: "20px",
+  // };
 
   const loginImageStyle = {
     width: "40em",
@@ -65,7 +65,9 @@ export default function LoginPage() {
             Please note that you will be redirected to Google's OAuth page to
             authenticate your login details.
           </h4>
+          <Nav.Link href="/dashboard">
           <Login />
+          </Nav.Link>
         </Col>
       </Row>
       <Row>
