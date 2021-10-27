@@ -20,18 +20,19 @@
 ### Branch
 
 > M2: TODO
+> For the checkpoint, we have commits in [dev](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/dev), [kclindse/third-party-login-logout](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/kclindse/third-party-login-logout), and [spferrer/aboutUsEmailForm](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/spferrer/aboutUsEmailForm)
 
 **What's done.**
 
 - We have finished implementing the log in, log out, and registration functionality using React Google Login. 
     -  With this, we are not storing passwords anywhere, so there is nothing to hash.
+- On the About Us/Contact Us page, we will be utilizing EmailJS so that users can contact the company.
+    - One of our student emails will be used as the point of contact for convenience.
 
 **What's not done.**
 
 - We have started working on functionality so that the navigation bar changes depending on if the user is logged in.
 - We are working on a task component that will display data about the specific task the user has input.
-- On the About Us/Contact Us page, we will be utilizing EmailJS so that users can contact the company.
-    - One of our student emails will be used as the point of contact for convenience.
 - We need to finish implementing the backend behind the dashboard and calendar pages.
     - Partially reliant on getting the task component complete.
 - We need to implement at least some of the backend behind the settings page.
