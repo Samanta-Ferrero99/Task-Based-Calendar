@@ -20,7 +20,7 @@
 ### Branch
 
 > M2: TODO
-> For the checkpoint, we have commits in [dev](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/dev), [kclindse/third-party-login-logout](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/kclindse/third-party-login-logout), and [spferrer/aboutUsEmailForm](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/spferrer/aboutUsEmailForm)
+- For the checkpoint, we have commits in [dev](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/dev), [kclindse/third-party-login-logout](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/kclindse/third-party-login-logout), and [spferrer/aboutUsEmailForm](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/spferrer/aboutUsEmailForm)
 
 **What's done.**
 
