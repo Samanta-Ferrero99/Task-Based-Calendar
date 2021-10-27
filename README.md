@@ -23,11 +23,19 @@
 
 **What's done.**
 
-TODO
+- We have finished implementing the log in, log out, and registration functionality using React Google Login. 
+    -  With this, we are not storing passwords anywhere, so there is nothing to hash.
 
 **What's not done.**
 
-TODO
+- We have started working on functionality so that the navigation bar changes depending on if the user is logged in.
+- We are working on a task component that will display data about the specific task the user has input.
+- On the About Us/Contact Us page, we will be utilizing EmailJS so that users can contact the company.
+    - One of our student emails will be used as the point of contact for convenience.
+- We need to finish implementing the backend behind the dashboard and calendar pages.
+    - Partially reliant on getting the task component complete.
+- We need to implement at least some of the backend behind the settings page.
+    - Reliant on the calendar page. May not get done for M2.  
 
 **List all the pages/components of the web app. Provide wireframes for pages not complete.**
 
@@ -39,6 +47,7 @@ Landing | ✔️ | [Link](https://cdn.discordapp.com/attachments/890627955439599
 Login | ✔️ | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896071794535063582/login_wireframe.PNG)
 About us/Contact us | 🔶 | [Link](https://cdn.discordapp.com/attachments/890627955439599616/896023874725101598/unknown.png)
 Calendar | 🔶 | [Link](https://cdn.discordapp.com/attachments/878271460697841675/892921014080639046/unknown.png)
+Dashboard | 🔶 |
 Settings | 🔶 |
 
 **List all the endpoints of the web app. For each endpoint, provide a description of the route, and expected behavior of the endpoint.**
