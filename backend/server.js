@@ -3,6 +3,7 @@ let mongoose = require("mongoose");
 let cors = require("cors");
 let bodyParser = require("body-parser");
 let dbConfig = require("./database/db");
+const passport = require("passport");
 
 // Express Route
 const userRoute = require("../backend/routes/user.route");
@@ -31,6 +32,12 @@ app.use(
     extended: true,
   })
 );
+
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+
 app.use(cors());
 app.use("/tasks", taskRoute);
 app.use("/users", userRoute);

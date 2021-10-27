@@ -1,56 +1,97 @@
 const express = require("express");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const keys = require("../config/keys");
+
+// Load input validation
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
+// Load User model
 const userModel = require("../models/user");
-const app = express();
 
-// Test
-app.get("/test", async (request, response) => {
-  response.send("Hey!!");
-});
-
-// POST endpoint for creating new user
-app.post("/create-user", async (request, response) => {
-  const user = new userModel(request.body);
-  try {
-    await user.save();
-    response.send(user);
-  } catch (error) {
-    response.status(500).send(error);
+// @route POST api/users/register
+// @desc Register user
+// @access Public
+router.post("/register", (req, res) => {
+  // Form validation
+  const { errors, isValid } = validateRegisterInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
   }
+  userModel.findOne({ email: req.body.email }).then(user => {
+    if (user) {
+      return res.status(400).json({ email: "Email already exists" });
+    } else {
+      const newUser = new userModel({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+      });
+      // Hash password before saving in database
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(user => res.json(user))
+            .catch(err => console.log(err));
+        });
+      });
+    }
+  });
 });
 
-// GET endpoint for getting all users.
-app.get("/", async (request, response) => {
-  const users = await userModel.find({});
-
-  try {
-    response.send(users);
-  } catch (error) {
-    response.status(500).send(error);
+// @route POST api/users/login
+// @desc Login user and return JWT token
+// @access Public
+router.post("/login", (req, res) => {
+  // Form validation
+  const { errors, isValid } = validateLoginInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
   }
+  const email = req.body.email;
+  const password = req.body.password;
+  // Find user by email
+  userModel.findOne({ email }).then(user => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    }
+    // Check password
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        // User matched
+        // Create JWT Payload
+        const payload = {
+          id: user.id,
+          username: user.username
+        };
+        // Sign token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          {
+            expiresIn: 31556926 // 1 year in seconds
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
+      } else {
+        return res
+          .status(400)
+          .json({ passwordincorrect: "Password incorrect" });
+      }
+    });
+  });
 });
 
-// GET endpoint for getting a single user.
-app.get("/:id", async (request, response) => {
-  try {
-    const user = await userModel.findById(request.params.id);
-    response.send(user);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-    
-});
-
-// DELETE endpoint for a single user
-// app.delete('/delete-user/:id', async (request, response) => {
-//   const user = userModel.findByIdAndRemove(request.params.id);
-//   try {
-//     response.status(200).send(user);
-//   } catch (error) {
-//     response.stataus(500).send(error);
-//   }
-// });
-
-// PUT endpoint for a single user
-// WIP
-
-module.exports = app;
+module.exports = router;
