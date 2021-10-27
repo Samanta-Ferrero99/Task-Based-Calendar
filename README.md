@@ -26,8 +26,8 @@
 
 - We have finished implementing the log in, log out, and registration functionality using React Google Login. 
     -  With this, we are not storing passwords anywhere, so there is nothing to hash.
-- On the About Us/Contact Us page, we will be utilizing EmailJS so that users can contact the company.
-    - One of our student emails will be used as the point of contact for convenience.
+- On the About Us/Contact Us page, we are now utilizing EmailJS so that users can contact the company.
+    - One of our student emails (spferrer@ncsu.edu) is being used as the point of contact for convenience.
 
 **What's not done.**
 
