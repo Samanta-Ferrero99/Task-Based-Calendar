@@ -96,16 +96,22 @@ export default function AboutUsPage() {
             About the Creators
           </h1>
           <h3 className="subHook" style={subHook}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            imperdiet ipsum ut tortor euismod elementum. Quisque nec molestie
-            ligula, mattis viverra dolor.
+            We are three young entrepeneurs studying at North Carolina State University.
+            We are Computer Science majors learning about website design. 
           </h3>
 
           <h3 className="subHook" style={subHook}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            imperdiet ipsum ut tortor euismod elementum. Quisque nec molestie
-            ligula, mattis viverra dolor.
+            We created "Chronicle" as a fun way to fight our own difficulties with college homework scheduling.
+            As college students, we have experienced multiple moments of procrastination and time missmanagement,
+            because of this, we wanted to create a calendar specifically for college students that would help with
+            scheduling of classes, homework and free time to achieve better work-life balance. 
           </h3>
+
+          <h3 className="subHook" style={subHook}>
+          We would love to hear from you as to how we can better Chronicle! If you would like to leave any feedback
+          fill in the form below! 
+          </h3>
+
         </Col>
       </Row>
       <Row>
