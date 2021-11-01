@@ -20,7 +20,7 @@
 ### Branch
 
 > M2: TODO
-- For the checkpoint, we have commits in [dev](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/dev), [kclindse/third-party-login-logout](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/kclindse/third-party-login-logout), and [spferrer/aboutUsEmailForm](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/spferrer/aboutUsEmailForm). We will be merging these branches into an M2 branch once fully finished.
+- For the checkpoint, we have commits in [dev](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/dev), , and [spferrer/aboutUsEmailForm](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/spferrer/aboutUsEmailForm). We will be merging these branches into an M2 branch once fully finished.
 
 **What's done.**
 
@@ -28,16 +28,17 @@
     -  With this, we are not storing passwords anywhere, so there is nothing to hash.
 - On the About Us/Contact Us page, we are now utilizing EmailJS so that users can contact the company.
     - One of our student emails (spferrer@ncsu.edu) is being used as the point of contact for convenience.
-    - This page is almost finished. We just need to add information about the company Chronicle.
+    - We have added information about the company Chronicle to the About Us page.
 
 **What's not done.**
 
 - We have started working on functionality so that the navigation bar changes depending on if the user is logged in.
+    - This functionality can be seen under [kclindse/third-party-login-logout](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/kclindse/third-party-login-logout), we just haven't fully completed it yet!
 - We are working on a task component that will display data about the specific task the user has input.
 - We need to finish implementing the backend behind the dashboard and calendar pages.
     - Partially reliant on getting the task component complete.
 - We need to implement at least some of the backend behind the settings page.
-    - Reliant on the calendar page. May not get done for M2.  
+    - Reliant on the calendar page. 
 
 **List all the pages/components of the web app. Provide wireframes for pages not complete.**
 
