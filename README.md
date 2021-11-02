@@ -19,8 +19,7 @@
 
 ### Branch
 
-> M2: TODO
-- For the checkpoint, we have commits in [dev](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/dev), , and [spferrer/aboutUsEmailForm](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/spferrer/aboutUsEmailForm). We will be merging these branches into an M2 branch once fully finished.
+> [M2](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/m2)
 
 **What's done.**
 
