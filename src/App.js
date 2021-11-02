@@ -1,6 +1,7 @@
 
 // Route pages of application
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { UseGoogleLoginProps } from "react-google-login";
 
 // Import components
 import LandingPage from "./pages/landingPage";
@@ -19,7 +20,7 @@ const App = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar isAuth={UseGoogleLoginProps}/>
       <Router>
         <Switch>
           <Route path="/login" component={LoginPage} />
