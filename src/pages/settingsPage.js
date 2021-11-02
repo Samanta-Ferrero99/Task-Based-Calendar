@@ -85,10 +85,10 @@ export default function SettingsPage() {
             value="1"
             style={darkmode}
           >
-            DarkMode
+             DarkMode
           </ToggleButton>
           <h3 className="subHook" style={subHook}>
-            Notifications:
+             Notifications:
           </h3>
           <ToggleButton
             className="notifications"

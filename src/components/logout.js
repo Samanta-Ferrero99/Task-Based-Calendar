@@ -7,7 +7,7 @@ const clientId =
 
 function Logout() {
   const onLogoutSuccess = (res) => {
-    console.log("Logged out Successfully");
+    console.log("Logged out Successfully: ", res.profileObj);
     alert("Logged out Successfully ✌");
   };
 
@@ -29,7 +29,7 @@ function Logout() {
 
   return (
     <Button onClick={signOut} style={loginButton}>
-      Log In
+      Log Out
     </Button>
   );
 }
