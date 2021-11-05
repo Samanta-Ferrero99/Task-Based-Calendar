@@ -1,9 +1,12 @@
 import React from "react";
-import { Modal, Button, FormControl, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import { Modal, Button, FormControl, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
 import Login from "./googleLogin";
+import AuthService from "../services/authService";
+import EventBus from "../utils/eventBus";
 
 /**
  * Modal for user Login
@@ -11,24 +14,7 @@ import Login from "./googleLogin";
 export default function LoginForm(props) {
   const [user, setUser] = React.useState({});
   const [errors, setErrors] = React.useState({});
-  const [authComplete, setAuthComplete] = React.useState(false);
-  const [googleError, setGoogleError] = React.useState(false);
   const history = useHistory();
-
-  React.useEffect(() => {
-    if (authComplete) {
-      handleLogin();
-      console.log("Google auth complete");
-      console.log(user);
-      // Logic to redirect
-    }
-  }, [authComplete]);
-
-  React.useEffect(() => {
-    if (googleError) {
-      // do something
-    }
-  }, [googleError]);
 
   const setField = (field, value) => {
     setUser({
@@ -62,40 +48,21 @@ export default function LoginForm(props) {
     } else {
       // No errors :)
       handleLogin();
-      console.log("No errors!");
-      console.log(user);
-      // Logic to redirect
     }
   }
 
   async function handleLogin() {
-    fetch("http://localhost:5000/users/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
+    AuthService.login(user).then(
+      (response) => {
+        console.log(`Successful login for user ${user.email}`);
+        EventBus.dispatch("login");
+        return history.push("/dashboard");
       },
-      body: JSON.stringify(user),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("token", data.token);
-        console.log(data);
-      })
-      .catch(e => {});
-      console.log("finished");
+      (error) => {
+        console.log("error");
+      }
+    );
   }
-
-  React.useEffect(() => {
-    fetch("/verifyUser", {
-      method: "GET",
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      },
-    })
-    .then((response) => response.json())
-    .then((data) => data.isLoggedIn ? history.push("/") : null)
-    .catch(e => {});
-  }, []);
 
   return (
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
@@ -156,9 +123,9 @@ export default function LoginForm(props) {
             </Button>
           </div>
         </Form>
-        <div className="d-grid gap-2">
-          <Login setGoogleError={setGoogleError} setUser={setUser} setAuthComplete={setAuthComplete} register={false} />
-        </div>
+        {/* <div className="d-grid gap-2">
+          <Login register={false} />
+        </div> */}
       </Modal.Body>
     </Modal>
   );

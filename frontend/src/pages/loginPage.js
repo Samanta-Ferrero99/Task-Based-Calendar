@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+
 import LoginForm from "../components/login";
 import "./loginPage.css";
 
@@ -8,7 +9,6 @@ export default function LoginPage() {
 
   return (
     <Container className="loginPage" id="loginPage" style={{paddingLeft: "15px"}}>
-      {/* <LogoutHooks /> */}
       <Row>
         <Col className="leftPane" md="6" id="leftPane">
           <h1 className="hook" id="cooperHeading1">

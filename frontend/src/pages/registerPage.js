@@ -6,57 +6,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import Login from "../components/googleLogin";
+import AuthService from "../services/authService";
 
 export default function RegisterPage() {
- 
+
   const [createNew, setCreateNew] = React.useState(false);
   const [user, setUser] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const history = useHistory();
-
-  async function handleRegister() {
-    const formatUser = {
-      username: user.username,
-      email: user.email,
-      password: user.password,
-    }
-    fetch("http://localhost:5000/users/register", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(formatUser),
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Get our new errors
-    const newErrors = findFormErrors();
-    // Conditional logic:
-    if (Object.keys(newErrors).length > 0) {
-      // We got errors!
-      setErrors(newErrors);
-    } else {
-      // No errors :)
-      handleRegister();
-      console.log("No errors!");
-      console.log(user);
-      // Logic to redirect
-    }
-  };
-
-  React.useEffect(() => {
-    fetch("/verifyUser", {
-      method: "GET",
-      headers: {
-        "x-access-token": localStorage.getItem("token"),
-      }
-    })
-    .then(response => response.json())
-    .then(data => data.isLoggedIn ? history.push("/"): null)
-    .catch(e => {});
-  }, []);
 
   const setField = (field, value) => {
     setUser({
@@ -71,14 +28,41 @@ export default function RegisterPage() {
   };
 
   const findFormErrors = () => {
-    const { email, password } = user;
+    const { username, email, password, password2 } = user;
     const newErrors = {};
-    // name errors
+    if (!username || username === "") newErrors.username = "Username cannot be blank";
     if (!email || email === "") newErrors.email = "Email cannot be blank";
     else if (!password || password === "")
       newErrors.password = "Password cannot be blank";
+    else if (!password2 || password2 === "")
+      newErrors.password2 = "Password confirmation cannot be blank";
 
     return newErrors;
+  };
+
+  async function handleRegister() {
+    AuthService.register(user).then(
+      (response) => {
+        return history.push("/welcome");
+      },
+      (error) => {
+        console.log("error");
+      }
+    );
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Get our new errors
+    const newErrors = findFormErrors();
+    // Conditional logic:
+    if (Object.keys(newErrors).length > 0) {
+      // We got errors!
+      setErrors(newErrors);
+    } else {
+      // No errors :)
+      handleRegister();
+    }
   };
 
   return (
@@ -105,7 +89,7 @@ export default function RegisterPage() {
               id="subHeading1"
               style={{ fontSize: "20px" }}
             >
-              Register with email
+              Sign up with email
             </span>
             <Button
               id="closeButton"
@@ -167,12 +151,12 @@ export default function RegisterPage() {
                 <FormControl
                   id="field"
                   type="text"
-                  onChange={(e) => setField("confirmPassword", e.target.value)}
+                  onChange={(e) => setField("password2", e.target.value)}
                   required
-                  isInvalid={!!errors.confirmPassword}
+                  isInvalid={!!errors.password2}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.repeatPassword}
+                  {errors.password2}
                 </Form.Control.Feedback>
               </Form.Group>
             </Form>
@@ -191,8 +175,16 @@ export default function RegisterPage() {
       ) : (
         <>
           <Row style={{ marginTop: "20px" }}>
-            <Col md="5" style={{ width: "200px" }}>
-              <Login />
+            <Button
+              id="button1"
+              variant="dark"
+              onClick={() => setCreateNew(true)}
+              style={{ width: "500px" }}
+            >
+              Sign up with email
+            </Button>
+            {/* <Col md="5" style={{ width: "200px" }}>
+              <Login register={true} />
             </Col>
             <Col md="5">
               <span style={{ marginRight: "25px" }}>or</span>
@@ -201,9 +193,9 @@ export default function RegisterPage() {
                 variant="dark"
                 onClick={() => setCreateNew(true)}
               >
-                Create new account
+                Sign up with email
               </Button>
-            </Col>
+            </Col> */}
           </Row>
         </>
       )}

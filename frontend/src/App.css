@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 .App {
   text-align: center;
 }
@@ -91,3 +93,13 @@ html * {
 #field {
   max-width: 350px;
 }
+
+#optionsLink {
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Libre Franklin', sans-serif;
+}
+
+#optionsGreeting {}
+
