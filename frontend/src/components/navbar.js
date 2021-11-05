@@ -144,6 +144,16 @@ const NavBar = (isLoggedIn) => {
                   Dashboard
                 </Nav.Link>
                 <Nav.Link
+                  href="/calendar"
+                  style={{
+                    color: "#1c1c1c",
+                    fontSize: "15px",
+                    fontWeight: 400,
+                  }}
+                >
+                  Calendar
+                </Nav.Link>
+                <Nav.Link
                   href="/settings"
                   style={{
                     color: "#1c1c1c",

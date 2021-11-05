@@ -1,9 +1,11 @@
 // Import dependencies
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "antd";
+import {useHistory} from "react-router-dom";
 
 // Import authentication services
 import UserService from "../services/userService";
+import AuthService from "../services/authService";
 import EventBus from "../utils/eventBus";
 // import AuthService from "../services/authService";
 
@@ -11,10 +13,11 @@ import EventBus from "../utils/eventBus";
 import ProjectSidePanel from "../components/projectSidePanel";
 import TaskSearch from "../components/taskSearch";
 import DashboardCard from "../components/dashboardCard";
+import DashboardCalendar from "../components/calendar";
 
 // The user's dashboard page -> overview of all tasks/projects
 export default function DashboardPage() {
-
+  const history = useHistory();
   // // Get the current user & token
   // const user = AuthService.getCurrentUser();
 
@@ -35,22 +38,82 @@ export default function DashboardPage() {
         }
       }
     );
+    if (!AuthService.getCurrentUser() || AuthService.getCurrentUser().user === undefined) {
+      history.push("/");
+    }
   }, []);
+
+  
   
   // Render the page
   return (
     <>
-      <ProjectSidePanel />
-      <TaskSearch/>
-      <DashboardCard width="600px" height="400px" color="red">
-        <h1>Test</h1>
-      </DashboardCard>
-      <Container
-        className="loginPage"
-        id="loginPage"
-        style={{ paddingLeft: "15px" }}
+      {/* <ProjectSidePanel /> */}
+
+      <div
+        className="dashboard"
+        id="dashboard"
+        style={{ paddingLeft: "9vw", paddingTop: "5vh" }}
       >
+        <Row style={{ paddingBottom: "20px" }}>
+          <TaskSearch />
+        </Row>
         <Row>
+          <DashboardCard width="85vw" height="200px" color="#fafafa">
+            <br />
+            <h1 id="normalHeading1">good morning, username !</h1>
+            <p id="subHeading2">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+              interdum non nunc eu accumsan. Nullam sagittis vehicula leo, in
+              commodo justo feugiat vel.
+            </p>
+          </DashboardCard>
+        </Row>
+        <br />
+        <Row gutter={[24, 24]}>
+          <Col span={11.5}>
+            <DashboardCard width="41vw" height="400px" color="#fafafa">
+              <br />
+              <h1 id="normalHeading1">weekly progress</h1>
+              <p id="subHeading2">Lorem ipsum dolor sit amet</p>
+            </DashboardCard>
+          </Col>
+          <Col span={12}>
+            <Row gutter={[12, 12]}>
+              <Col span={5.5}>
+                <DashboardCard width="20vw" height="180px" color="#fafafa">
+                  <h1 id="normalHeading2">today</h1>
+                  <p id="subHeading3">WIP STATIC DATA</p>
+                </DashboardCard>
+              </Col>
+              <Col span={5.5}>
+                <DashboardCard width="20vw" height="180px" color="#fafafa">
+                  <h1 id="normalHeading2">tomorrow</h1>
+                  <p id="subHeading3">WIP STATIC DATA</p>
+                </DashboardCard>
+              </Col>
+            </Row>
+            <br />
+            <Row gutter={[12, 12]}>
+              <Col span={12}>
+                <DashboardCard width="41vw" height="180px" color="#fafafa">
+                  <h1 id="normalHeading2">deadlines approaching</h1>
+                  <p id="subHeading3">WIP STATIC DATA</p>
+                </DashboardCard>
+              </Col>
+            </Row>
+          </Col>
+
+          <Col span={8} />
+          <Col span={8} />
+          <Col span={8} />
+        </Row>
+        <Row gutter={[16, 16]}>
+          <Col span={8} />
+          <Col span={8} />
+          <Col span={8} />
+        </Row>
+        {/* <Row>
           <Col className="leftPane" md="6" id="leftPane">
             <h1 className="hook" id="cooperHeading1">
               Welcome aboard!
@@ -73,7 +136,7 @@ export default function DashboardPage() {
               walkthrough
             </h4>
           </Col>
-        </Row>
+        </Row> */}
 
         {/* <Row>
           <img
@@ -83,7 +146,7 @@ export default function DashboardPage() {
             id="loginImage"
           />
         </Row> */}
-      </Container>
+      </div>
     </>
   );
 }

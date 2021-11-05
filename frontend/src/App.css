@@ -50,11 +50,44 @@ html * {
   min-width: 500px;
 }
 
+#cooperHeading2 {
+  font-family: "cooper-black-std";
+  font-size: 2em !important;
+}
+
+#normalHeading1 {
+  font-size: 2.2em;
+  font-weight: 900;
+  color: #1f1f1f;
+}
+
+#normalHeading2 {
+  font-size: 1.8em;
+  font-weight: 900;
+  color: #1f1f1f;
+}
+
 #subHeading1 {
   font-size: 1.4em;
   font-weight: 300;
   min-width: 600px;
   padding-top: 5px;
+}
+
+#subHeading2 {
+  font-size: 1.1em;
+  font-weight: 300;
+  min-width: 600px;
+  padding-top: 5px;
+  color: #868686;
+}
+
+#subHeading3 {
+  font-size: 1em;
+  font-weight: 300;
+  min-width: 600px;
+  padding-top: 5px;
+  color: #868686;
 }
 
 #button1 {
@@ -103,3 +136,6 @@ html * {
 
 #optionsGreeting {}
 
+/* .ant-input {
+  border-radius: 25px;
+} */

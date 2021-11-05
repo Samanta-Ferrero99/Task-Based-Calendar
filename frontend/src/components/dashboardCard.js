@@ -4,7 +4,7 @@ import "./dashboardCard.css";
 
 const DashboardCard = ({width, height, color, children}) => {
   return (
-    <Card title="Card title" style={{ width: width, height: height, color: color }} id="dashboardCard">
+    <Card style={{ width: width, height: height, backgroundColor: color, borderRadius: "25px" }} id="dashboardCard">
       {children}
     </Card>
   );
