@@ -15,7 +15,11 @@
 
 ### Milestone Report
 
-> [Screencast](https://drive.google.com/file/d/1FRxoc07dbXj2vBozTyDsoqYRGtN39vHH/view?usp=sharing)
+> [M2 Submission Screencast](https://drive.google.com/file/d/19oTjNawlqlUV5uorpdojym7LYN4I52p5/view?usp=sharing)
+
+> [(Old, Not Current/Complete Functionality) Screencast](https://drive.google.com/file/d/1FRxoc07dbXj2vBozTyDsoqYRGtN39vHH/view?usp=sharing)
+
+_Note that we were given an extension due to health reasons, so the old screencast is from prior to that._
 
 ### Branch
 
@@ -23,21 +27,30 @@
 
 **What's done.**
 
-- We have finished implementing the log in, log out, and registration functionality using React Google Login. 
-    -  With this, we are not storing passwords anywhere, so there is nothing to hash.
+- We have finished implementing the log in, log out, and registration functionality using Google authentication and our own account creation. 
+    -  We are salting+hasing passwords for non-Google accounts using bcrypt.
+    -  We are using JWT, authenticated by our /api/auth/verify API endpoint, stored in the client using localStorage (which we plan to change to something else like cookies in order to make it more secure).
+- Pages including the Dashboard (and more soon) are restricted to authenticated users.
+- We have made some changes to some page layouts to increase responsiveness.
+- We have finished implementing functionality so that the navigation bar changes depending on if the user is logged in.
 - On the About Us/Contact Us page, we are now utilizing EmailJS so that users can contact the company.
     - One of our student emails (spferrer@ncsu.edu) is being used as the point of contact for convenience.
     - We have added information about the company Chronicle to the About Us page.
+- We have created UI components such as 
+    - a sidebar/drawer to hold options/shortcuts for logged-in users
+    - a calendar
+    - a search bar with autosuggest for looking up tasks by keyword
+    - a login modal
+    - various buttons and cards
+- We have created a React hook for icon/element animations, currently being used for the sidebar open/close button. 
 
 **What's not done.**
 
-- We have started working on functionality so that the navigation bar changes depending on if the user is logged in.
-    - This functionality can be seen under [kclindse/third-party-login-logout](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/kclindse/third-party-login-logout), we just haven't fully completed it yet!
-- We are working on a task component that will display data about the specific task the user has input.
-- We need to finish implementing the backend behind the dashboard and calendar pages.
-    - Partially reliant on getting the task component complete.
-- We need to implement at least some of the backend behind the settings page.
-    - Reliant on the calendar page. 
+- We have created static layouts for the Dashboard and Calendar pages, which we will add more design elements and dynamic data to for the next milestone.
+- We are working on a task UI component that will display data about the specific task the user has inputted.
+- We have made significant progress towards the backend for task creation/linking dependencies/editing/deletion etc. We are working on perfecting the schema and API for these.
+- We plan to implement the backend for the settings page, but have been holding off until more of the UI is built out for dashboard/calendar pages so that we can visually show the settings.
+- We need to secure our database credentials (have not done this yet for ease of the teaching staff in viewing our application and for ease of development)
 
 **List all the pages/components of the web app. Provide wireframes for pages not complete.**
 
@@ -54,23 +67,34 @@ Settings | 🔶 | N/A
 
 **List all the endpoints of the web app. For each endpoint, provide a description of the route, and expected behavior of the endpoint.**
 
+### API Endpoints
+_Base URL: http://localhost:5000_
+
+Endpoint | Status | Purpose | Response
+--- | --- | --- | ---
+/api/auth/login | ✔️ | POST requests to sign in user | User is authenticated and sent JWT
+/api/auth/register | ✔️ | POST requests to this endpoint allow creation of a new user | New user is created
+/api/auth/verify | ✔️ | GET requests to this endpoint allow verification of a user's authentication token (JWT) | User token is verified
+/api/tasks/ | ✔️ | GET request to this endpoint to view all tasks in the database | Responds with an array of task objects representing all tasks in the database.
+/api/tasks/:user_id | ❌ | GET request to this endpoint to view all tasks owned by the user with the given user_id in the database | Responds with an array of task objects representing all the user's tasks in the database, empty if there are no tasks for the user, or with a 404 status and error if the user does not exist.
+/api/tasks/:user_id/create-task | ✔️ | POST request for creating a new task for the user with the given user_id | Responds with the created task object if successful, or a 500 status and error if user does not exist or task is invalid.
+/api/tasks/:task_id | ✔️ | GET request for a single task with the given task_id | Responds with a task object if one exists in the database with the given task_id, or with a 404 status if none exists.
+/api/tasks/edit-task/:task_id | ✔️ | PUT request to edit a single task ith the given task_id | Responds with the updated task object if the task exists, or a 404 status and error if task does not exist.
+/api/tasks/delete-task/:task_id | ✔️ | DELETE request for a single task with the given task_id | Responds with the task object and 204 status if task exists, if not responds with 404 and error.
+
+### Client Endpoints
+_Base URL: http://localhost:3000_
+
 Endpoint | Status | Purpose | Response
 --- | --- | --- | ---
 / | ✔️ | Directs user to landing page, base URL | Load landing page
-/login | ✔️ | Directs the user to the Login page | Login page redirect
 /calendar | ✔️ | Directs the user to the Calendar page | Calendar page redirect
 /dashboard | ✔️ | Directs the user to the Dashboard page | Dashboard page redirect
-/users/create-user | ✔️ | POST requests to this endpoint allow creation of a new user | New user is created
-/users/ | ✔️ | GET request to this endpoint to view all users in the database | Responds with an array of user objects representing all users in the database.
-/users/:id | ✔️ | GET request for a single user with the given id | Responds with a user object if one exists in the database with the given id, or with a 404 status if none exists.
-/users/delete-user/:id | 🔶 | DELETE request for a single user with the given id | Responds with the user object and 204 status if user exists, if not responds with 404 and error.
-/users/edit-user/:id | ✔️ | PUT request to edit a single user ith the given id | Responds with the updated user object if the user exists, or a 404 status and error if user does not exist.
-/tasks/ | ✔️ | GET request to this endpoint to view all tasks in the database | Responds with an array of task objects representing all tasks in the database.
-/tasks/:user_id | ❌ | GET request to this endpoint to view all tasks owned by the user with the given user_id in the database | Responds with an array of task objects representing all the user's tasks in the database, empty if there are no tasks for the user, or with a 404 status and error if the user does not exist.
-/tasks/:user_id/create-task | ✔️ | POST request for creating a new task for the user with the given user_id | Responds with the created task object if successful, or a 500 status and error if user does not exist or task is invalid.
-/tasks/:task_id | ✔️ | GET request for a single task with the given task_id | Responds with a task object if one exists in the database with the given task_id, or with a 404 status if none exists.
-/tasks/edit-task/:task_id | ✔️ | PUT request to edit a single task ith the given task_id | Responds with the updated task object if the task exists, or a 404 status and error if task does not exist.
-/tasks/delete-task/:task_id | ✔️ | DELETE request for a single task with the given task_id | Responds with the task object and 204 status if task exists, if not responds with 404 and error.
+/login | ✔️ | Directs to Login page | Login page redirect
+/register | ✔️ | Directs to Register page | Register page redirect
+/welcome | ✔️ | Directs to Welcome page | Welcome page redirect
+/settings | ✔️ | Directs to Settings page | Settings page redirect
+/about | ✔️ | Directs to About page | About page redirect
 
 ---
 
