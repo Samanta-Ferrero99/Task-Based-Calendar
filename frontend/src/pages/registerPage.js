@@ -7,6 +7,8 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import Login from "../components/googleLogin";
 import AuthService from "../services/authService";
+import EventBus from "../utils/eventBus";
+
 
 export default function RegisterPage() {
 
@@ -43,6 +45,20 @@ export default function RegisterPage() {
   async function handleRegister() {
     AuthService.register(user).then(
       (response) => {
+        console.log(`Successful registration for user ${user.email}`);
+        const loginUser = {
+          email: user.email,
+          password: user.password
+        };
+        AuthService.login(loginUser).then(
+          (res) => {
+            console.log(`Successful login for user ${user.email}`);
+            EventBus.dispatch("login");
+          },
+          (err) => {
+            console.log("error");
+          }
+        );
         return history.push("/welcome");
       },
       (error) => {
@@ -175,15 +191,15 @@ export default function RegisterPage() {
       ) : (
         <>
           <Row style={{ marginTop: "20px" }}>
-            <Button
+            {/* <Button
               id="button1"
               variant="dark"
               onClick={() => setCreateNew(true)}
               style={{ width: "500px" }}
             >
               Sign up with email
-            </Button>
-            {/* <Col md="5" style={{ width: "200px" }}>
+            </Button> */}
+            <Col md="5" style={{ width: "200px" }}>
               <Login register={true} />
             </Col>
             <Col md="5">
@@ -195,7 +211,7 @@ export default function RegisterPage() {
               >
                 Sign up with email
               </Button>
-            </Col> */}
+            </Col>
           </Row>
         </>
       )}

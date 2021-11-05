@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 // Import authentication services
 import UserService from "../services/userService";
 import EventBus from "../utils/eventBus";
-import AuthService from "../services/authService";
+// import AuthService from "../services/authService";
 
 // Import components
 import ProjectSidePanel from "../components/projectSidePanel";
@@ -15,11 +15,11 @@ import DashboardCard from "../components/dashboardCard";
 // The user's dashboard page -> overview of all tasks/projects
 export default function DashboardPage() {
 
-  // Get the current user & token
-  const user = AuthService.getCurrentUser();
+  // // Get the current user & token
+  // const user = AuthService.getCurrentUser();
 
-  // Content to display
-  const [content, setContent] = React.useState("");
+  // // Content to display
+  // const [content, setContent] = React.useState("");
 
   // Fire on initial render -> check user's access token for authentication
   // Logout when token is expired

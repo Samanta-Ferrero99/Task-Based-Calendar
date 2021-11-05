@@ -2,7 +2,7 @@ import React from "react";
 import {Drawer, Button} from "antd";
 import { animated } from "react-spring";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { solid, regular, brands } from '@fortawesome/fontawesome-svg-core/import.macro'
+import { solid } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 import useBoop from "../hooks/useBoop";
 import "./optionsBar.css";

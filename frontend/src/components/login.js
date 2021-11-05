@@ -123,9 +123,9 @@ export default function LoginForm(props) {
             </Button>
           </div>
         </Form>
-        {/* <div className="d-grid gap-2">
+        <div className="d-grid gap-2">
           <Login register={false} />
-        </div> */}
+        </div>
       </Modal.Body>
     </Modal>
   );

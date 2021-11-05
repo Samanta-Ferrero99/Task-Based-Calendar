@@ -43,7 +43,7 @@ const NavBar = (isLoggedIn) => {
     if (currentUser !== user && currentUser !== undefined) {
       setUser(currentUser);
     }
-  }, []);
+  }, [user]);
 
   const handleLogoutButton = () => {
     AuthService.logout();
