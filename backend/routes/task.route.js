@@ -1,9 +1,11 @@
 const express = require("express");
 const taskModel = require("../models/task");
 const app = express();
+const router = express.Router();
+
 
 // Test
-app.get("/test", async (request, response) => {
+router.get("/test", async (request, response) => {
   response.send("Hey!!");
 });
 

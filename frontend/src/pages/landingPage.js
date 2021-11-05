@@ -18,17 +18,17 @@ export default function LandingPage() {
   };
 
   const hook = {
-    fontSize: "2.7em",
+    fontSize: "2.4em" ,
     fontWeight: "800",
-    maxWidth: "500px",
-    minWidth: "480px",
+    maxWidth: "600px",
+    minWidth: "550px",
   };
 
   const subHook = {
     fontSize: "1.2em",
     fontWeight: "300",
-    maxWidth: "490px",
-    minWidth: "380px",
+    maxWidth: "600px",
+    minWidth: "550px",
     marginTop: "20px",
   };
 
@@ -55,7 +55,7 @@ export default function LandingPage() {
     <Container className="landingPage" style={landingPage}>
       <Row>
         <Col className="rightPane" md="6" style={rightPane}>
-          <h1 className="hook" style={hook}>
+          <h1 className="hook" id="cooperHeading1" style={hook}>
             We're not your average task planner
           </h1>
           <h3 className="subHook" style={subHook}>
