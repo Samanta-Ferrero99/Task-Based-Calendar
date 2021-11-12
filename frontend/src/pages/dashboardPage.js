@@ -1,5 +1,7 @@
 // Import dependencies
 import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import { Row, Col } from "antd";
 import {useHistory} from "react-router-dom";
 
@@ -14,6 +16,14 @@ import ProjectSidePanel from "../components/projectSidePanel";
 import TaskSearch from "../components/taskSearch";
 import DashboardCard from "../components/dashboardCard";
 import DashboardCalendar from "../components/calendar";
+
+const getStartedButton = {
+  marginTop: "20px",
+  marginLeft: "5px",
+  marginRight: "5px",
+  backgroundColor: "#b8cd48",
+  border: "0px solid #b8cd48",
+};
 
 // The user's dashboard page -> overview of all tasks/projects
 export default function DashboardPage() {
@@ -67,6 +77,11 @@ export default function DashboardPage() {
               interdum non nunc eu accumsan. Nullam sagittis vehicula leo, in
               commodo justo feugiat vel.
             </p>
+            <Link to="/task-creation">
+            <Button className="getStartedButton" style={getStartedButton}>
+              Create a Task
+            </Button>
+          </Link>
           </DashboardCard>
         </Row>
         <br />

@@ -18,6 +18,7 @@ import SettingsPage from "./pages/settingsPage";
 import RegisterPage from "./pages/registerPage";
 import WelcomePage from "./pages/welcomePage";
 import OptionsBar from "./components/optionsBar";
+import TaskCreation from "./pages/taskGenerator";
 
 // Styles
 import "./App.css";
@@ -77,6 +78,7 @@ const App = () => {
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/register" component={RegisterPage} />
             <Route exact path="/welcome" component={WelcomePage} />
+            <Route path="/task-creation" component={TaskCreation} />
           </Switch>
         </div>
       </Router>
