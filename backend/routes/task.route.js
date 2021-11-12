@@ -3,7 +3,6 @@ const taskModel = require("../models/task");
 const app = express();
 const router = express.Router();
 
-
 // Test
 router.get("/test", async (request, response) => {
   response.send("Hey!!");
@@ -55,7 +54,7 @@ app.patch("/edit-task/:task_id", async (request, response) => {
       task.createdDate = request.body.createdDate;
     }
     if (request.body.dueDate) {
-      task.title = request.body.dueDate;
+      task.dueDate = request.body.dueDate;
     }
     await task.save();
     response.send(task);
