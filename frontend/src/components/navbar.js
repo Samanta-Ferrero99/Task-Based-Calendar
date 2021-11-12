@@ -38,12 +38,6 @@ const NavBar = (isLoggedIn) => {
     }
   }, [isLoggedIn]);
 
-  React.useEffect(() => {
-    const currentUser = AuthService.getCurrentUser();
-    if (currentUser !== user && currentUser !== undefined) {
-      setUser(currentUser);
-    }
-  }, [user]);
 
   const handleLogoutButton = () => {
     AuthService.logout();
