@@ -1,51 +1,28 @@
 import React from "react";
+import { useSelector } from 'react-redux';
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { push } from 'connected-react-router';
+import { useDispatch } from 'react-redux';
+import { attemptLogout } from '../store/thunks/auth';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import {useHistory} from "react-router-dom";
-
-import EventBus from "../utils/eventBus";
-import AuthService from "../services/authService";
-import UserService from "../services/userService";
 
 
 // Top navigation bar
 const NavBar = (isLoggedIn) => {
 
-  const history = useHistory();
+  const { isAuth, user } = useSelector((state) => state.user);
 
-  const [user, setUser] = React.useState(isLoggedIn ? AuthService.getCurrentUser() : undefined
-  );
-  const [authorized, setAuthorized] = React.useState(false);
-
-  React.useEffect(() => {
-    if (isLoggedIn) {
-      UserService.verifyUserAuth().then(
-        (response) => {
-          setAuthorized(true);
-          setUser(AuthService.getCurrentUser);
-        },
-        (error) => {
-          if (error.response && error.response.status === 401) {
-            EventBus.dispatch("logout");
-            setAuthorized(false);
-            setUser(undefined);
-          }
-        }
-      );
-    } else {
-      setAuthorized(false);
-    }
-  }, [isLoggedIn]);
-
+  const dispatch = useDispatch();
 
   const handleLogoutButton = () => {
-    AuthService.logout();
-    EventBus.dispatch("logout");
-    return history.push("/");
+    console.log("LOGGING OUT...");
+    dispatch(attemptLogout());
+    dispatch(push('/'));
   }
 
-  if (!authorized) {
+  if (!isAuth) {
     return (
       <Navbar variant="light" expand="lg" style={{ marginTop: "25px" }}>
         <Container>
@@ -117,6 +94,9 @@ const NavBar = (isLoggedIn) => {
           <Navbar.Collapse id="basic-navbar-nav">
             {
               <Nav className="me-auto">
+                <Nav.Item>
+                  Hello, {user.username}!
+                </Nav.Item>
                 <Nav.Link
                   href="/about-us"
                   style={{

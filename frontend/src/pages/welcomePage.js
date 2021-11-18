@@ -1,7 +1,10 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { useSelector } from 'react-redux';
 
 export default function WelcomePage() {
+
+  const { user } = useSelector((state) => state.user);
 
   return (
     <Container

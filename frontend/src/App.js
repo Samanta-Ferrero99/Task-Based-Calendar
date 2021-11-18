@@ -1,15 +1,14 @@
 
 // Route pages of application
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-// Authentication
-import AuthService from "./services/authService";
-import EventBus from "./utils/eventBus";
+import { useDispatch } from 'react-redux';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { attemptGetUser } from './store/thunks/user';
 
 // Import components
 import LandingPage from "./pages/landingPage";
 import NavBar from "./components/navbar";
+import ProtectedRoute from "./components/protectedRoute"
 import LoginPage from "./pages/loginPage";
 import DashboardPage from "./pages/dashboardPage";
 import CalendarPage from "./pages/calendarPage";
@@ -25,64 +24,40 @@ import "./App.css";
 
 // Driver for application
 const App = () => {
-  
-  // Current application user
-  const [currentUser, setCurrentUser] = React.useState(undefined);
 
-  // User is logged in - boolean
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  // Whether app is loading
+  const [loading, setLoading] = React.useState(true);
+  const dispatch = useDispatch();
 
-  // Run on initial render to retrieve signed in user (if exists).
   React.useEffect(() => {
-    const user = AuthService.getCurrentUser();
-
-    if (user) {
-      setCurrentUser(user);
-      setIsLoggedIn(true);
-    }
-
-    EventBus.on("login", () => {
-      setCurrentUser(AuthService.getCurrentUser());
-      setIsLoggedIn(true);
-    });
-
-    EventBus.on("logout", () => {
-      logOut();
-    });
-
-    return () => {
-      EventBus.remove("logout");
-      EventBus.remove("login");
-    };
-  }, []);
-
-  // Logout utility
-  const logOut = () => {
-    AuthService.logout();
-    setCurrentUser(undefined);
-    setIsLoggedIn(false);
-  };
+    dispatch(attemptGetUser())
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, [dispatch]);
   
-  return (
+  return !loading ? (
     <div>
-      <Router>
-        <div>
-          <OptionsBar style={{ maxWidth: "300px", position: "absolute" }} />
-          <NavBar isLoggedIn={isLoggedIn} />
-          <Switch>
-            <Route path="/dashboard" component={DashboardPage} />
-            <Route path="/calendar" component={CalendarPage} />
-            <Route path="/about-us" component={AboutUsPage} />
-            <Route path="/settings" component={SettingsPage} />
-            <Route exact path="/" component={LandingPage} />
-            <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/register" component={RegisterPage} />
-            <Route exact path="/welcome" component={WelcomePage} />
-            <Route path="/task-creation" component={TaskCreation} />
-          </Switch>
-        </div>
-      </Router>
+      <OptionsBar style={{ maxWidth: '300px', position: 'absolute' }} />
+      <NavBar />
+      <Switch>
+        <Route exact path='/' component={LandingPage} />
+        <Route exact path='/login' component={LoginPage} />
+        <Route exact path='/register' component={RegisterPage} />
+        <Route path='/about-us' component={AboutUsPage} />
+        <ProtectedRoute path='/dashboard' exact component={DashboardPage} />
+        <ProtectedRoute path='/calendar' exact component={CalendarPage} />
+        <ProtectedRoute path='/settings' exact component={SettingsPage} />
+        <ProtectedRoute exact path='/welcome' component={WelcomePage} />
+        <ProtectedRoute path='/task-creation' exact component={TaskCreation} />
+        <Redirect to='/home' />
+      </Switch>
     </div>
+  ) : (
+    <p>Loading...</p>
   );
 }
 

@@ -3,13 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { Row, Col } from "antd";
-import {useHistory} from "react-router-dom";
-
-// Import authentication services
-import UserService from "../services/userService";
-import AuthService from "../services/authService";
-import EventBus from "../utils/eventBus";
-// import AuthService from "../services/authService";
+import { useSelector } from 'react-redux';
 
 // Import components
 import ProjectSidePanel from "../components/projectSidePanel";
@@ -27,33 +21,8 @@ const getStartedButton = {
 
 // The user's dashboard page -> overview of all tasks/projects
 export default function DashboardPage() {
-  const history = useHistory();
-  // // Get the current user & token
-  // const user = AuthService.getCurrentUser();
 
-  // // Content to display
-  // const [content, setContent] = React.useState("");
-
-  // Fire on initial render -> check user's access token for authentication
-  // Logout when token is expired
-  React.useEffect(() => {
-    UserService.verifyUserAuth().then(
-      (response) => {
-        console.log(response.data.message);
-      },
-      (error) => {
-        if (error.response && error.response.status === 401) {
-          console.log("Error authenticating, logging out");
-          EventBus.dispatch("logout");
-        }
-      }
-    );
-    if (!AuthService.getCurrentUser() || AuthService.getCurrentUser().user === undefined) {
-      history.push("/");
-    }
-  }, []);
-
-  
+  const { user } = useSelector((state) => state.user);
   
   // Render the page
   return (

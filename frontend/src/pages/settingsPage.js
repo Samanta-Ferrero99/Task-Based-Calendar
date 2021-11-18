@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Dropdown, ToggleButton } from "react-bootstrap";
+import { useSelector } from 'react-redux';
 
 /**
  * Landing page for the application.
@@ -55,6 +56,8 @@ export default function SettingsPage() {
   // light green: #b8cd48
 
   // End of styles
+
+  const { user } = useSelector((state) => state.user);
 
   return (
     <Container className="settingPage" style={settingPage}>

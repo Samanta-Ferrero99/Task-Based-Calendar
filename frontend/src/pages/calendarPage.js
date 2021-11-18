@@ -1,11 +1,7 @@
 // Import dependencies
 import React from "react";
 import { Row, Col } from "antd";
-
-// Import authentication services
-import UserService from "../services/userService";
-import EventBus from "../utils/eventBus";
-// import AuthService from "../services/authService";
+import { useSelector } from 'react-redux';
 
 // Import components
 import ProjectSidePanel from "../components/projectSidePanel";
@@ -15,27 +11,8 @@ import DashboardCalendar from "../components/calendar";
 
 // The user's dashboard page -> overview of all tasks/projects
 export default function CalendarPage() {
-  // // Get the current user & token
-  // const user = AuthService.getCurrentUser();
 
-  // // Content to display
-  // const [content, setContent] = React.useState("");
-
-  // Fire on initial render -> check user's access token for authentication
-  // Logout when token is expired
-  React.useEffect(() => {
-    UserService.verifyUserAuth().then(
-      (response) => {
-        console.log(response.data.message);
-      },
-      (error) => {
-        if (error.response && error.response.status === 401) {
-          console.log("Error authenticating, logging out");
-          EventBus.dispatch("logout");
-        }
-      }
-    );
-  }, []);
+  const { user } = useSelector((state) => state.user);
 
   // Render the page
   return (

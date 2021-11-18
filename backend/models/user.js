@@ -1,27 +1,39 @@
+// Dependencies
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const moment = require('moment');
 
-let userSchema = new Schema(
-  {
-    username: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    profileImage: {
-      type: String,
-      required: false,
-    }
+// Format dates
+moment().format();
+
+/**
+ * Schema for a user in the system
+ */
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 25
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 5,
+    maxlength: 50
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6,
+    maxlength: 300
+  },
+  profileImage: {
+    type: String,
+    required: false
   }
-);
+});
 
-const user = mongoose.model("user", userSchema)
+const user = mongoose.model("user", userSchema);
 
 module.exports = user;
