@@ -17,7 +17,7 @@ import SettingsPage from "./pages/settingsPage";
 import RegisterPage from "./pages/registerPage";
 import WelcomePage from "./pages/welcomePage";
 import OptionsBar from "./components/optionsBar";
-import TaskCreation from "./pages/taskGenerator";
+import TaskForm from "./pages/taskGenerator";
 
 // Styles
 import "./App.css";
@@ -52,7 +52,7 @@ const App = () => {
         <ProtectedRoute path='/calendar' exact component={CalendarPage} />
         <ProtectedRoute path='/settings' exact component={SettingsPage} />
         <ProtectedRoute exact path='/welcome' component={WelcomePage} />
-        <ProtectedRoute path='/task-creation' exact component={TaskCreation} />
+        <ProtectedRoute path='/task-creation' exact component={TaskForm} />
         <Redirect to='/home' />
       </Switch>
     </div>
