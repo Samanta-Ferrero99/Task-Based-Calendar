@@ -158,8 +158,15 @@ export default function DashboardPage() {
           </Modal>
         </Row>
         <Row style={{ marginTop: '30px' }}>
-          <DashboardCard width='85vw' height='180px' color='#fafafa'>
+          <DashboardCard width='85vw' height='280px' color='#fafafa'>
             <h1 id='normalHeading1'>good morning, {user.username} !</h1>
+            <p>
+              welcome to your dashboard! this page shows the summary of all of the chronicles you have created!
+              you can see your created chronicles, chronicles that you have set for today and tomorrow, as well as 
+              any deadlines that are fast approaching.
+              <br /><br />
+              want to create a task? click the + icon next to the search bar!
+            </p>
             <p id='quote'>{quote.text}</p>
             <p id='quoteAuthor'>
               {' '}
