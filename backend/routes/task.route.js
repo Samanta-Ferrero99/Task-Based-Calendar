@@ -32,6 +32,7 @@ router.post('/', (req, res, next) => {
         parents: req.body.parents || [],
         children: req.body.children || [],
         blocked: req.body.blocked || false,
+        chronicle: req.body.chronicle || null,
       });
 
       newTask.save().catch((err) => console.log(err));

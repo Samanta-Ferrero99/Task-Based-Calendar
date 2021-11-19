@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import getRandomQuote from "../utils/getRandomQuote";
 import { taskAPI } from '../api/task';
 import {PlusSquareFilled} from "@ant-design/icons"
+import { useHistory } from 'react-router';
 
 // Import components
 import ChronicleDisplay from "../components/chronicleDisplay";
@@ -24,6 +25,7 @@ import DashboardCalendar from "../components/calendar";
 // The user's dashboard page -> overview of all tasks/projects
 export default function DashboardPage() {
 
+  const history = useHistory();
   const { user } = useSelector((state) => state.user);
   const quote = getRandomQuote();
   const [chronicles, setChronicles] = React.useState([]);
@@ -45,6 +47,10 @@ export default function DashboardPage() {
     setTomorrowTasks(getTomorrowTasks());
     setUpcomingTasks(getUpcomingTasks());
   }, [tasks]);
+
+  const viewChronicle = (chronicle) => {
+    history.push("/view-chronicle", {data: {chronicle, user}});
+  }
 
   const getTodayTasks = () => {
     const today = [];
@@ -114,21 +120,8 @@ export default function DashboardPage() {
     <>
       {/* <ProjectSidePanel /> */}
 
-      <div
-        className='dashboard'
-        id='dashboard'
-        style={{ paddingLeft: '9vw', paddingTop: '5vh' }}
-      >
-        <Row
-          style={{
-            paddingBottom: '20px',
-            float: 'right',
-            position: 'relative',
-            right: '85px',
-            top: '-30px'
-          }}
-        >
-          <TaskSearch  />
+      <div className='dashboard' id='dashboard' style={{ paddingLeft: '8vw' }}>
+        <Row>
           <Tooltip title='create a new chronicle'>
             <AntButton
               style={{ marginRight: '5px' }}
@@ -156,10 +149,33 @@ export default function DashboardPage() {
           >
             <TaskForm user={user} chronicles={chronicles} />
           </Modal>
+          <h1 id='normalHeading3'>good morning, {user.username} !</h1>
+          {/* <h1 id='normalHeading3'>good morning, {user.username} !</h1>
+          <div
+            style={{
+              float: 'right',
+              position: 'absolute',
+              right: '55px',
+              top: '100px'
+            }}
+          >
+            <TaskSearch />
+            
+          </div> */}
         </Row>
-        <Row style={{ marginTop: '30px' }}>
-          <DashboardCard width='85vw' height='180px' color='#fafafa'>
-            <h1 id='normalHeading1'>good morning, {user.username} !</h1>
+        {/* <div
+          style={{
+            width: '100vw',
+            backgroundColor: '#f2f2f2',
+            height: '73px',
+            position: 'absolute',
+            top: '80px',
+            zIndex: '-1',
+            left: '0px'
+          }}
+        ></div> */}
+        <Row style={{ marginTop: '35px' }}>
+          <DashboardCard width='85vw' height='120px' color='#fafafa'>
             <p id='quote'>{quote.text}</p>
             <p id='quoteAuthor'>
               {' '}
@@ -180,9 +196,9 @@ export default function DashboardPage() {
               {chronicles?.length ? (
                 chronicles?.map((ch) => (
                   <ChronicleDisplay
+                    viewChronicle={viewChronicle}
                     key={ch?.title}
                     chronicle={ch}
-                    isLoading={false}
                   />
                 ))
               ) : (

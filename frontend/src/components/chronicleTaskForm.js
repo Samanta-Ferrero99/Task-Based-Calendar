@@ -1,31 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Import dependencies
 import React from 'react';
-import {
-  Row,
-  Form,
-  Input,
-  DatePicker,
-  Rate,
-  Select,
-  Alert,
-  Modal
-} from 'antd';
-import { CirclePicker } from 'react-color';
+import { Row, Form, Input, DatePicker, Select, Alert } from 'antd';
 import { Button } from 'react-bootstrap';
 import DashboardCard from '../components/dashboardCard';
-import { useSelector } from 'react-redux';
 
 import { taskStatus } from '../utils/taskStatus';
 import { taskAPI } from '../api/task';
 
 // The user's task creation form -> ability to create a task
-export default function ChronicleForm() {
+export default function TaskForm({ user, chronicle }) {
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
-  const [openColor, setOpenColor] = React.useState(false);
-  const [color, setColor] = React.useState('');
-
-  const { user } = useSelector((state) => state.user);
+  const [id, setId] = React.useState(null);
+  
 
   const statusOptions = taskStatus.map((status) => {
     return (
@@ -35,28 +23,28 @@ export default function ChronicleForm() {
     );
   });
 
-  const paths = ['work', 'school', 'life'];
-
-  const pathOptions = paths.map((path) => {
-    return (
-      <Select.Option key={path} value={path}>
-        {path}
-      </Select.Option>
-    );
-  });
-
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    const chronicleObject = {
+    const taskObject = {
       ...values,
+      startDate: values['startDate']?.format('MM-DD-YYYY') || null,
       dueDate: values['dueDate']?.format('MM-DD-YYYY') || null,
-      color: color.hex
+      chronicle: chronicle._id,
     };
-    console.log(chronicleObject);
-    taskAPI.createChronicle(chronicleObject, user, setError, setSuccess);
+    taskAPI.createTaskForChronicle(taskObject, user, setError, setSuccess, setId);
   };
 
+  React.useEffect(() => {
+    if (id !== null) {
+      const newChronicle = chronicle;
+      newChronicle.tasks.push(id);
+      taskAPI.editChronicle(newChronicle, user, setError, setSuccess);
+    }
+  }, [id]);
+
+  
+  
   return (
     <>
       <Row style={{ marginTop: '30px' }}>
@@ -69,7 +57,7 @@ export default function ChronicleForm() {
             }}
             id='normalHeading1'
           >
-            begin a new chronicle
+            add a task to: {chronicle.title}
           </h1>
           <Form
             style={{ marginLeft: '20px', marginRight: '20px' }}
@@ -80,9 +68,6 @@ export default function ChronicleForm() {
             wrapperCol={{ span: 19 }}
             layout='horizontal'
           >
-            <Form.Item name='type' label='type'>
-              <Select>{pathOptions}</Select>
-            </Form.Item>
             <Form.Item
               label='title'
               name='title'
@@ -90,7 +75,7 @@ export default function ChronicleForm() {
               rules={[
                 {
                   required: true,
-                  message: 'chronicle must have a title!'
+                  message: 'tasks must have a title!'
                 }
               ]}
             >
@@ -108,6 +93,17 @@ export default function ChronicleForm() {
               />
             </Form.Item>
             <Form.Item
+              name='startDate'
+              label='start date'
+              rules={[
+                {
+                  type: 'object'
+                }
+              ]}
+            >
+              <DatePicker />
+            </Form.Item>
+            <Form.Item
               name='dueDate'
               label='due date'
               rules={[
@@ -118,56 +114,28 @@ export default function ChronicleForm() {
             >
               <DatePicker />
             </Form.Item>
-            <Form.Item name='priority' label='priority'>
-              <Rate />
-            </Form.Item>
             <Form.Item name='status' label='status'>
               <Select>{statusOptions}</Select>
             </Form.Item>
-
-            <Form.Item>
-              <Button
-                variant='dark'
-                id='colorPicker'
-                style={{ position: 'absolute', left: '185px', top: '0px' }}
-                onClick={() => setOpenColor(true)}
-              >
-                set color
-              </Button>
-              <Modal
-                centered
-                width={325}
-                visible={openColor}
-                onOk={() => setOpenColor(false)}
-                onCancel={() => setOpenColor(false)}
-              >
-                <CirclePicker
-                  onChangeComplete={(color) => setColor(color)}
-                  color={color}
-                />
-              </Modal>
-              <Button
-                variant='dark'
-                id='button1'
-                type='submit'
-                style={{ position: 'absolute', left: '297px', top: '0px' }}
-              >
-                submit
-              </Button>
-            </Form.Item>
             {error ? (
-              <Alert
-                message='could not create chronicle'
-                type='error'
-                showIcon
-              />
+              <Alert message='Could not create task' type='error' showIcon />
             ) : success ? (
               <Alert
-                message='chronicle created successfully'
+                message='Task created successfully'
                 type='success'
                 showIcon
               />
             ) : null}
+            <Form.Item wrapperCol={{ span: 24 }}>
+              <div
+                className='d-grid gap-2'
+                style={{ paddingBottom: '10px', paddingTop: '10px' }}
+              >
+                <Button variant='dark' id='button1' type='submit'>
+                  submit
+                </Button>
+              </div>
+            </Form.Item>
           </Form>
         </DashboardCard>
       </Row>

@@ -1,15 +1,6 @@
 // Import dependencies
 import React from 'react';
-import {
-  Row,
-  Form,
-  Input,
-  DatePicker,
-  Rate,
-  Select,
-  Alert,
-  Modal
-} from 'antd';
+import { Row, Form, Input, DatePicker, Rate, Select, Alert, Modal } from 'antd';
 import { CirclePicker } from 'react-color';
 import { Button } from 'react-bootstrap';
 import DashboardCard from '../components/dashboardCard';
@@ -19,13 +10,12 @@ import { taskStatus } from '../utils/taskStatus';
 import { taskAPI } from '../api/task';
 
 // The user's task creation form -> ability to create a task
-export default function ChronicleForm() {
+export default function EditChronicle({chronicle, user}) {
+
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [openColor, setOpenColor] = React.useState(false);
   const [color, setColor] = React.useState('');
-
-  const { user } = useSelector((state) => state.user);
 
   const statusOptions = taskStatus.map((status) => {
     return (
@@ -49,12 +39,16 @@ export default function ChronicleForm() {
 
   const onFinish = (values) => {
     const chronicleObject = {
-      ...values,
-      dueDate: values['dueDate']?.format('MM-DD-YYYY') || null,
-      color: color.hex
+      _id: chronicle._id,
+      type: values['type'] || chronicle.type,
+      description: values['description'] || chronicle.description,
+      dueDate: values['dueDate']?.format('MM-DD-YYYY') || chronicle.dueDate,
+      color: color.hex || chronicle.color,
+      status: values['status'] || chronicle.status,
+      priority: values['priority'] || chronicle.priority,
     };
     console.log(chronicleObject);
-    taskAPI.createChronicle(chronicleObject, user, setError, setSuccess);
+    taskAPI.editChronicle(chronicleObject, user, setError, setSuccess);
   };
 
   return (
@@ -69,7 +63,7 @@ export default function ChronicleForm() {
             }}
             id='normalHeading1'
           >
-            begin a new chronicle
+            edit {chronicle?.title}
           </h1>
           <Form
             style={{ marginLeft: '20px', marginRight: '20px' }}
@@ -82,23 +76,6 @@ export default function ChronicleForm() {
           >
             <Form.Item name='type' label='type'>
               <Select>{pathOptions}</Select>
-            </Form.Item>
-            <Form.Item
-              label='title'
-              name='title'
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: 'chronicle must have a title!'
-                }
-              ]}
-            >
-              <Input
-                onChange={(e) => {
-                  form.setFieldsValue({ title: e.target.value });
-                }}
-              />
             </Form.Item>
             <Form.Item label='description' name='description'>
               <Input.TextArea
@@ -124,7 +101,6 @@ export default function ChronicleForm() {
             <Form.Item name='status' label='status'>
               <Select>{statusOptions}</Select>
             </Form.Item>
-
             <Form.Item>
               <Button
                 variant='dark'
@@ -157,13 +133,13 @@ export default function ChronicleForm() {
             </Form.Item>
             {error ? (
               <Alert
-                message='could not create chronicle'
+                message='could not edit chronicle'
                 type='error'
                 showIcon
               />
             ) : success ? (
               <Alert
-                message='chronicle created successfully'
+                message='chronicle edited successfully'
                 type='success'
                 showIcon
               />

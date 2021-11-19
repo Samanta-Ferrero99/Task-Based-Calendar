@@ -94,9 +94,9 @@ const NavBar = (isLoggedIn) => {
           <Navbar.Collapse id="basic-navbar-nav">
             {
               <Nav className="me-auto">
-                <Nav.Item>
+                {/* <Nav.Item>
                   Hello, {user.username}!
-                </Nav.Item>
+                </Nav.Item> */}
                 <Nav.Link
                   href="/about-us"
                   style={{
@@ -138,6 +138,7 @@ const NavBar = (isLoggedIn) => {
                   Settings
                 </Nav.Link>
                 <Button
+                  size="sm"
                   id="button1"
                   style={{ width: "100px" }}
                   onClick={() => handleLogoutButton()}

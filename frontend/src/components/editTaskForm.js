@@ -1,22 +1,14 @@
 // Import dependencies
 import React from 'react';
-import {
-  Row,
-  Form,
-  Input,
-  DatePicker,
-  Select,
-  Alert
-} from 'antd';
+import { Row, Form, Input, DatePicker, Select, Alert } from 'antd';
 import { Button } from 'react-bootstrap';
 import DashboardCard from '../components/dashboardCard';
 
 import { taskStatus } from '../utils/taskStatus';
 import { taskAPI } from '../api/task';
 
-
 // The user's task creation form -> ability to create a task
-export default function TaskForm({user, chronicles}) {
+export default function EditTaskForm({ user, task }) {
   const [success, setSuccess] = React.useState(false);
   const [error, setError] = React.useState(false);
 
@@ -28,23 +20,24 @@ export default function TaskForm({user, chronicles}) {
     );
   });
 
-  const chronicleOptions = chronicles?.map((ch) => {
-    return (
-      <Select.Option key={ch?.title} value={ch?.id}>
-        {ch?.title}
-      </Select.Option>
-    )
-  });
-
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     const taskObject = {
-      ...values,
+      description: values['description'] || task.description,
+      status: values['status'] || task.status,
+      _id: task._id,
       startDate: values['startDate']?.format('MM-DD-YYYY') || null,
-      dueDate: values['dueDate']?.format('MM-DD-YYYY') || null
+      dueDate: values['dueDate']?.format('MM-DD-YYYY') || null,
+      blocked: task.blocked,
+      chronicle: task.chronicle,
+      createdDate: task.createdDate,
+      parents: task.parents,
+      children: task.children,
+      title: task.title,
     };
-    taskAPI.createTask(taskObject, user, setError, setSuccess);
+    console.log(taskObject);
+    taskAPI.editTask(taskObject, user, setError, setSuccess);
   };
 
   return (
@@ -59,7 +52,7 @@ export default function TaskForm({user, chronicles}) {
             }}
             id='normalHeading1'
           >
-            create a task:
+            edit task:
           </h1>
           <Form
             style={{ marginLeft: '20px', marginRight: '20px' }}
@@ -70,23 +63,6 @@ export default function TaskForm({user, chronicles}) {
             wrapperCol={{ span: 19 }}
             layout='horizontal'
           >
-            <Form.Item
-              label='title'
-              name='title'
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: 'tasks must have a title!'
-                }
-              ]}
-            >
-              <Input
-                onChange={(e) => {
-                  form.setFieldsValue({ title: e.target.value });
-                }}
-              />
-            </Form.Item>
             <Form.Item label='description' name='description'>
               <Input.TextArea
                 onChange={(e) => {
@@ -119,14 +95,11 @@ export default function TaskForm({user, chronicles}) {
             <Form.Item name='status' label='status'>
               <Select>{statusOptions}</Select>
             </Form.Item>
-            <Form.Item name='chronicle' label='chronicle'>
-              <Select>{chronicleOptions}</Select>
-            </Form.Item>
             {error ? (
-              <Alert message='could not create task' type='error' showIcon />
+              <Alert message='could not edit task' type='error' showIcon />
             ) : success ? (
               <Alert
-                message='task created successfully'
+                message='task edited successfully'
                 type='success'
                 showIcon
               />

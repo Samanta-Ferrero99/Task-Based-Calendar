@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Progress, Badge } from 'antd';
 import './dashboardCard.css';
 
-const ChronicleDisplay = ({chronicle, isLoading}) => {
+const ChronicleDisplay = ({chronicle, viewChronicle}) => {
   return (
     <div>
       <Badge count={chronicle?.tasks?.length || 0}>
@@ -16,7 +16,7 @@ const ChronicleDisplay = ({chronicle, isLoading}) => {
             marginBottom: '5px'
           }}
           onClick={() => {
-            console.log('click card');
+            viewChronicle(chronicle);
           }}
           className='hvr-grow'
         >

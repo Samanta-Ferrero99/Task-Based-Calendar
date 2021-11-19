@@ -51,8 +51,10 @@ const TaskSearch = () => {
     <AutoComplete
       dropdownMatchSelectWidth={252}
       style={{
-        width: "40vw",
-        marginRight: "5px"
+        width: "30vw",
+        marginRight: "5px",
+        position: "relative",
+        top: "-5px"
       }}
       options={options}
       onSelect={onSelect}

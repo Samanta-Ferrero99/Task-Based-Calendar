@@ -18,6 +18,8 @@ import RegisterPage from "./pages/registerPage";
 import WelcomePage from "./pages/welcomePage";
 import OptionsBar from "./components/optionsBar";
 import TaskForm from "./pages/taskGenerator";
+import ViewChroniclePage from "./pages/viewChroniclePage";
+import ViewTaskPage from './pages/viewTaskPage';
 
 // Styles
 import "./App.css";
@@ -41,7 +43,7 @@ const App = () => {
   
   return !loading ? (
     <div>
-      <OptionsBar style={{ maxWidth: '300px', position: 'absolute' }} />
+      {/* <OptionsBar style={{ maxWidth: '300px', position: 'absolute' }} /> */}
       <NavBar />
       <Switch>
         <Route exact path='/' component={LandingPage} />
@@ -53,6 +55,8 @@ const App = () => {
         <ProtectedRoute path='/settings' exact component={SettingsPage} />
         <ProtectedRoute exact path='/welcome' component={WelcomePage} />
         <ProtectedRoute path='/task-creation' exact component={TaskForm} />
+        <Route path='/view-chronicle' exact component={ViewChroniclePage} />
+        <Route path='/view-task' exact component={ViewTaskPage} />
         <Redirect to='/home' />
       </Switch>
     </div>

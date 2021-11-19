@@ -61,6 +61,14 @@ html * {
   color: #1f1f1f;
 }
 
+#normalHeading3 {
+  font-size: 1.3em;
+  font-weight: 500;
+  color: #1f1f1f;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
 #normalHeading2 {
   font-size: 1.8em;
   font-weight: 900;
@@ -225,6 +233,24 @@ html * {
 .ant-input {
   border-radius: 5px;
 }
+
+.ant-btn {
+  color:#fff !important;
+}
+
+.ant-btn-icon-only {
+  background-color: #b8cd48 !important;
+}
+
+.ant-btn-icon-only:hover {
+  background-color: #62710d !important;
+}
+
+
+
+/* .anticon {
+  color:
+} */
 
 
 /* .ant-input {
