@@ -51,13 +51,14 @@ const TaskSearch = () => {
     <AutoComplete
       dropdownMatchSelectWidth={252}
       style={{
-        width: "76vw",
+        width: "40vw",
+        marginRight: "5px"
       }}
       options={options}
       onSelect={onSelect}
       onSearch={handleSearch}
     >
-      <Input.Search size="large" placeholder="Search tasks..." enterButton />
+      <Input.Search size="med" placeholder="Search tasks..." enterButton />
     </AutoComplete>
   );
 };

@@ -1,28 +1,113 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Import dependencies
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { Row, Col } from "antd";
+import {Button as AntButton, Tooltip} from "antd";
+import { Row, Col, Modal } from "antd";
 import { useSelector } from 'react-redux';
+import getRandomQuote from "../utils/getRandomQuote";
+import { taskAPI } from '../api/task';
+import {PlusSquareFilled} from "@ant-design/icons"
 
 // Import components
+import ChronicleDisplay from "../components/chronicleDisplay";
+import SmallTask from "../components/smallTask";
+import TaskForm from "../components/taskForm";
+import ChronicleForm from "../components/chronicleForm"
 import ProjectSidePanel from "../components/projectSidePanel";
 import TaskSearch from "../components/taskSearch";
 import DashboardCard from "../components/dashboardCard";
+import DashboardCardNoScroll from '../components/noScrollDashboardCard';
 import DashboardCalendar from "../components/calendar";
-
-const getStartedButton = {
-  marginTop: "20px",
-  marginLeft: "5px",
-  marginRight: "5px",
-  backgroundColor: "#b8cd48",
-  border: "0px solid #b8cd48",
-};
 
 // The user's dashboard page -> overview of all tasks/projects
 export default function DashboardPage() {
 
   const { user } = useSelector((state) => state.user);
+  const quote = getRandomQuote();
+  const [chronicles, setChronicles] = React.useState([]);
+  const [tasks, setTasks] = React.useState([]);
+  const [todayTasks, setTodayTasks] = React.useState([]);
+  const [tomorrowTasks, setTomorrowTasks] = React.useState([]);
+  const [upcomingTasks, setUpcomingTasks] = React.useState([]);
+  const [showNewTask, setShowNewTask] = React.useState(false);
+  const [showNewChronicle, setShowNewChronicle] = React.useState(false);
+
+  React.useEffect(() => {
+    taskAPI.getAllChronicles(user, setChronicles);
+    taskAPI.getAllTasks(user, setTasks);
+  }, []);
+
+  React.useEffect(() => {
+    console.log(tasks);
+    setTodayTasks(getTodayTasks());
+    setTomorrowTasks(getTomorrowTasks());
+    setUpcomingTasks(getUpcomingTasks());
+  }, [tasks]);
+
+  const getTodayTasks = () => {
+    const today = [];
+    const td = new Date();
+    for (let task of tasks) {
+      console.log(task);
+      if (task?.dueDate) {
+        const taskDate = new Date(task?.dueDate);
+        console.log(taskDate);
+        if (
+          taskDate.getDate() === td.getDate() &&
+          taskDate.getMonth() === td.getMonth() &&
+          taskDate.getFullYear() === td.getFullYear()
+        ) {
+          today.push(task);
+        }
+      }
+    }
+    return today;
+  }
+
+  const getTomorrowTasks = () => {
+    const tomorrow = [];
+    const td = new Date();
+    td.setDate(td.getDate() + 1);
+    for (let task of tasks) {
+      if (task?.dueDate) {
+        const taskDate = new Date(task?.dueDate);
+        if (
+          taskDate.getDate() === td.getDate() &&
+          taskDate.getMonth() === td.getMonth() &&
+          taskDate.getFullYear() === td.getFullYear()
+        ) {
+          tomorrow.push(task);
+        }
+      }
+    }
+    return tomorrow;
+  };
+
+  const getUpcomingTasks = () => {
+    const upcoming = [];
+    const min = new Date();
+    const max = new Date();
+    min.setDate(min.getDate() + 2);
+    max.setDate(max.getDate() + 7);
+    for (let task of tasks) {
+      if (task?.dueDate) {
+        const taskDate = new Date(task?.dueDate);
+        if (
+          taskDate.getDate() <= max.getDate() &&
+          taskDate.getDate() >= min.getDate() &&
+          taskDate.getMonth() <= max.getMonth() &&
+          taskDate.getMonth() >= min.getMonth() &&
+          taskDate.getFullYear() <= max.getFullYear() &&
+          taskDate.getFullYear() >= min.getFullYear()
+        ) {
+          upcoming.push(task);
+        }
+      }
+    }
+    return upcoming;
+  };
   
   // Render the page
   return (
@@ -30,60 +115,136 @@ export default function DashboardPage() {
       {/* <ProjectSidePanel /> */}
 
       <div
-        className="dashboard"
-        id="dashboard"
-        style={{ paddingLeft: "9vw", paddingTop: "5vh" }}
+        className='dashboard'
+        id='dashboard'
+        style={{ paddingLeft: '9vw', paddingTop: '5vh' }}
       >
-        <Row style={{ paddingBottom: "20px" }}>
-          <TaskSearch />
+        <Row
+          style={{
+            paddingBottom: '20px',
+            float: 'right',
+            position: 'relative',
+            right: '85px',
+            top: '-30px'
+          }}
+        >
+          <TaskSearch  />
+          <Tooltip title='create a new chronicle'>
+            <AntButton
+              style={{ marginRight: '5px' }}
+              icon={<PlusSquareFilled />}
+              onClick={() => setShowNewChronicle(true)}
+            />
+          </Tooltip>
+          <Modal
+            footer={null}
+            visible={showNewChronicle}
+            onCancel={() => setShowNewChronicle(false)}
+          >
+            <ChronicleForm user={user} />
+          </Modal>
+          <Tooltip title='create a new task'>
+            <AntButton
+              icon={<PlusSquareFilled />}
+              onClick={() => setShowNewTask(true)}
+            />
+          </Tooltip>
+          <Modal
+            footer={null}
+            visible={showNewTask}
+            onCancel={() => setShowNewTask(false)}
+          >
+            <TaskForm user={user} chronicles={chronicles} />
+          </Modal>
         </Row>
-        <Row>
-          <DashboardCard width="85vw" height="200px" color="#fafafa">
-            <br />
-            <h1 id="normalHeading1">good morning, username !</h1>
-            <p id="subHeading2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              interdum non nunc eu accumsan. Nullam sagittis vehicula leo, in
-              commodo justo feugiat vel.
+        <Row style={{ marginTop: '30px' }}>
+          <DashboardCard width='85vw' height='180px' color='#fafafa'>
+            <h1 id='normalHeading1'>good morning, {user.username} !</h1>
+            <p id='quote'>{quote.text}</p>
+            <p id='quoteAuthor'>
+              {' '}
+              - {quote.author === null ? 'Unknown' : quote.author}
             </p>
-            <Link to="/task-creation">
-            <Button className="getStartedButton" style={getStartedButton}>
-              Create a Task
-            </Button>
-          </Link>
           </DashboardCard>
         </Row>
         <br />
         <Row gutter={[24, 24]}>
           <Col span={11.5}>
-            <DashboardCard width="41vw" height="400px" color="#fafafa">
-              <br />
-              <h1 id="normalHeading1">weekly progress</h1>
-              <p id="subHeading2">Lorem ipsum dolor sit amet</p>
-            </DashboardCard>
+            <DashboardCardNoScroll
+              width='41vw'
+              height='400px'
+              color='#fafafa'
+              id='noScroll'
+            >
+              <h1 id='normalHeading1'>your chronicles</h1>
+              {chronicles?.length ? (
+                chronicles?.map((ch) => (
+                  <ChronicleDisplay
+                    key={ch?.title}
+                    chronicle={ch}
+                    isLoading={false}
+                  />
+                ))
+              ) : (
+                <p id='subHeading3'>no chronicles to display</p>
+              )}
+            </DashboardCardNoScroll>
           </Col>
           <Col span={12}>
             <Row gutter={[12, 12]}>
               <Col span={5.5}>
-                <DashboardCard width="20vw" height="180px" color="#fafafa">
-                  <h1 id="normalHeading2">today</h1>
-                  <p id="subHeading3">WIP STATIC DATA</p>
-                </DashboardCard>
+                <DashboardCardNoScroll
+                  width='20vw'
+                  height='180px'
+                  color='#fafafa'
+                  id='noScroll'
+                >
+                  <h1 id='normalHeading2'>today</h1>
+                  {todayTasks?.length ? (
+                    todayTasks?.map((task) => (
+                      <SmallTask key={task?.title} task={task} />
+                    ))
+                  ) : (
+                    <p id='subHeading4'>no tasks due today!</p>
+                  )}
+                </DashboardCardNoScroll>
               </Col>
               <Col span={5.5}>
-                <DashboardCard width="20vw" height="180px" color="#fafafa">
-                  <h1 id="normalHeading2">tomorrow</h1>
-                  <p id="subHeading3">WIP STATIC DATA</p>
-                </DashboardCard>
+                <DashboardCardNoScroll
+                  width='20vw'
+                  height='180px'
+                  color='#fafafa'
+                  id='noScroll'
+                >
+                  <h1 id='normalHeading2'>tomorrow</h1>
+                  {tomorrowTasks?.length ? (
+                    tomorrowTasks?.map((task) => (
+                      <SmallTask key={task?.title} task={task} />
+                    ))
+                  ) : (
+                    <p id='subHeading4'>no tasks due tomorrow!</p>
+                  )}
+                </DashboardCardNoScroll>
               </Col>
             </Row>
             <br />
             <Row gutter={[12, 12]}>
               <Col span={12}>
-                <DashboardCard width="41vw" height="180px" color="#fafafa">
-                  <h1 id="normalHeading2">deadlines approaching</h1>
-                  <p id="subHeading3">WIP STATIC DATA</p>
-                </DashboardCard>
+                <DashboardCardNoScroll
+                  width='41vw'
+                  height='180px'
+                  color='#fafafa'
+                  id='noScroll'
+                >
+                  <h1 id='normalHeading2'>deadlines approaching</h1>
+                  {upcomingTasks?.length ? (
+                    upcomingTasks?.map((task) => (
+                      <SmallTask key={task?.title} task={task} />
+                    ))
+                  ) : (
+                    <p id='subHeading4'>no upcoming deadlines!</p>
+                  )}
+                </DashboardCardNoScroll>
               </Col>
             </Row>
           </Col>
