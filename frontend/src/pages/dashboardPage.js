@@ -1,56 +1,281 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Import dependencies
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-
-// Import authentication services
-import UserService from "../services/userService";
-import EventBus from "../utils/eventBus";
-// import AuthService from "../services/authService";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import {Button as AntButton, Tooltip} from "antd";
+import { Row, Col, Modal } from "antd";
+import { useSelector } from 'react-redux';
+import getRandomQuote from "../utils/getRandomQuote";
+import { taskAPI } from '../api/task';
+import {PlusSquareFilled} from "@ant-design/icons"
+import { useHistory } from 'react-router';
 
 // Import components
+import ChronicleDisplay from "../components/chronicleDisplay";
+import SmallTask from "../components/smallTask";
+import TaskForm from "../components/taskForm";
+import ChronicleForm from "../components/chronicleForm"
 import ProjectSidePanel from "../components/projectSidePanel";
 import TaskSearch from "../components/taskSearch";
 import DashboardCard from "../components/dashboardCard";
+import DashboardCardNoScroll from '../components/noScrollDashboardCard';
+import DashboardCalendar from "../components/calendar";
 
 // The user's dashboard page -> overview of all tasks/projects
 export default function DashboardPage() {
 
-  // // Get the current user & token
-  // const user = AuthService.getCurrentUser();
+  const history = useHistory();
+  const { user } = useSelector((state) => state.user);
+  const quote = getRandomQuote();
+  const [chronicles, setChronicles] = React.useState([]);
+  const [tasks, setTasks] = React.useState([]);
+  const [todayTasks, setTodayTasks] = React.useState([]);
+  const [tomorrowTasks, setTomorrowTasks] = React.useState([]);
+  const [upcomingTasks, setUpcomingTasks] = React.useState([]);
+  const [showNewTask, setShowNewTask] = React.useState(false);
+  const [showNewChronicle, setShowNewChronicle] = React.useState(false);
 
-  // // Content to display
-  // const [content, setContent] = React.useState("");
-
-  // Fire on initial render -> check user's access token for authentication
-  // Logout when token is expired
   React.useEffect(() => {
-    UserService.verifyUserAuth().then(
-      (response) => {
-        console.log(response.data.message);
-      },
-      (error) => {
-        if (error.response && error.response.status === 401) {
-          console.log("Error authenticating, logging out");
-          EventBus.dispatch("logout");
+    taskAPI.getAllChronicles(user, setChronicles);
+    taskAPI.getAllTasks(user, setTasks);
+  }, []);
+
+  React.useEffect(() => {
+    console.log(tasks);
+    setTodayTasks(getTodayTasks());
+    setTomorrowTasks(getTomorrowTasks());
+    setUpcomingTasks(getUpcomingTasks());
+  }, [tasks]);
+
+  const viewChronicle = (chronicle) => {
+    history.push("/view-chronicle", {data: {chronicle, user}});
+  }
+
+  const getTodayTasks = () => {
+    const today = [];
+    const td = new Date();
+    for (let task of tasks) {
+      console.log(task);
+      if (task?.dueDate) {
+        const taskDate = new Date(task?.dueDate);
+        console.log(taskDate);
+        if (
+          taskDate.getDate() === td.getDate() &&
+          taskDate.getMonth() === td.getMonth() &&
+          taskDate.getFullYear() === td.getFullYear()
+        ) {
+          today.push(task);
         }
       }
-    );
-  }, []);
+    }
+    return today;
+  }
+
+  const getTomorrowTasks = () => {
+    const tomorrow = [];
+    const td = new Date();
+    td.setDate(td.getDate() + 1);
+    for (let task of tasks) {
+      if (task?.dueDate) {
+        const taskDate = new Date(task?.dueDate);
+        if (
+          taskDate.getDate() === td.getDate() &&
+          taskDate.getMonth() === td.getMonth() &&
+          taskDate.getFullYear() === td.getFullYear()
+        ) {
+          tomorrow.push(task);
+        }
+      }
+    }
+    return tomorrow;
+  };
+
+  const getUpcomingTasks = () => {
+    const upcoming = [];
+    const min = new Date();
+    const max = new Date();
+    min.setDate(min.getDate() + 2);
+    max.setDate(max.getDate() + 7);
+    for (let task of tasks) {
+      if (task?.dueDate) {
+        const taskDate = new Date(task?.dueDate);
+        if (
+          taskDate.getDate() <= max.getDate() &&
+          taskDate.getDate() >= min.getDate() &&
+          taskDate.getMonth() <= max.getMonth() &&
+          taskDate.getMonth() >= min.getMonth() &&
+          taskDate.getFullYear() <= max.getFullYear() &&
+          taskDate.getFullYear() >= min.getFullYear()
+        ) {
+          upcoming.push(task);
+        }
+      }
+    }
+    return upcoming;
+  };
   
   // Render the page
   return (
     <>
-      <ProjectSidePanel />
-      <TaskSearch/>
-      <DashboardCard width="600px" height="400px" color="red">
-        <h1>Test</h1>
-      </DashboardCard>
-      <Container
-        className="loginPage"
-        id="loginPage"
-        style={{ paddingLeft: "15px" }}
-      >
+      {/* <ProjectSidePanel /> */}
+
+      <div className='dashboard' id='dashboard' style={{ paddingLeft: '8vw', paddingTop: "40px" }}>
         <Row>
+          <Tooltip title='create a new chronicle'>
+            <AntButton
+              style={{ marginRight: '5px' }}
+              icon={<PlusSquareFilled />}
+              onClick={() => setShowNewChronicle(true)}
+            />
+          </Tooltip>
+          <Modal
+            footer={null}
+            visible={showNewChronicle}
+            onCancel={() => setShowNewChronicle(false)}
+          >
+            <ChronicleForm user={user} />
+          </Modal>
+          <Tooltip title='create a new task'>
+            <AntButton
+              id="btn2"
+              icon={<PlusSquareFilled />}
+              onClick={() => setShowNewTask(true)}
+            />
+          </Tooltip>
+          <Modal
+            footer={null}
+            visible={showNewTask}
+            onCancel={() => setShowNewTask(false)}
+          >
+            <TaskForm user={user} chronicles={chronicles} />
+          </Modal>
+          <h1 id='normalHeading3'>good morning, {user.username} !</h1>
+          {/* <h1 id='normalHeading3'>good morning, {user.username} !</h1>
+          <div
+            style={{
+              float: 'right',
+              position: 'absolute',
+              right: '55px',
+              top: '100px'
+            }}
+          >
+            <TaskSearch />
+            
+          </div> */}
+        </Row>
+        {/* <div
+          style={{
+            width: '100vw',
+            backgroundColor: '#f2f2f2',
+            height: '73px',
+            position: 'absolute',
+            top: '80px',
+            zIndex: '-1',
+            left: '0px'
+          }}
+        ></div> */}
+        <Row style={{ marginTop: '35px' }}>
+          <DashboardCard width='85vw' height='120px' color='#fafafa'>
+            <p id='quote'>{quote.text}</p>
+            <p id='quoteAuthor'>
+              {' '}
+              - {quote.author === null ? 'Unknown' : quote.author}
+            </p>
+          </DashboardCard>
+        </Row>
+        <br />
+        <Row gutter={[24, 24]}>
+          <Col span={11.5}>
+            <DashboardCardNoScroll
+              width='41vw'
+              height='400px'
+              color='#fafafa'
+              id='noScroll'
+            >
+              <h1 id='normalHeading1'>your chronicles</h1>
+              {chronicles?.length ? (
+                chronicles?.map((ch) => (
+                  <ChronicleDisplay
+                    viewChronicle={viewChronicle}
+                    key={ch?.title}
+                    chronicle={ch}
+                  />
+                ))
+              ) : (
+                <p id='subHeading3'>no chronicles to display</p>
+              )}
+            </DashboardCardNoScroll>
+          </Col>
+          <Col span={12}>
+            <Row gutter={[12, 12]}>
+              <Col span={5.5}>
+                <DashboardCardNoScroll
+                  width='20vw'
+                  height='180px'
+                  color='#fafafa'
+                  id='noScroll'
+                >
+                  <h1 id='normalHeading2'>today</h1>
+                  {todayTasks?.length ? (
+                    todayTasks?.map((task) => (
+                      <SmallTask key={task?.title} task={task} />
+                    ))
+                  ) : (
+                    <p id='subHeading4'>no tasks due today!</p>
+                  )}
+                </DashboardCardNoScroll>
+              </Col>
+              <Col span={5.5}>
+                <DashboardCardNoScroll
+                  width='20vw'
+                  height='180px'
+                  color='#fafafa'
+                  id='noScroll'
+                >
+                  <h1 id='normalHeading2'>tomorrow</h1>
+                  {tomorrowTasks?.length ? (
+                    tomorrowTasks?.map((task) => (
+                      <SmallTask key={task?.title} task={task} />
+                    ))
+                  ) : (
+                    <p id='subHeading4'>no tasks due tomorrow!</p>
+                  )}
+                </DashboardCardNoScroll>
+              </Col>
+            </Row>
+            <br />
+            <Row gutter={[12, 12]}>
+              <Col span={12}>
+                <DashboardCardNoScroll
+                  width='41vw'
+                  height='180px'
+                  color='#fafafa'
+                  id='noScroll'
+                >
+                  <h1 id='normalHeading2'>deadlines approaching</h1>
+                  {upcomingTasks?.length ? (
+                    upcomingTasks?.map((task) => (
+                      <SmallTask key={task?.title} task={task} />
+                    ))
+                  ) : (
+                    <p id='subHeading4'>no upcoming deadlines!</p>
+                  )}
+                </DashboardCardNoScroll>
+              </Col>
+            </Row>
+          </Col>
+
+          <Col span={8} />
+          <Col span={8} />
+          <Col span={8} />
+        </Row>
+        <Row gutter={[16, 16]}>
+          <Col span={8} />
+          <Col span={8} />
+          <Col span={8} />
+        </Row>
+        {/* <Row>
           <Col className="leftPane" md="6" id="leftPane">
             <h1 className="hook" id="cooperHeading1">
               Welcome aboard!
@@ -73,7 +298,7 @@ export default function DashboardPage() {
               walkthrough
             </h4>
           </Col>
-        </Row>
+        </Row> */}
 
         {/* <Row>
           <img
@@ -83,7 +308,7 @@ export default function DashboardPage() {
             id="loginImage"
           />
         </Row> */}
-      </Container>
+      </div>
     </>
   );
 }

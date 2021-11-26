@@ -43,53 +43,23 @@ You should already have installed
 
 - **Tip:** Use the keyboard shortcut ```CTRL + ~``` to open and hide the terminal.
 
-5. On the right side of the terminal panel, click the "+" symbol to create a second terminal instance.
-
-6. I suggest right-clicking each terminal instance (you should have 2 now, will probably be called "zsh"/"sh"/"bash") and then renaming each instance. Name one "client" and the other "server".
-
-- **Tip:** I like to open up a third terminal for installing packages or other commands, as these two terminals will be running our application and unable to accept commands.
-
-7. In the **server** terminal, enter the following commands:
+5. In the terminal, enter the following commands:
 
 - ```cd backend```
 - ```npm install```
-- _After the prevoius command has finished installing server dependencies_ ```nodemon server.js```
-
-> The server should now be started; you will see a message in the terminal like "Server is running on port: 5000" and/or "Successfully connected to MongoDB".
-
-8. In the **client** terminal, enter the following commands:
-
+- _After the prevoius command has finished installing server dependencies_ ```cd ..```
+- ```cd frontend```
 - ```npm install```
-- _After the prevoius command has finished installing server dependencies_ ```npm start```
+- _After the prevoius command has finished installing server dependencies_ ```cd ..```
+- ```npm install```
+- ```npm run dev```
 
-> The client development server should now be started; you will see a message in the terminal like "Compiled successfully!".
-
-9. The application is now running, you can open it in the browser by visiting ```localhost:3000```
-
-10. When you are ready to stop working/stop the application, you can go into the **client** and **server** terminals (order does not matter) and hit ```CTRL + C``` to terminate.
-
-## Running the Application
-
-You will follow some of the same steps as in the setup to run the application. 
-
-1. Open up a terminal inside VSCode
-
-- **Tip:** Use the keyboard shortcut ```CTRL + ~``` to open and hide the terminal.
-
-2. On the right side of the terminal panel, click the "+" symbol to create a second terminal instance.
-
-3. I suggest right-clicking each terminal instance (you should have 2 now, will probably be called "zsh"/"sh"/"bash") and then renaming each instance. Name one "client" and the other "server".
-
-- **Tip:** I like to open up a third terminal for installing packages or other commands, as these two terminals will be running our application and unable to accept commands.
-
-4. In the **server** terminal, enter ```nodemon server.js```
+_We are using concurrently (npm library) to run both servers in one terminal_
 
 > The server should now be started; you will see a message in the terminal like "Server is running on port: 5000" and/or "Successfully connected to MongoDB".
 
-8. In the **client** terminal, enter ```npm start```
-
 > The client development server should now be started; you will see a message in the terminal like "Compiled successfully!".
 
-9. The application is now running, you can open it in the browser by visiting ```localhost:3000```
+6. The application is now running, you can open it in the browser by visiting ```http://localhost:3000```
 
-10. When you are ready to stop working/stop the application, you can go into the **client** and **server** terminals (order does not matter) and hit ```CTRL + C``` to terminate.
+7. When you are ready to stop working/stop the application, you can go into the terminal and hit ```CTRL + C``` to terminate.

@@ -1,80 +1,34 @@
+// Import dependencies
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button, Container, Row, Col } from "react-bootstrap";
-import heroImage from "../assets/hero-image.svg";
-import FullCalendar from '@fullcalendar/react' // must go before plugins
-import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
-import './calendar.css';
+import { Row, Col } from "antd";
+import { useSelector } from 'react-redux';
 
-/**
- * Landing page for the application.
- */
+// Import components
+import ProjectSidePanel from "../components/projectSidePanel";
+import TaskSearch from "../components/taskSearch";
+import DashboardCard from "../components/dashboardCard";
+import DashboardCalendar from "../components/calendar";
+
+// The user's dashboard page -> overview of all tasks/projects
 export default function CalendarPage() {
-  // Styles
-  const landingPage = {
-    padding: "70px 0px",
-  };
 
-  const rightPane = {
-    marginTop: "90px",
-    marginLeft: "20px",
-  };
+  const { user } = useSelector((state) => state.user);
 
-  const title = {
-    fontSize: "2.7em",
-    fontWeight: "800",
-    maxWidth: "500px",
-    minWidth: "480px",
-    paddingTop: "20px",
-  };
-
-  const subHook = {
-    fontSize: "1.2em",
-    fontWeight: "300",
-    maxWidth: "490px",
-    minWidth: "380px",
-    marginTop: "20px",
-  };
-
-  const leftPane = {};
-
-  const heroImageStyle = {
-    width: "33em",
-    marginLeft: "0em",
-    marginTop: "40px",
-  };
-  // dark green: #91a434
-  // light green: #b8cd48
-  const getStartedButton = {
-    marginTop: "20px",
-    marginLeft: "5px",
-    marginRight: "5px",
-    backgroundColor: "#b8cd48",
-    border: "0px solid #b8cd48",
-  };
-
-  // End of styles
-
+  // Render the page
   return (
-    <Container className="calendarPage">
-      <Row>
-        <Col className="rightPane" md="6">
-          <h1 className="title" style={title}>
-            Calendar
-          </h1>
-        </Col>
-        {/* <Col className="leftPane" md="auto" style={leftPane}>
-          <img
-            src={heroImage}
-            alt="Hero"
-            className="heroImage"
-            style={heroImageStyle}
-          />
-        </Col> */}
-      </Row>
-      <Row>
-        <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
-      </Row>
-    </Container>
+    <>
+      {/* <ProjectSidePanel /> */}
+
+      <div
+        className="calendar"
+        id="calendar"
+        style={{ paddingLeft: "8vw", paddingTop: "2vh", maxWidth: "85vw" }}
+      >
+        <h1 id="cooperHeading1" style={{ color: "#df7538" }}>
+          calendar
+        </h1>
+        <DashboardCalendar />
+      </div>
+    </>
   );
 }

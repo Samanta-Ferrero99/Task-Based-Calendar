@@ -1,3 +1,12 @@
-#dashboardCard {
-  drop-shadow: (0 0 0.75rem crimson);
+/* Hide scrollbar for Chrome, Safari and Opera */
+#noScroll::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#noScroll {
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  scrollbar-width: none !important;
+  /* Firefox */
 }
