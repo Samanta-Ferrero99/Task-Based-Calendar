@@ -9,9 +9,11 @@
     "start": "node ./backend/server.js",
     "server": "nodemon ./backend/server.js",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run frontend\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run frontend\"",
+    "build": "cd frontend && npm run build"
   },
   "dependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.0.1",
+    "dotenv": "^10.0.0"
   }
 }

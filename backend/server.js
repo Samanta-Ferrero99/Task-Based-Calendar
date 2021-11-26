@@ -2,10 +2,10 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const passport = require('passport');
-const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
+require("dotenv").config();
 
 // Import REST API routes
 const authRoute = require("../backend/routes/auth.route");
@@ -35,8 +35,7 @@ app.use(
     // Save session
     store: MongoStore.create({
       mongoUrl:
-        process.env.MONGO_URI ||
-        'mongodb+srv://wizard:hello@csc342-10.iyhnw.mongodb.net/chronicle?retryWrites=true&w=majority'
+        process.env.MONGODB_CONNECTION_STRING
     })
   })
 );
