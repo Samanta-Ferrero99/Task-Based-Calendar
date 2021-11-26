@@ -4,6 +4,7 @@ import React from "react";
 import { useDispatch } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { attemptGetUser } from './store/thunks/user';
+import {Spin} from "antd";
 
 // Import components
 import LandingPage from "./pages/landingPage";
@@ -61,7 +62,7 @@ const App = () => {
       </Switch>
     </div>
   ) : (
-    <p>Loading...</p>
+    <Spin size="large" style={{position: "absolute", top: "50vh", left: "50vw"}}/>
   );
 }
 

@@ -235,7 +235,7 @@ html * {
 }
 
 .ant-btn {
-  color:#fff !important;
+  color: #fff !important;
 }
 
 .ant-btn-icon-only {
@@ -244,6 +244,14 @@ html * {
 
 .ant-btn-icon-only:hover {
   background-color: #62710d !important;
+}
+
+#btn2.ant-btn-icon-only {
+  background-color: #e98e27 !important;
+}
+
+#btn2.ant-btn-icon-only:hover {
+  background-color: #ad7a13 !important;
 }
 
 

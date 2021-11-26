@@ -12,6 +12,8 @@ import {
   attemptRegister,
 } from '../store/thunks/auth';
 
+import loginImage from "../assets/login.svg";
+
 export default function RegisterPage() {
 
   const [serverError, setServerError] = React.useState('');
@@ -87,7 +89,7 @@ export default function RegisterPage() {
               id='closeButton'
               variant='outline-secondary'
               onClick={() => setCreateNew(false)}
-              style={{ marginLeft: '150px' }}
+              style={{ marginLeft: '13vw' }}
             >
               <FontAwesomeIcon
                 icon={faTimes}
@@ -95,7 +97,7 @@ export default function RegisterPage() {
               />
             </Button>
 
-            <Form name='registerForm' form={form} onFinish={onFinish}>
+            <Form name='registerForm' form={form} onFinish={onFinish} style={{width: "400px", paddingTop: "20px"}}>
               <Form.Item
                 label='Email'
                 name='email'
@@ -172,7 +174,7 @@ export default function RegisterPage() {
         </Row>
       ) : (
         <>
-          <Row style={{ marginTop: '20px' }}>
+          <Row style={{ marginTop: '60px' }}>
             {/* <Button
               id="button1"
               variant="dark"
@@ -198,14 +200,15 @@ export default function RegisterPage() {
         </>
       )}
 
-      {/* <Row>
+      <Col>
         <img
           src={loginImage}
           alt="Login"
           className="registerImage"
           id="loginImage"
+          style={{width: "600px", position: "absolute", top: "320px", left: "800px"}}
         />
-      </Row> */}
+      </Col>
     </Container>
   );
 }

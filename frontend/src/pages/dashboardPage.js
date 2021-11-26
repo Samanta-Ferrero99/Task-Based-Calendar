@@ -120,7 +120,7 @@ export default function DashboardPage() {
     <>
       {/* <ProjectSidePanel /> */}
 
-      <div className='dashboard' id='dashboard' style={{ paddingLeft: '8vw' }}>
+      <div className='dashboard' id='dashboard' style={{ paddingLeft: '8vw', paddingTop: "40px" }}>
         <Row>
           <Tooltip title='create a new chronicle'>
             <AntButton
@@ -138,6 +138,7 @@ export default function DashboardPage() {
           </Modal>
           <Tooltip title='create a new task'>
             <AntButton
+              id="btn2"
               icon={<PlusSquareFilled />}
               onClick={() => setShowNewTask(true)}
             />
