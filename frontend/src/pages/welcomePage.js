@@ -1,7 +1,10 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import { useSelector } from 'react-redux';
 
 export default function WelcomePage() {
+
+  const { user } = useSelector((state) => state.user);
 
   return (
     <Container
@@ -15,9 +18,7 @@ export default function WelcomePage() {
             Welcome aboard!
           </h1>
           <h4 className="bottomNote" id="subHeading1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            interdum non nunc eu accumsan. Nullam sagittis vehicula leo, in
-            commodo justo feugiat vel.
+          Thanks for signing up! Click the Log In button to start your journey with Chronicle.
           </h4>
         </Col>
       </Row>

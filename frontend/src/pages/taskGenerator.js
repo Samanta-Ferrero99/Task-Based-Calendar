@@ -1,8 +1,15 @@
 
 // Import dependencies
 import React, { useState } from 'react'
-import { Row, Col } from "antd";
+import { Row, Col, Form, Input, DatePicker, TimePicker, Rate, Select, Alert, Modal } from 'antd';
+import {CirclePicker} from "react-color";
+import { Button } from 'react-bootstrap';
 import DashboardCard from "../components/dashboardCard";
+import { useSelector } from 'react-redux';
+
+import { taskStatus } from "../utils/taskStatus";
+import { taskAPI } from "../api/task";
+import httpService from "../services/httpService";
 
 // Styles
 const aboutUsPage = {
@@ -56,77 +63,160 @@ const aboutUsPage = {
     marginLeft: "0px",
   };
 
-// The user's task creation page -> ability to create a task
-export default function TaskGeneratorPage() {
+// The user's task creation form -> ability to create a task
+export default function TaskForm() {
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [type, setType] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [dueDate, setDueDate] = useState('');
+  const [success, setSuccess] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [openColor, setOpenColor] = React.useState(false);
+  const [color, setColor] = React.useState("");
 
-    const options = [
-        'work', 'class', 'life'
-      ];
+  const { user } = useSelector((state) => state.user);
 
-    const defaultOption = options[0]
+    const statusOptions = taskStatus.map((status) => {
+      return <Select.Option key={status} value={status}>{status}</Select.Option>;
+    });
 
-    const submit = () => {
-        if (title && type && dueDate) {
-            const templateParams = {
-                title,
-                type,
-                dueDate
-            };
-        } else if (title && type && dueDate && startDate && description) {
-            const templateParams = {
-                title,
-                type,
-                dueDate,
-                startDate,
-                description
-            };
-        } else {
-            alert('Please fill in all fields.');
-        }
-    }
+    const paths = [
+      'work', 'school', 'life'
+    ];
+
+    const pathOptions = paths.map((path) => {
+      return (
+        <Select.Option key={path} value={path}>
+          {path}
+        </Select.Option>
+      );
+    });
+
+    const [form] = Form.useForm();
+
+    const onFinish = (values) => {
+      const chronicleObject = {
+        ...values,
+        'dueDate': values['dueDate']?.format('MM-DD-YYYY') || null,
+        'color': color.hex,
+      };
+      console.log(chronicleObject);
+      taskAPI.createChronicle(chronicleObject, user, setError, setSuccess);
+      // if ( ) === true) {
+      //   console.log("TRUE");
+      //   setSuccess(true);
+      //   setError(false);
+      // } else {
+      //   setError(true);
+      //   setSuccess(false);
+      // }
+    };
 
     return (
+      <>
+        <Row>
+          <DashboardCard width='550px' height='580px' color='#fafafa'>
+            <h1
+              style={{
+                paddingBottom: '20px',
+                marginLeft: '20px',
+                paddingTop: '10px'
+              }}
+              id='normalHeading1'
+            >
+              begin a new chronicle
+            </h1>
+            <Form
+              style={{ marginLeft: '20px', marginRight: '20px' }}
+              name='taskForm'
+              form={form}
+              onFinish={onFinish}
+              labelCol={{ span: 5 }}
+              wrapperCol={{ span: 19 }}
+              layout='horizontal'
+            >
+              <Form.Item name='type' label='type'>
+                <Select>{pathOptions}</Select>
+              </Form.Item>
+              <Form.Item
+                label='title'
+                name='title'
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: 'chronicle must have a title!'
+                  }
+                ]}
+              >
+                <Input
+                  onChange={(e) => {
+                    form.setFieldsValue({ title: e.target.value });
+                  }}
+                />
+              </Form.Item>
+              <Form.Item label='description' name='description'>
+                <Input.TextArea
+                  onChange={(e) => {
+                    form.setFieldsValue({ description: e.target.value });
+                  }}
+                />
+              </Form.Item>
+              <Form.Item
+                name='dueDate'
+                label='due date'
+                rules={[
+                  {
+                    type: 'object'
+                  }
+                ]}
+              >
+                <DatePicker />
+              </Form.Item>
+              <Form.Item name='priority' label='priority'>
+                <Rate />
+              </Form.Item>
+              <Form.Item name='status' label='status'>
+                <Select>{statusOptions}</Select>
+              </Form.Item>
 
-        <>
-
-    <Row>
-    <DashboardCard width="85vw" height="800px" color="#fafafa">
-      <br />
-      <h1 id="normalHeading1">create a task:</h1>
-      <p id="subHeading2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-        interdum non nunc eu accumsan. Nullam sagittis vehicula leo, in
-        commodo justo feugiat vel.
-      </p>
-        <div id="contact-form">
-            <label style={text}>title </label>
-            <input style={inputs} type="text" placeholder="title" value={title} onChange={e => setTitle(e.target.value)} />
-            <label style={text}>description </label>
-            <input style={inputs} type="email" placeholder="description" value={description} onChange={e => setDescription(e.target.value)} />
-            <label style={text}>
-           type of task
-           <br />
-                <select value={type} onChange={e => setType(e.target.value)}>
-                    <option value="work">work</option>
-                    <option value="class">class</option>
-                    <option value="life">life</option>
-                </select>
-            </label>
-            <label style={text}> start date </label>
-            <input style={inputs} type="date" placeholder="start date" value={startDate} onChange={e => setStartDate(e.target.value)} />
-            <label style={text}> due date </label>
-            <input style={inputs} type="date" placeholder="due date" value={dueDate} onChange={e => setDueDate(e.target.value)} />
-            <button style={sendMessageButton} onClick={submit}>create task</button>
-        </div>
-    </DashboardCard>
-  </Row>
-  <br />
-  </>
+              <Form.Item>
+                <Button
+                  variant='dark'
+                  id='colorPicker'
+                  style={{ position: 'absolute', left: '265px', top: '0px' }}
+                  onClick={() => setOpenColor(true)}
+                >
+                  set color
+                </Button>
+                <Modal
+                  centered
+                  width={325}
+                  visible={openColor}
+                  onOk={() => setOpenColor(false)}
+                  onCancel={() => setOpenColor(false)}
+                >
+                  <CirclePicker onChangeComplete={(color) => setColor(color)} color={color} />
+                </Modal>
+                <Button
+                  variant='dark'
+                  id='button1'
+                  type='submit'
+                  style={{ position: 'absolute', left: '375px', top: '0px' }}
+                >
+                  submit
+                </Button>
+              </Form.Item>
+              {error ? (
+                <Alert message='could not create chronicle' type='error' showIcon />
+              ) : success ? (
+                <Alert
+                  message='chronicle created successfully'
+                  type='success'
+                  showIcon
+                />
+              ) : null}
+            </Form>
+          </DashboardCard>
+        </Row>
+        <br />
+      </>
     );
 }

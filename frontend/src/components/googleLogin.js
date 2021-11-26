@@ -1,34 +1,28 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
-import { Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { attemptLogin, attemptRegister } from '../store/thunks/auth';
+import { useDispatch } from 'react-redux';
 
-// refresh token
-import { refreshTokenSetup } from "../utils/refreshToken";
-import AuthService from "../services/authService";
-import EventBus from "../utils/eventBus";
 
 const clientId =
   "701049817934-2i9bdpvl02much6ldgqabiv6el46d6t9.apps.googleusercontent.com";
 
 function Login({register}) {
-  const history = useHistory();
+
+  const [serverError, setServerError] = React.useState('');
+
+  const dispatch = useDispatch();
+
   const onSuccessLogin = (res) => {
     const user = {
       email: res.profileObj.email,
       password: res.profileObj.googleId,
     };
-    AuthService.login(user).then(
-      (response) => {
-        console.log(`Successful login for user ${user.email}`);
-        EventBus.dispatch("login");
-        return history.push("/dashboard");
-      },
-      (error) => {
-        console.log("Error while signing in with Google");
+    dispatch(attemptLogin(user)).catch(({ response }) => {
+      if (response.data.message) {
+        setServerError(response.data.message);
       }
-    );
-    refreshTokenSetup(res);
+    });
   };
 
   const onFailureLogin = (res) => {
@@ -42,68 +36,16 @@ function Login({register}) {
       password: res.profileObj.googleId,
       password2: res.profileObj.googleId
     };
-    AuthService.register(user).then(
-      (response) => {
-        console.log(`Successful registration for user ${user.email}`);
-        const loginUser = {
-          email: user.email,
-          password: user.password,
-        };
-        AuthService.login(loginUser).then(
-          (res) => {
-            console.log(`Successful login for user ${user.email}`);
-            EventBus.dispatch("login");
-          },
-          (err) => {
-            console.log("error");
-          }
-        );
-        return history.push("/welcome");
-      },
-      (error) => {
-        const loginUser = {
-          email: user.email,
-          password: user.password,
-        };
-        AuthService.login(loginUser).then(
-          (res) => {
-            console.log(`Successful login for user ${user.email}`);
-            EventBus.dispatch("login");
-          },
-          (err) => {
-            console.log("error");
-          }
-        );
-        return history.push("/dashboard");
+    dispatch(attemptRegister(user)).catch((error) => {
+      if (error.response) {
+        setServerError(error.response.data.message);
       }
-    );
-    refreshTokenSetup(res);
+    });
   };
 
   const onFailureRegister = (res) => {
     console.log("Google registration failed: ", res);
   };
-
-  // const {signIn} = useGoogleLogin({
-  //   onSuccessLogin,
-  //   onFailureLogin,
-  //   clientId,
-  //   isSignedIn: true,
-  //   theme: "dark",
-  //   // responseType: 'code',
-  //   // prompt: 'consent',
-  // });
-
-  // const { signUp } = useGoogleLogin({
-  //   onSuccessRegister,
-  //   onFailureRegister,
-  //   clientId,
-  //   isSignedIn: true,
-  //   accessType: "offline",
-  //   theme: "dark",
-  //   responseType: 'code',
-  //   prompt: 'consent',
-  // });
 
   if (register === true) {
     return (

@@ -1,172 +1,111 @@
 // Dependencies
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-// const createHttpError = require("http-errors");
-const keys = require("../config/keys");
+const sanitize = require('mongo-sanitize');
+const moment = require('moment');
+const passport = require('passport');
+const bcrypt = require('bcryptjs');
+const r = require('ramda');
 
-// Load input validation
-const validateRegisterInput = require("../validation/register");
-const validateLoginInput = require("../validation/login");
-
-// Load User model
+// Load user model
 const userModel = require("../models/user");
 
-/**
- * Register a new user.
- * POST to /api/auth/register
- */
-router.post("/register", (req, res, next) => {
+// Load validation utility
+const validateTool = require("../utils");
 
-  // Form validation
-  const { errors, isValid } = validateRegisterInput(req.body);
+// Date format
+moment().format();
 
-  // Check validation
-  if (!isValid) {
-    console.error("VALIDATION CHECK FAIL");
-    console.error(req.body);
-    return res.status(400).json(errors);
+router.post("/login", (req, res, next) => {
+  const { error } = validateTool.loginInput(req.body);
+  if  (error) {
+    return res.status(400).send({message: error.details[0].message});
   }
-  // Check if user is already registered
-  userModel.findOne({ email: req.body.email }).then(user => {
+  req.body = sanitize(req.body);
+  req.body.email = req.body.email.toLowerCase();
 
-    // If user with given email already exists, send error
-    if (user) {
+  const userObject = {
+    username: req.body.email,
+    password: req.body.password
+  }
 
-      return res.status(422).json({ message: "An account with this email already exists." });
-
-    // If user does not exist, create a new user object
-    } else {
-      
-      const newUser = new userModel({
-        username: req.body.username || null,
-        email: req.body.email || null,
-        password: req.body.password || null
-      });
-
-      console.log(newUser);
-
-      // Check if any fields are null (if the validator did not catch them)
-      if (newUser.username === null || newUser.email === null || newUser.password === null) {
-        console.error("NULL CHECK FAIL");
-        return res
-          .status(400)
-          .json({ message: "A new user must have a username, email, and password. Request is missing one or more fields." });
-      }
-
-      // Hash password before saving in database (bcrypt)
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-          if (err) throw err;
-          newUser.password = hash;
-          newUser
-            .save()
-            .catch(err => console.log(err));
-        });
-      });
-
-      // Send response
-      return res.status(200).json({message: `Successfully registered user ${newUser.username}`, user: newUser});
+  passport.authenticate("local", (err, userObject, info) => {
+    if (err) {
+      return next(err);
     }
+    if (info && info.message === "Missing credentials") {
+      return res.status(400).send({message: "Missing credentials"});
+    }
+    if (!userObject) {
+      return res.status(400).send({messaaage: "Login failed: Invalid email or password"});
+    }
+
+    req.login(userObject, (err) => {
+      if (err) {
+        res.status(401).send({message: "Login failed", err});
+      }
+      console.log("LOG IN SUCCESS");
+      console.log(userObject);
+      res.status(200).send({message: "Login success!", user: r.omit(["password", "__v", "__id"], userObject.toObject({virtuals: true}))});
+    });
+  })(req, res, next);
+});
+
+router.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      res.status(500).send({message: "Logout failed", err});
+    }
+    req.sessionID = null;
+    req.logout();
+    res.status(200).send({message: "Logout success"});
   });
 });
 
-/**
- * Login an existing user.
- * POST to /api/auth/login
- */
-router.post("/login", (req, res) => {
-
-  // Form validation
-  const { errors, isValid } = validateLoginInput(req.body);
-
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
+router.post("/register", async (req, res) => {
+  const { error } = validateTool.registerInput(req.body);
+  if (error) {
+    return res.status(400).send({message: error.details[0].message});
+  }
+  req.body = sanitize(req.body);
+  let user = await userModel.findOne({email: req.body.email.toLowerCase()}, function(err) {
+    if (err) {
+      return res.status(500).send({message: "Unexpected error while attempting to register user"});
+    }
+  });
+  if (user) {
+    return res.status(400).send({message: "An account with this email already exists."});
   }
 
-  // Extract fields
-  const email = req.body.email;
-  const password = req.body.password;
+  if (req.body.password !== req.body.password2) {
+    return res.status(400).send({message: "Passwords do not match"});
+  }
+  const newUser = new userModel({
+    username: req.body.username || null,
+    email: req.body.email || null,
+    password: req.body.password || null
+  });
 
-  // Lookup user by email in the database
-  userModel.findOne({ email }).then(user => {
-
-    // Check if user exists, if does not exist, send an error
-    if (!user) {
-      return res.status(404).json({ message: `No user exists with the email ${email}.`});
-    }
-
-    // Check password validation using bcrypt
-    bcrypt.compare(password, user.password).then(isMatch => {
-
-      if (isMatch) {
-
-        // Password matched
-        // Create JWT Payload
-        const payload = {
-          id: user.id,
-          username: user.username
-        };
-
-        // Sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          {
-            expiresIn: 31556926 // 1 year in seconds
-          },
-          (err, token) => {
-            // Send response with token
-            res.status(200).json({
-              message: `Successful Login for user ${user.username}`,
-              token: "Bearer " + token
-            });
-          }
-        );
-      // Password was not a match
-      } else {
-        return res
-          .status(400)
-          .json({ message: "Password incorrect" });
-      }
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if (err) throw err;
+      newUser.password = hash;
+      console.log(newUser.password + " " + hash);
+      newUser
+      .save()
+      .catch(err => console.log(err));
+      return res.status(200).json({
+        message: `Successfully registered user ${newUser.email}`,
+        user: newUser
+      });
     });
   });
-});
 
-/**
- * Verify a user's access token.
- * GET to /api/auth/verify
- */
-router.get("/verify", (req, res) => {
-  // Get token from header
-  let token = req.headers.token;
+  
+})
 
-  // Verify that token exists / was passed in
-  if (!token) return res.status(401).json({message: "Access denied, unauthorized request."});
-
-  // Attempt to verify token
-  try {
-    // Remove Bearer from the token string
-    token = token.split(' ')[1];
-
-    // Check that token is not null, and exists
-    if (token === 'null' || !token) return res.status(401).json({message: "Access denied, unauthorized request"});
-
-    // Verify token for user
-    let verifiedUser = jwt.verify(token, keys.secretOrKey);
-
-    // Return an error if the user is not verified.
-    if (!verifiedUser) return res.status(401).json({message: "Access denied, unauthorized request"});
-
-    // Authentication success!
-    res.status(200).json({message: `Authentication success for user ${verifiedUser.username}`});
-
-  } catch (error) {
-    // Return an error for unauthorized token
-    res.status(400).json({message: "Access denied, invalid token"});
-  }
+router.get("/test", (req, res) => {
+  res.send("HELLO");
 })
 
 module.exports = router;
