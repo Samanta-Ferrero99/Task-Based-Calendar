@@ -2,6 +2,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const passport = require('passport');
+const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
