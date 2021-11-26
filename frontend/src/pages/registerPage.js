@@ -66,10 +66,10 @@ export default function RegisterPage() {
       <Row>
         <Col className='leftPane' md='6' id='leftPane'>
           <h1 className='hook' id='cooperHeading1'>
-            Some inspiring text here.
+            Sign Up Today!
           </h1>
           <h4 className='bottomNote' id='subHeading1'>
-            And a snappy subheading to make us sound relatable.
+            Choose to sign up through a Google account or by creating an account with us!
           </h4>
         </Col>
       </Row>
