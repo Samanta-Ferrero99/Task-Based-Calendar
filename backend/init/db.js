@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 // Connect to DB from env variable url, create instance
 module.exports = function () {
   const dbConfig =
-    process.env.MONGODB_CONNECTION_STRING;
+    process.env.MONGO_URI ||
+    'mongodb+srv://wizard:hello@csc342-10.iyhnw.mongodb.net/chronicle?retryWrites=true&w=majority';
   
     const options = {
     useNewUrlParser: true,

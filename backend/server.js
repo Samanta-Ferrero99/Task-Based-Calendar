@@ -1,4 +1,5 @@
 // Import dependencies
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const express = require('express');
 const passport = require('passport');
@@ -6,7 +7,6 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
-require("dotenv").config();
 
 // Import REST API routes
 const authRoute = require("../backend/routes/auth.route");
@@ -35,8 +35,7 @@ app.use(
     saveUninitialized: false,
     // Save session
     store: MongoStore.create({
-      mongoUrl:
-        process.env.MONGODB_CONNECTION_STRING
+      mongoUrl: process.env.MONGODB_CONNECTION_STRING,
     })
   })
 );
@@ -44,7 +43,7 @@ app.use(
 // Middleware
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.CLIENT,
     credentials: true
   })
 );
