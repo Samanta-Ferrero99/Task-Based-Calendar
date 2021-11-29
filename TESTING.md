@@ -3,18 +3,14 @@
 - Loading Website
 - Home Page
 - About Us/Contact Us
-- Log In
+- Log In/Log Out
 - Dashboard Page
-- Empty Calendar Page
 - Add a Work Task to Schedule, Check Calendar
-- Add a Life Task to Schedule, Check Calendar
 - Add Conflicting Tasks (Should be fine)
-- Settings Page
-- Log Out
 
 <h2>Loading Testing Environment</h2>
 
-TODO
+Type in the URL "https://chronicle.quest", which will take you straight to the landing page of the website.
 
 <h2>Test 1: Contact Us Page</h2>
 
@@ -96,7 +92,7 @@ Expected: The account creation does not work because the email does not exist.
 
 Expected: The account creation does not work because the email is already associated with another account.
 
-14. Change the email address to be **INSERT NEW EMAIL ADDRESS HERE ONCE SIGN UP IS FIXED**, an email address that already exists from the regular account creation. Click on the "Create My Account" button.
+14. Change the email address to be doesnotexist@gmail.com, an email address that already exists from the regular account creation. Click on the "Create My Account" button.
 
 Expected: The account creation does not work because the email is already associated with another account.
 
@@ -175,3 +171,91 @@ Expected: The user is redirected to the /dashboard page. It shows that current c
 <h2>Test 5: Create a Chronicle</h5>
 
 **TODO**
+
+Preconditions: Test 4
+
+1. Hover over the button with the green plus in the top right corner of the dashboard page.
+
+Expected: When the button is hovered over, it should display the text "create a chronicle".
+
+2. Click on the button with the green plus.
+
+Expected: A pop-up form appears, prompting the user to begin a new chronicle. It prompts for a type, a title, a description, a due date, a priority, and a status. Only the title is marked as required.
+
+3. Click on the "Submit" button.
+
+Expected: Underneath the textbox for the title, a message appears stating that the chronicle must have a title.
+
+4. Fill in the fields for type, description, due date, priority, and status. Click on the "Submit" button.
+
+Expected: Underneath the textbox for the title, a message appears stating that the chronicle must have a title.
+
+5. Enter in the title "My First Chronicle". Click on the "Submit" button.
+
+Expected: Underneath the "Submit" button, a green text bubble will appear stating that the chronicle has been created successfully.
+
+6. Close the form window. Refresh the dashboard page.
+
+Expected: Under the section that shows a user's chronicles, a card will appear with the given title and due date. The color of this card will be grey.
+
+7. Click on the newly created chronicle.
+
+Expected: The user is redirected to the "/view-chronicle" page. Within it, the title, description, type, due date, and creation date is listed on the left side. The progress circle is set to 0% and there are no tasks listed in the chronicle.
+
+8. Click on the "Dashboard" button in the navigation bar. Click on the green plus button. Select some type. Enter in the title "Driving Lessons". Click on the "set color" button.
+
+Expected: A pop up window with several colors to choose from appear.
+
+9. Select a color that is not grey. Click on the "OK" button. Click on the "Submit" button.
+
+Expected: Underneath the "Submit" button, a green text bubble will appear stating that the chronicle has been created successfully.
+
+10. Close the form window. Refresh the dashboard page.
+
+Expected: The chronicle labelled "Driving Lessons" appears underneath the "My First Chronicle" chronicle. The "Driving Lessons" chronicle appears under the chosen color when the chronicle was created.
+
+<h2>Test 6: Edit a Chronicle</h2>
+
+Preconditions: Test 5
+
+1. Click on the chronicle labelled "Driving Lessons".
+
+Expected: The title, type, and creation date are listed on the left side. The progress circle is set to 0% and the chronicle has no tasks associated with it. The title is surrounded by the color chosen during the chronicle creation.
+
+2. Hover over the right hand **MAY NOT BE GREEN PLUS ANYMORE** button.
+
+Expected: A label that states "edit chronicle" is displayed.
+
+3. Click on the right hand **MAY NOT BE GREEN PLUS ANYMORE** button.
+
+Expected: A pop-up form appears. Most of the fields are not populated.
+
+4. Select a due date and enter in a description. Click on the "Submit" button.
+
+Expected: Underneath the "Submit" button, a green text bubble will appear stating that the chronicle has been edited successfully.
+
+5. Close the form. Click on the "Dashboard" button in the navigation bar.
+
+Expected: The "Driving Lessons" chronicle now appears to have a due date associated with it with the selected due date present.
+
+6. Click on the chronicle labelled "Driving Lessons".
+
+Expected: The title, description, type, due date, and creation date are listed on the left side. The progress circle is set to 0% and the chronicle has no tasks associated with it. The title is surrounded by the color chosen during the chronicle creation.
+
+<h2>Test 7: Create a Task in a Chronicle</h2>
+
+Preconditions: Test 6
+
+**TODO**
+
+<h2>Test 8: Create a Task outside of a Chronicle</h2>
+
+Preconditions: Test 7
+
+**TODO**
+
+<h2>Test 9: Edit a Task</h2>
+
+Preconditions: Test 8
+
+**TODO: Edit a task in some way in both a chronicle and outside. At the end of this test, log out.**
