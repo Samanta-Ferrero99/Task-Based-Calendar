@@ -1,23 +1,23 @@
 import React from 'react';
 import './dashboardCard.css';
 
-const SmallTask = ({task}) => {
+const SmallTask = ({task, viewTask}) => {
   return (
-    <p
+    <div
       style={{
         backgroundColor: '#ffffff',
         borderRadius: '5px',
         cursor: 'pointer',
         padding: '5px 5px',
-        margin: '2px 0px',
+        margin: '2px 5px',
       }}
       onClick={() => {
-        console.log('click card');
+        viewTask(task);
       }}
       className='hvr-grow'
     >
       <span id='taskTitle'>{task?.title}</span>
-    </p>
+    </div>
   );
 };
 

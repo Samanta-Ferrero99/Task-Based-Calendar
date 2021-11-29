@@ -3,7 +3,7 @@ import './dashboardCard.css';
 
 const MiddleTask = ({ task, width, viewTask }) => {
   return (
-    <p
+    <div
       style={{
         backgroundColor: '#ffffff',
         borderRadius: '5px',
@@ -32,7 +32,7 @@ const MiddleTask = ({ task, width, viewTask }) => {
           due on {new Date(task?.dueDate).toDateString().toLowerCase()}
         </p>
       ) : null}
-    </p>
+    </div>
   );
 };
 

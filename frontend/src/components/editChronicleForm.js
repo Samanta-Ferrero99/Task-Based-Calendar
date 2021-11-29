@@ -4,7 +4,6 @@ import { Row, Form, Input, DatePicker, Rate, Select, Alert, Modal } from 'antd';
 import { CirclePicker } from 'react-color';
 import { Button } from 'react-bootstrap';
 import DashboardCard from '../components/dashboardCard';
-import { useSelector } from 'react-redux';
 
 import { taskStatus } from '../utils/taskStatus';
 import { taskAPI } from '../api/task';

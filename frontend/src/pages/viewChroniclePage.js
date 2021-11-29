@@ -23,11 +23,10 @@ export default function ViewChroniclePage() {
     const data = history.location.state.data;
     const user = data.user;
     const chronicle = data.chronicle;
-    console.log(chronicle);
 
     React.useEffect(() => {
       taskAPI.getTaskByChronicle(user, chronicle._id, setTasks);
-    }, []);
+    }, [addTask, showEdit]);
 
     const getPercentage = () => {
       const numTasks = tasks.length;
@@ -46,7 +45,6 @@ export default function ViewChroniclePage() {
       history.push('/view-task', { data: { task, user } });
     };
 
-    console.log(tasks);
   // Render the page
   return (
     <>
@@ -76,6 +74,7 @@ export default function ViewChroniclePage() {
             </Tooltip>
             <Tooltip title='add new task to chronicle'>
               <AntButton
+                id='btn2'
                 style={{
                   display: 'inline-block',
                   float: 'right',
@@ -90,14 +89,14 @@ export default function ViewChroniclePage() {
         <Modal
           visible={showEdit}
           onCancel={() => setShowEdit(false)}
-          onOk={() => history.push('/dashboard')}
+          onOk={() => setShowEdit(false)}
         >
           <EditChronicleForm user={user} chronicle={chronicle} />
         </Modal>
         <Modal
           visible={addTask}
           onCancel={() => setAddTask(false)}
-          onOk={() => history.push('/dashboard')}
+          onOk={() => setShowEdit(false)}
         >
           <ChronicleTaskForm user={user} chronicle={chronicle} />
         </Modal>

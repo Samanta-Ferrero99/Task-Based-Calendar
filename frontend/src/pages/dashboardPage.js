@@ -1,8 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // Import dependencies
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import {Button as AntButton, Tooltip} from "antd";
 import { Row, Col, Modal } from "antd";
 import { useSelector } from 'react-redux';
@@ -16,11 +14,8 @@ import ChronicleDisplay from "../components/chronicleDisplay";
 import SmallTask from "../components/smallTask";
 import TaskForm from "../components/taskForm";
 import ChronicleForm from "../components/chronicleForm"
-import ProjectSidePanel from "../components/projectSidePanel";
-import TaskSearch from "../components/taskSearch";
 import DashboardCard from "../components/dashboardCard";
 import DashboardCardNoScroll from '../components/noScrollDashboardCard';
-import DashboardCalendar from "../components/calendar";
 
 // The user's dashboard page -> overview of all tasks/projects
 export default function DashboardPage() {
@@ -39,10 +34,9 @@ export default function DashboardPage() {
   React.useEffect(() => {
     taskAPI.getAllChronicles(user, setChronicles);
     taskAPI.getAllTasks(user, setTasks);
-  }, []);
+  }, [showNewChronicle, showNewTask]);
 
   React.useEffect(() => {
-    console.log(tasks);
     setTodayTasks(getTodayTasks());
     setTomorrowTasks(getTomorrowTasks());
     setUpcomingTasks(getUpcomingTasks());
@@ -54,12 +48,11 @@ export default function DashboardPage() {
 
   const getTodayTasks = () => {
     const today = [];
-    const td = new Date();
+    const td = new Date(new Date().toDateString());
     for (let task of tasks) {
-      console.log(task);
       if (task?.dueDate) {
-        const taskDate = new Date(task?.dueDate);
-        console.log(taskDate);
+        const taskDate = new Date(Date.parse(task?.dueDate));
+        taskDate.setDate(taskDate.getDate() + 1);
         if (
           taskDate.getDate() === td.getDate() &&
           taskDate.getMonth() === td.getMonth() &&
@@ -74,11 +67,12 @@ export default function DashboardPage() {
 
   const getTomorrowTasks = () => {
     const tomorrow = [];
-    const td = new Date();
+    const td = new Date(new Date().toDateString());
     td.setDate(td.getDate() + 1);
     for (let task of tasks) {
       if (task?.dueDate) {
-        const taskDate = new Date(task?.dueDate);
+        const taskDate = new Date(Date.parse(task?.dueDate));
+        taskDate.setDate(taskDate.getDate() + 1);
         if (
           taskDate.getDate() === td.getDate() &&
           taskDate.getMonth() === td.getMonth() &&
@@ -93,13 +87,14 @@ export default function DashboardPage() {
 
   const getUpcomingTasks = () => {
     const upcoming = [];
-    const min = new Date();
-    const max = new Date();
+    const min = new Date(new Date().toDateString());
+    const max = new Date(new Date().toDateString());
     min.setDate(min.getDate() + 2);
-    max.setDate(max.getDate() + 7);
+    max.setDate(max.getDate() + 8);
     for (let task of tasks) {
       if (task?.dueDate) {
-        const taskDate = new Date(task?.dueDate);
+        const taskDate = new Date(Date.parse(task?.dueDate));
+        taskDate.setDate(taskDate.getDate() + 1);
         if (
           taskDate.getDate() <= max.getDate() &&
           taskDate.getDate() >= min.getDate() &&
@@ -114,13 +109,19 @@ export default function DashboardPage() {
     }
     return upcoming;
   };
+
+  const viewTask = (task) => {
+    history.push('/view-task', { data: { task, user } });
+  };
   
   // Render the page
   return (
     <>
-      {/* <ProjectSidePanel /> */}
-
-      <div className='dashboard' id='dashboard' style={{ paddingLeft: '8vw', paddingTop: "40px" }}>
+      <div
+        className='dashboard'
+        id='dashboard'
+        style={{ paddingLeft: '8vw', paddingTop: '40px' }}
+      >
         <Row>
           <Tooltip title='create a new chronicle'>
             <AntButton
@@ -138,7 +139,7 @@ export default function DashboardPage() {
           </Modal>
           <Tooltip title='create a new task'>
             <AntButton
-              id="btn2"
+              id='btn2'
               icon={<PlusSquareFilled />}
               onClick={() => setShowNewTask(true)}
             />
@@ -151,30 +152,7 @@ export default function DashboardPage() {
             <TaskForm user={user} chronicles={chronicles} />
           </Modal>
           <h1 id='normalHeading3'>good morning, {user.username} !</h1>
-          {/* <h1 id='normalHeading3'>good morning, {user.username} !</h1>
-          <div
-            style={{
-              float: 'right',
-              position: 'absolute',
-              right: '55px',
-              top: '100px'
-            }}
-          >
-            <TaskSearch />
-            
-          </div> */}
         </Row>
-        {/* <div
-          style={{
-            width: '100vw',
-            backgroundColor: '#f2f2f2',
-            height: '73px',
-            position: 'absolute',
-            top: '80px',
-            zIndex: '-1',
-            left: '0px'
-          }}
-        ></div> */}
         <Row style={{ marginTop: '35px' }}>
           <DashboardCard width='85vw' height='120px' color='#fafafa'>
             <p id='quote'>{quote.text}</p>
@@ -219,7 +197,11 @@ export default function DashboardPage() {
                   <h1 id='normalHeading2'>today</h1>
                   {todayTasks?.length ? (
                     todayTasks?.map((task) => (
-                      <SmallTask key={task?.title} task={task} />
+                      <SmallTask
+                        key={task?.title}
+                        task={task}
+                        viewTask={viewTask}
+                      />
                     ))
                   ) : (
                     <p id='subHeading4'>no tasks due today!</p>
@@ -236,7 +218,11 @@ export default function DashboardPage() {
                   <h1 id='normalHeading2'>tomorrow</h1>
                   {tomorrowTasks?.length ? (
                     tomorrowTasks?.map((task) => (
-                      <SmallTask key={task?.title} task={task} />
+                      <SmallTask
+                        key={task?.title}
+                        task={task}
+                        viewTask={viewTask}
+                      />
                     ))
                   ) : (
                     <p id='subHeading4'>no tasks due tomorrow!</p>
@@ -256,7 +242,11 @@ export default function DashboardPage() {
                   <h1 id='normalHeading2'>deadlines approaching</h1>
                   {upcomingTasks?.length ? (
                     upcomingTasks?.map((task) => (
-                      <SmallTask key={task?.title} task={task} />
+                      <SmallTask
+                        key={task?.title}
+                        task={task}
+                        viewTask={viewTask}
+                      />
                     ))
                   ) : (
                     <p id='subHeading4'>no upcoming deadlines!</p>
@@ -275,39 +265,6 @@ export default function DashboardPage() {
           <Col span={8} />
           <Col span={8} />
         </Row>
-        {/* <Row>
-          <Col className="leftPane" md="6" id="leftPane">
-            <h1 className="hook" id="cooperHeading1">
-              Welcome aboard!
-            </h1>
-            <h4 className="bottomNote" id="subHeading1">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              interdum non nunc eu accumsan. Nullam sagittis vehicula leo, in
-              commodo justo feugiat vel.
-            </h4>
-          </Col>
-        </Row>
-        <Row className="login" id="login">
-          <Col>
-            <h4
-              className="alreadyJoined"
-              id="subHeading1"
-              style={{ paddingTop: "20px" }}
-            >
-              Learn the ins and outs of using chronicle with our new-user
-              walkthrough
-            </h4>
-          </Col>
-        </Row> */}
-
-        {/* <Row>
-          <img
-            src={loginImage}
-            alt="Login"
-            className="registerImage"
-            id="loginImage"
-          />
-        </Row> */}
       </div>
     </>
   );

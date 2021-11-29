@@ -1,23 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+// Redux
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-// import { BrowserRouter } from "react-router-dom";
+import { PersistGate } from 'redux-persist/integration/react';
+
+
+import configureStore from './store/configureStore';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from './App';
-import configureStore from './store/configureStore';
 import * as serviceWorker from "./serviceWorker";
 
 const history = createBrowserHistory();
-const store = configureStore(history);
-
+const {store, persistor} = configureStore(history);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );

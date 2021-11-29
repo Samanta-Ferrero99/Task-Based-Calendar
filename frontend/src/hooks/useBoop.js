@@ -1,7 +1,8 @@
-import React from "react";
-import { useSpring } from "react-spring";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React from 'react';
+import { useSpring } from 'react-spring';
 
-import usePrefersReducedMotion from "./usePrefersReducedMotion.js";
+import usePrefersReducedMotion from './usePrefersReducedMotion.js';
 
 function useBoop({
   x = 0,
@@ -11,8 +12,8 @@ function useBoop({
   timing = 150,
   springConfig = {
     tension: 300,
-    friction: 10,
-  },
+    friction: 10
+  }
 }) {
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -26,7 +27,7 @@ function useBoop({
       : `translate(0px, 0px)
          rotate(0deg)
          scale(1)`,
-    config: springConfig,
+    config: springConfig
   });
 
   React.useEffect(() => {
@@ -46,7 +47,7 @@ function useBoop({
   }, []);
 
   let appliedStyle = prefersReducedMotion ? {} : style;
-  
+
   return [appliedStyle, trigger];
 }
 export default useBoop;

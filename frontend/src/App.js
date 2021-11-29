@@ -14,10 +14,7 @@ import LoginPage from "./pages/loginPage";
 import DashboardPage from "./pages/dashboardPage";
 import CalendarPage from "./pages/calendarPage";
 import AboutUsPage from "./pages/aboutUsPage";
-import SettingsPage from "./pages/settingsPage";
 import RegisterPage from "./pages/registerPage";
-import WelcomePage from "./pages/welcomePage";
-import OptionsBar from "./components/optionsBar";
 import TaskForm from "./pages/taskGenerator";
 import ViewChroniclePage from "./pages/viewChroniclePage";
 import ViewTaskPage from './pages/viewTaskPage';
@@ -53,8 +50,6 @@ const App = () => {
         <Route path='/about-us' component={AboutUsPage} />
         <ProtectedRoute path='/dashboard' exact component={DashboardPage} />
         <ProtectedRoute path='/calendar' exact component={CalendarPage} />
-        <ProtectedRoute path='/settings' exact component={SettingsPage} />
-        <ProtectedRoute exact path='/welcome' component={WelcomePage} />
         <ProtectedRoute path='/task-creation' exact component={TaskForm} />
         <Route path='/view-chronicle' exact component={ViewChroniclePage} />
         <Route path='/view-task' exact component={ViewTaskPage} />

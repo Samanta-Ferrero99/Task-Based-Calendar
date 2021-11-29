@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { GoogleLogin } from "react-google-login";
 import { attemptLogin, attemptRegister } from '../store/thunks/auth';

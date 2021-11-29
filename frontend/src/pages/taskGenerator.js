@@ -1,7 +1,7 @@
 
 // Import dependencies
-import React, { useState } from 'react'
-import { Row, Col, Form, Input, DatePicker, TimePicker, Rate, Select, Alert, Modal } from 'antd';
+import React from 'react'
+import { Row, Form, Input, DatePicker, Modal, Select, Rate, Alert } from 'antd';
 import {CirclePicker} from "react-color";
 import { Button } from 'react-bootstrap';
 import DashboardCard from "../components/dashboardCard";
@@ -9,59 +9,7 @@ import { useSelector } from 'react-redux';
 
 import { taskStatus } from "../utils/taskStatus";
 import { taskAPI } from "../api/task";
-import httpService from "../services/httpService";
 
-// Styles
-const aboutUsPage = {
-    padding: "40px 0px",
-  };
-
-  const rightPane = {
-    marginLeft: "10px",
-    paddingTop: "20px",
-  };
-
-  const hook = {
-    fontSize: "2.7em",
-    fontWeight: "800",
-    textAlign: "left",
-  };
-
-  const contact = {
-    fontSize: "2.7em",
-    fontWeight: "800",
-  };
-
-  const subHook = {
-    fontSize: "1.2em",
-    fontWeight: "300",
-    marginTop: "20px",
-    textAlign: "left",
-  };
-
-  const text = {
-    fontSize: "1.2em",
-    fontWeight: "300",
-    marginTop: "20px",
-    display: "block",
-  };
-
-  const inputs = {
-    display: "block",
-    minWidth: "600px",
-    maxWidth: "800px",
-  };
-  const leftPane = {
-    marginLeft: "15px",
-  };
-  // dark green: #91a434
-  // light green: #b8cd48
-  const sendMessageButton = {
-    marginTop: "20px",
-    backgroundColor: "#b8cd48",
-    border: "0px solid #b8cd48",
-    marginLeft: "0px",
-  };
 
 // The user's task creation form -> ability to create a task
 export default function TaskForm() {

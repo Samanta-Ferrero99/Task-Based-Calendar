@@ -10,7 +10,8 @@
     "server": "nodemon ./backend/server.js",
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run frontend\"",
-    "build": "cd frontend && npm run build"
+    "build": "cd frontend && npm run build",
+    "deploy": "cd frontend && npm run build && scp -r ./build/* root@67.205.147.131:/var/www/chronicle.quest/html"
   },
   "dependencies": {
     "concurrently": "^4.0.1",

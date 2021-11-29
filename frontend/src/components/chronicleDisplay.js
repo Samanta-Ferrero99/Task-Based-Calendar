@@ -3,6 +3,17 @@ import { Card, Progress, Badge } from 'antd';
 import './dashboardCard.css';
 
 const ChronicleDisplay = ({chronicle, viewChronicle}) => {
+  const getPercentage = () => {
+      const numTasks = chronicle?.tasks?.length || 0;
+      let completeTasks = 0;
+      for (let task of chronicle?.tasks) {
+        if (task.status && task.status === 'complete') {
+          completeTasks++;
+        }
+      }
+      return Math.floor((completeTasks / numTasks) * 100);
+    }
+  const percent = getPercentage();
   return (
     <div>
       <Badge count={chronicle?.tasks?.length || 0}>
@@ -22,7 +33,7 @@ const ChronicleDisplay = ({chronicle, viewChronicle}) => {
         >
           <p id='chronicleTitle'>{chronicle?.title}</p>
           <Progress
-            percent='50'
+            percent={percent}
             id='progressBarChronicle'
             strokeColor='hsl(113, 36%, 86%)'
             showInfo={false}

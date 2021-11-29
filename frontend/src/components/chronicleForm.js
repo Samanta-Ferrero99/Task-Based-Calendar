@@ -24,7 +24,6 @@ export default function ChronicleForm() {
   const [error, setError] = React.useState(false);
   const [openColor, setOpenColor] = React.useState(false);
   const [color, setColor] = React.useState('');
-
   const { user } = useSelector((state) => state.user);
 
   const statusOptions = taskStatus.map((status) => {
@@ -51,9 +50,9 @@ export default function ChronicleForm() {
     const chronicleObject = {
       ...values,
       dueDate: values['dueDate']?.format('MM-DD-YYYY') || null,
-      color: color.hex
+      color: color.hex,
+      type: values['type'] || 'work',
     };
-    console.log(chronicleObject);
     taskAPI.createChronicle(chronicleObject, user, setError, setSuccess);
   };
 

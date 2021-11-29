@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useSelector } from 'react-redux';
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
@@ -126,16 +127,6 @@ const NavBar = (isLoggedIn) => {
                   }}
                 >
                   Calendar
-                </Nav.Link>
-                <Nav.Link
-                  href="/settings"
-                  style={{
-                    color: "#1c1c1c",
-                    fontSize: "15px",
-                    fontWeight: 400,
-                  }}
-                >
-                  Settings
                 </Nav.Link>
                 <Button
                   size="sm"

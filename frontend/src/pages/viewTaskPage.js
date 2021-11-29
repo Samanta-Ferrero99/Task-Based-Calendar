@@ -2,17 +2,13 @@
 // Import dependencies
 import React from 'react';
 import { useHistory } from 'react-router';
-import { Button as AntButton, Tooltip, Progress } from 'antd';
+import { Button as AntButton, Tooltip } from 'antd';
 import { Row, Col, Modal } from 'antd';
-import { taskAPI } from '../api/task';
 import { PlusSquareFilled } from '@ant-design/icons';
 
 // Import components
-import MiddleTask from '../components/middleTask';
-import ChronicleTaskForm from '../components/chronicleTaskForm';
 import EditTaskForm from '../components/editTaskForm';
 import DashboardCard from '../components/dashboardCard';
-import DashboardCardNoScroll from '../components/noScrollDashboardCard';
 
 // The user's dashboard page -> overview of all tasks/projects
 export default function ViewTaskPage() {
@@ -21,13 +17,10 @@ export default function ViewTaskPage() {
   const data = history.location.state.data;
   const user = data.user;
   const task = data.task;
-  console.log(task);
 
   // Render the page
   return (
     <>
-      {/* <ProjectSidePanel /> */}
-
       <div className='dashboard' id='dashboard' style={{ paddingLeft: '8vw' }}>
         <Row style={{ marginTop: '35px', marginRight: '80px' }}>
           <DashboardCard width='100vw' height='100px' color='#ffffff'>

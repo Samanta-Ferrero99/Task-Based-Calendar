@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = `http://localhost:5000/api`;
+axios.defaults.baseURL = `https://api.chronicle.quest/api`;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.response.use(null, (error) => {
