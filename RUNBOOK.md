@@ -10,7 +10,7 @@ This document details instructions for creating  the deployment server from scra
 	- [Set up domain](#set-up-domain)
 	- [Install Nginx on server](#install-nginx-on-server)
 	- [Create SSL Certificate with Certbot](#create-ssl-certificate-with-certbot)
-	- [Install Node.js](#install-node.js)
+	- [Install Node.js](#install-nodejs)
 	- [Deploy React Frontend](#deploy-react-frontend)
 	- [Deploy Backend](#deploy-backend)
 - [Update Deployment](#update-deployment)
