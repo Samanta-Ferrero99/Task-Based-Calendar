@@ -287,7 +287,45 @@ Expected: User taken back to dashboard with their two chronicles still there.
 
 Preconditions: Test 7
 
-**TODO**
+1.	Hover over the left side orange button.
+
+Expected: A label that states “add a new task” is displayed.
+
+2.	Click on the "add a new task" button.
+
+Expected: A pop-up form appears. No fields are populated. 
+
+3.	Fill in form with all task information, including a new title, set due date to today, do not select a chronicle. Click “Submit” button. 
+
+Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.
+
+4.	Close the form and reload the page. 
+
+Expected: The task will be added to the “today” section of the dashboard.
+ 
+5.	Click on the “Add a new task” button again.
+
+Expected: A pop-up form appears. No fields are populated. 
+
+6.	Fill in form with all information, including a new title, set due date to tomorrow, do not select chronicle. Click the “Submit” button. 
+
+Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.
+
+7.	Close the form and reload the page. 
+
+Expected: The task will be added to the “tomorrow” section of the dashboard. 
+
+8.	Click one last time on the “Add a new task” button.
+
+Expected: A pop-up form appears. No fields are populated. 
+
+9.	Fill in form with all task information, including a new title, set due date to next week, do not select a chronicle. Click “Submit” button. 
+
+Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.
+
+10.	Close the form and reload the page.
+
+Expected: The task will be added to the “deadlines approaching” section of the dashboard. 
 
 <h2>Test 9: Edit a Task</h2>
 
