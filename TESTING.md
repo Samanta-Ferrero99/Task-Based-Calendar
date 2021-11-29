@@ -246,7 +246,42 @@ Expected: The title, description, type, due date, and creation date are listed o
 
 Preconditions: Test 6
 
-**TODO**
+1.	Hover over the right hand MAY NOT BE GREEN PLUS ANYMORE button.
+
+Expected: A label that states “add a new task to chronicle” is displayed. 
+
+2.	Click on the "add new task to chronicle" button.
+
+Expected: A pop-up form appears. No fields are populated. 
+
+3.	Click the submit button.
+
+Expected: Beneath the text box of title, it reminds the user in red text that they must enter a title.  
+
+4.	In the form, fill in just the required field of title and click the submit button. 
+
+Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. 
+
+5.	Close the form and reload the page. 
+
+Expected: The driving lessons chronicle now has a task with only a title. 
+
+6.	Click on the "add new task to chronicle" button.
+
+Expected: A pop-up form appears. No fields are populated. 
+
+7.	Enter information on all fields and click submit. 
+
+Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was 
+created successfully.
+
+8.	Close the form and reload the page. 
+
+Expected: The driving lessons chronicle now has two tasks, one with just a title and one with all its information( name, description, status, start date and due date). 
+
+9. Click on the "Dashboard" button on the navigation bar. 
+
+Expected: User taken back to dashboard with their two chronicles still there. 
 
 <h2>Test 8: Create a Task outside of a Chronicle</h2>
 
