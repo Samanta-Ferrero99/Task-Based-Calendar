@@ -2,7 +2,7 @@
 
 ### Deployment Runbook
 
-> [Runbook](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/blob/0b2fc8a37cb8c8feddc9e8b1b7cbdb5912ac7e15/RUNBOOK.md)
+> [Runbook](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/blob/main/RUNBOOK.md)
 
 ### Setup (Locally after Cloning)
 
