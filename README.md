@@ -1,8 +1,12 @@
 # WEBAPPS-10
 
-### Setup
+### Setup (Locally after Cloning)
 
 > [Instructions to Start Web Application](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/blob/main/SETUP.md)
+
+### Testing
+
+> [Acceptance Tests](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/blob/main/TESTING.md)
 
 ### Contents
 
@@ -17,19 +21,18 @@
 ### Milestone Report
 
 > TODO: Screencast
-> TODO: Demo Video
+
+> [Demo Video](https://drive.google.com/file/d/1sIXrSMs6DTvUPt8VLTGS542GPo8q17hO/view)
 
 ### Branch
 
 > TODO: Branch
 
-**In your submission's README.md, provide a final report of your project.
+**The problem your app solved**
 
-**Prepare a report that summarizes:
+**Your reflection on the development process and project.**
 
-**The problem your app solved
-**Your reflection on the development process and project.
-**Any limitations and future work.
+**Any limitations and future work.**
 
 
 ## M2
