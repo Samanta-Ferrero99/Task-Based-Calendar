@@ -15,7 +15,7 @@ This document details instructions for creating  the deployment server from scra
 	- [Deploy Backend](#deploy-backend)
 - [Update Deployment](#update-deployment)
 	- [Update Frontend Deployment](#update-frontend-deployment)
-	- [Update Backend/API Deployment](#update-backend/api-deployment)
+	- [Update Backend/API Deployment](#update-backendapi-deployment)
 - [Stop Server](#stop-server)
 
 # Prerequisites
