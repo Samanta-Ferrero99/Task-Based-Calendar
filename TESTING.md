@@ -331,4 +331,60 @@ Expected: The task will be added to the “deadlines approaching” section of t
 
 Preconditions: Test 8
 
-**TODO: Edit a task in some way in both a chronicle and outside. At the end of this test, log out.**
+1.	Click on the Driving lessons chronicle
+
+Expected: User will be moved to /view-chronicle page
+
+2.	Select click the task with only a title. 
+
+Expected: User will be taken to /view-task page. 
+
+3.	Select “Edit task” button on the right corner. 
+
+Expected: A pop-up form appears. No fields populated.  
+
+4.	Set a description, a start date and a due date. Click “Submit” 
+
+Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully.
+
+5.	Close pop-up form and click on “Dashboard” button on the navigation bar. Click on the Driving 
+Lessons chronicle. 
+
+Expected: The task now has the new information. 
+
+6.	Select that task again and change the status to complete. Click submit. 
+
+Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully.
+
+7.	Close pop-up form and click on “Dashboard” button on the navigation bar. Click on the Driving Lessons chronicle. 
+
+Expected: The task now is complete, and the progress bar was updated. 
+
+8.	If the other task is still incomplete, repeat steps to edit task and change the status to complete.  
+
+Expected: The task is now complete; the progress is at 100%. The progress bar is now a circle with a checkmark on it. 
+
+9.	Click on the “Dashboard” button on the navigation bar. 
+
+Expected: Returned to dashboard. Driving lessons chronicle is now complete (THIS PART DOESN’T WORK YET, still has half bar and a notification bubble) 
+
+10.	Click on the task due today. 
+
+Expected: User is redirected to view-task page. (THIS ALSO DOESN’T WORK YET)
+
+11.	Select “Edit task” 
+
+Expected: A pop-up form appears. No fields populated. 
+
+12.	Change the due date to tomorrow and click “Submit” 
+
+Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully.
+
+13.	Click the “Dashboard” button on the navigation bar. 
+
+Expected: The task is now on the tomorrow section. No tasks on today. 
+
+14.	Click “logout” button on navigation bar. 
+
+Expected: User is logged out and taken back to the /login page. 
+
