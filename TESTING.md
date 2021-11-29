@@ -1,20 +1,12 @@
 <h1>Acceptance Tests for CSC-WebApps-F21/WEBAPPS-10</h1>
 
-- Loading Website
-- Home Page
-- About Us/Contact Us
-- Log In/Log Out
-- Dashboard Page
-- Add a Work Task to Schedule, Check Calendar
-- Add Conflicting Tasks (Should be fine)
-
 <h2>Loading Testing Environment</h2>
 
-Type in the URL "https://chronicle.quest", which will take you straight to the landing page of the website.
+Type in the URL "https://chronicle.quest", which will take you straight to the landing page of the website. If the server is down for whatever reason, a backup method can be run locally through cloning the repository. Instructions for this can be found [here](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/blob/main/SETUP.md).
 
 <h2>Test 1: Contact Us Page</h2>
 
-Preconditions: User has just loaded in the server. The landing page is the page displayed.
+<h4>Preconditions: User has just loaded in the server. The landing page is the page displayed.</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
@@ -26,7 +18,7 @@ Preconditions: User has just loaded in the server. The landing page is the page 
 
 <h2>Test 2: Account Creation</h2>
 
-Preconditions: Test 1
+<h4>Preconditions: Test 1</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
@@ -48,7 +40,7 @@ Preconditions: Test 1
 
 <h2>Test 3: Account Creation via Google</h2>
 
-Preconditions: Test 2
+<h4>Preconditions: Test 2</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
@@ -62,7 +54,7 @@ Preconditions: Test 2
 
 <h2>Test 4: Log In/Log Out</h2>
 
-Preconditions: Test 3
+<h4>Preconditions: Test 3</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
@@ -77,7 +69,7 @@ Preconditions: Test 3
 
 <h2>Test 5: Create a Chronicle</h5>
 
-Preconditions: Test 4
+<h4>Preconditions: Test 4</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
@@ -94,7 +86,7 @@ Preconditions: Test 4
 
 <h2>Test 6: Edit a Chronicle</h2>
 
-Preconditions: Test 5
+<h4>Preconditions: Test 5</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
@@ -107,201 +99,50 @@ Preconditions: Test 5
 
 <h2>Test 7: Create a Task in a Chronicle</h2>
 
-Preconditions: Test 6
+<h4>Preconditions: Test 6</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-
-1.	Hover over the right hand MAY NOT BE GREEN PLUS ANYMORE button.
-
-Expected: A label that states “add a new task to chronicle” is displayed. 
-
-2.	Click on the "add new task to chronicle" button.
-
-Expected: A pop-up form appears. No fields are populated. 
-
-3.	Click the submit button.
-
-Expected: Beneath the text box of title, it reminds the user in red text that they must enter a title.  
-
-4.	In the form, fill in just the required field of title and click the submit button. 
-
-Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. 
-
-5.	Close the form and reload the page. 
-
-Expected: The driving lessons chronicle now has a task with only a title. 
-
-6.	Click on the "add new task to chronicle" button.
-
-Expected: A pop-up form appears. No fields are populated. 
-
-7.	Enter information on all fields and click submit. 
-
-Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was 
-created successfully.
-
-8.	Close the form and reload the page. 
-
-Expected: The driving lessons chronicle now has two tasks, one with just a title and one with all its information( name, description, status, start date and due date). 
-
-9. Click on the "Dashboard" button on the navigation bar. 
-
-Expected: User taken back to dashboard with their two chronicles still there. 
+| 1.	Hover over the right hand **MAY NOT BE GREEN PLUS ANYMORE** button. | A label that states “add a new task to chronicle” is displayed. |
+| 2.	Click on the right hand **MAY NOT BE GREEN PLUS ANYMORE** button. | A pop-up form appears, prompting the user to create a new task. It asks for a title, description, start date, due date, and status. Only the title is marked as required. No fields are populated. |
+| 3.	Click the submit button. | Expected: Beneath the text box of title, it reminds the user in red text that they must enter a title. |
+| 4.	In the form, fill in just the required title field with "Pay Driving Instructor" and click the submit button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
+| 5.	Close the form and reload the page. | The driving lessons chronicle now has a task with a title of "Pay Driving Instructor". |
+| 6. Click on the task labelled "Pay Driving Instructor". | The user is redirected to the "/view-task" page. It shows the title, an empty description and status, and a creation date. |
+| 7.	Click on the "add new task to chronicle" button. Enter the title as "Practice Driving". Fill in the rest of the fields with appropriate information and click submit. | Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
+| 8.	Close the form and reload the page. | Expected: The driving lessons chronicle now has two tasks, "Pay Driving Instructor" and "Practice Driving". |
+| 9. Click on the task labelled "Practice Driving". | The user is redirected to the "/view-task" page. It shows the title, the description, the status, the start date, the due date, and a creation date. | |
 
 <h2>Test 8: Create a Task outside of a Chronicle</h2>
 
-Preconditions: Test 7
+<h4>Preconditions: Test 7</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-
-1.	Hover over the left side orange button.
-
-Expected: A label that states “add a new task” is displayed.
-
-2.	Click on the "add a new task" button.
-
-Expected: A pop-up form appears. No fields are populated. 
-
-3.	Fill in form with all task information, including a new title, set due date to today, do not select a chronicle. Click “Submit” button. 
-
-Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.
-
-4.	Close the form and reload the page. 
-
-Expected: The task will be added to the “today” section of the dashboard.
- 
-5.	Click on the “Add a new task” button again.
-
-Expected: A pop-up form appears. No fields are populated. 
-
-6.	Fill in form with all information, including a new title, set due date to tomorrow, do not select chronicle. Click the “Submit” button. 
-
-Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.
-
-7.	Close the form and reload the page. 
-
-Expected: The task will be added to the “tomorrow” section of the dashboard. 
-
-8.	Click one last time on the “Add a new task” button.
-
-Expected: A pop-up form appears. No fields are populated. 
-
-9.	Fill in form with all task information, including a new title, set due date to next week, do not select a chronicle. Click “Submit” button. 
-
-Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.
-
-10.	Close the form and reload the page.
-
-Expected: The task will be added to the “deadlines approaching” section of the dashboard. 
+| 1. Click on the "Dashboard" button on the navigation bar. Hover over the left side orange button. | A label that states “add a new task” is displayed. |
+| 2.	Click on the "add a new task" button. | A pop-up form appears, prompting the user to create a new task. It asks for a title, description, start date, due date, and status. Only the title is marked as required. No fields are populated. |
+| 3.	Fill in form with all task information, including a title of "Water Plants". Set the due date to today and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
+| 4.	Close the form and reload the page. | The "Water Plants" task is added to the “today” section of the dashboard. |
+| 5.	Click on the “Add a new task” button again. Fill in form with all information, including a title of "Finish CSC 342 Project". Set the due date to tomorrow and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.  |
+| 6.	Close the form and reload the page. | The "Finish CSC 342 Project" task will be added to the “tomorrow” section of the dashboard. The "Water Plants" task is still set to be due today. |
+| 7.	Click one last time on the “Add a new task” button. Fill in form with all task information, including a title of "Study for Finals". Set the due date to three days ahead of the current date and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.|
+| 8.	Close the form and reload the page. | The "Study for Finals" task will be added to the “deadlines approaching” section of the dashboard. The other two tasks are in the appropriate sections from previous steps. |
 
 <h2>Test 9: Edit a Task</h2>
 
-Preconditions: Test 8
+<h4>Preconditions: Test 8</h4>
 
 | Step | Expected Results |
 | ----------- | ----------- |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-| | |
-
-1.	Click on the Driving lessons chronicle
-
-Expected: User will be moved to /view-chronicle page
-
-2.	Select click the task with only a title. 
-
-Expected: User will be taken to /view-task page. 
-
-3.	Select “Edit task” button on the right corner. 
-
-Expected: A pop-up form appears. No fields populated.  
-
-4.	Set a description, a start date and a due date. Click “Submit” 
-
-Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully.
-
-5.	Close pop-up form and click on “Dashboard” button on the navigation bar. Click on the Driving 
-Lessons chronicle. 
-
-Expected: The task now has the new information. 
-
-6.	Select that task again and change the status to complete. Click submit. 
-
-Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully.
-
-7.	Close pop-up form and click on “Dashboard” button on the navigation bar. Click on the Driving Lessons chronicle. 
-
-Expected: The task now is complete, and the progress bar was updated. 
-
-8.	If the other task is still incomplete, repeat steps to edit task and change the status to complete.  
-
-Expected: The task is now complete; the progress is at 100%. The progress bar is now a circle with a checkmark on it. 
-
-9.	Click on the “Dashboard” button on the navigation bar. 
-
-Expected: Returned to dashboard. Driving lessons chronicle is now complete (THIS PART DOESN’T WORK YET, still has half bar and a notification bubble) 
-
-10.	Click on the task due today. 
-
-Expected: User is redirected to view-task page. (THIS ALSO DOESN’T WORK YET)
-
-11.	Select “Edit task” 
-
-Expected: A pop-up form appears. No fields populated. 
-
-12.	Change the due date to tomorrow and click “Submit” 
-
-Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully.
-
-13.	Click the “Dashboard” button on the navigation bar. 
-
-Expected: The task is now on the tomorrow section. No tasks on today. 
-
-14.	Click “logout” button on navigation bar. 
-
-Expected: User is logged out and taken back to the /login page. 
-
+| 1.	Click on the "Driving Lessons" chronicle. Select click the "Pay Driving Instructor" task. Hover over the top right green plus button. | A label that states “edit task” is displayed. |
+| 2. Click on the top right green plus button. | A pop-up form appears. It has the same fields as the task creation form. Most of the fields are not populated. |
+| 3.	Set a description, a start date and a due date. Click on the “Submit” button. | Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully. |
+| 4.	Close pop-up form and click on “Dashboard” button on the navigation bar. Click on the "Driving Lessons" chronicle. | The task is updated to now have a start date, due date, and a description. |
+| 5.	Edit the "Pay Driving Instructor" task again and change the status to complete. Click on the "Submit" button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully. |
+| 6.	Close pop-up form and click on “Dashboard” button on the navigation bar. Click on the Driving Lessons chronicle. | The task now is complete, and the progress bar was updated to be half of a circle and displaying 50%. |
+| 7.	If the "Practice Driving" task is incomplete, repeat steps to edit task and change the status to complete. | The task now is complete, and the progress bar was updated to be a full circle and has a check mark in the middle, indicating it is 100% complete. |
+| 8.	Click on the “Dashboard” button on the navigation bar. 10.	Click on the "Water Plants" task due today. | User is redirected to view-task page. **(THIS ALSO DOESN’T WORK YET)** |
+| 9. Click on the top right green plus button. | A pop-up form appears. It has the same fields as the task creation form. Most of the fields are not populated. |
+| 10.	Change the due date to tomorrow and click on the “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully. |
+| 11.	Click the “Dashboard” button on the navigation bar. | The "Water Plants" task is now in the tomorrow section. No tasks are present in the today section. |
+| 12. Click on the "Log Out" button on the navigation bar. | User is logged out and taken back to the /login page. |
