@@ -25,13 +25,13 @@
 
 ### Milestone Report
 
-> TODO: Screencast
+> [Screencast](https://drive.google.com/file/d/1svdZW4hzJBS01nmuQzrrmsb6jEhv_cmS/view)
 
 > [Demo Video](https://drive.google.com/file/d/1sIXrSMs6DTvUPt8VLTGS542GPo8q17hO/view)
 
 ### Branch
 
-> TODO: Branch
+> [M3](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/tree/m3)
 
 **The problem your app solved**
 
