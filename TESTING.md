@@ -35,7 +35,7 @@ Type in the URL "https://chronicle.quest", which will take you straight to the l
 | 11. Change the password fields to be at least 7 characters long and matching. Change the username to alhudso4, a username that has already been registered. Click on the "Create My Account" button. | The account creation does not work because an account under that username already exists. |
 | 12. Change the username back to a username that has not been registered. Change the email address to be one that does not exist. Click on the "Create My Account" button. | The account creation does not work because the email does not exist. |
 | 13. Change the email address to be alhudso4@ncsu.edu, an email address that already exists with a Google account. Click on the "Create My Account" button. | The account creation does not work because the email is already associated with another account. |
-| 14. Change the email address to be doesnotexist@gmail.com, an email address that already exists from the regular account creation. Click on the "Create My Account" button. | The account creation does not work because the email is already associated with another account. |
+| 14. Change the email address to be alreadyexists@gmail.com, an email address that already exists from the regular account creation. Click on the "Create My Account" button. | The account creation does not work because the email is already associated with another account. |
 | 15. Change the email address back to one not already associated with another account. Click on the "Create My Account" button. | The user is redirected to the "/login" page to indicate successful account creation. |
 
 <h2>Test 3: Account Creation via Google</h2>
