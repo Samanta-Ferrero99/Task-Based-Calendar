@@ -1,5 +1,9 @@
 # WEBAPPS-10
 
+### Deployed Application
+
+> https://chronicle.quest
+
 ### Deployment Runbook
 
 > [Runbook](https://github.ncsu.edu/CSC-WebApps-F21/WEBAPPS-10/blob/main/RUNBOOK.md)
@@ -39,13 +43,19 @@ Our app “Chronicle” focused on solving the common college student problem of
 
 **Your reflection on the development process and project.**
 
-Over the course of our app's development, we carefully planned out which technologies to use and how each layer of the system would interact. This gave us an advantage in the later weeks of the project, as the structure we had created persisted through development and allowed us to put together the pieces of the backend and frontend without much difficulty. One of the biggest hurdles we experienced was with the "it works on my machine but not on yours" problem. Whether it be caused by different members using different operating systems, differing versions of Node and other dependencies, or by lack of experience with the tech stack causing us to overlook issues with simple fixes, we struggled to ensure a consistent development environment. In retrospect, we may have benefited from usilizing a containerized development environment, sharing a Docker image to avoid the operating system/dependency version issues. This would have also made deployment simpler, as we would have developed in the same environment as the production environment and could have automated certain things like dependency installation and server startup.
+Over the course of our app's development, we carefully planned out which technologies to use and how each layer of the system would interact. This gave us an advantage in the later weeks of the project, as the structure we had created persisted through development and allowed us to put together the pieces of the backend and frontend without much difficulty. 
+
+One of the biggest hurdles we experienced was with the "it works on my machine but not on yours" problem. Whether it be caused by different members using different operating systems, differing versions of Node and other dependencies, or by lack of experience with the tech stack causing us to overlook issues with simple fixes, we struggled to ensure a consistent development environment. In retrospect, we may have benefited from usilizing a containerized development environment, sharing a Docker image to avoid the operating system/dependency version issues. This would have also made deployment simpler, as we would have developed in the same environment as the production environment and could have automated certain things like dependency installation and server startup.
+
+I feel that we were successful in creating a well organized, clean application which conformed to the best practices of our stack. We utilized single responsibility components in the frontend, and created multiple layers of authentication to ensure a secure application. We also pushed ourselves to learn new technologies and skills, using our app as a playground for experimentation. We also gave our app the flexibility to grow and change, allowing ourselves to deviate from our initial vision to create a viable product within the time constraints placed upon us.
 
 **Any limitations and future work.**
 
-The current limitations of chronicle are we have no current way to send notifications to the users other than inside the chronicle website. We only had time and methods to set up one email sending form and it’s the one for the “About Us” page. We also currently have the website created with PC view in mind, so it might not look great on mobile.
+The biggest limitation of chronicle is that we have no current way to send notifications to the users other than within the application itself. We only had the time and resources to set up one email-sending form - the one for the “About Us” page. We also developed the website with desktop users in mind, so it is not currently optimized for mobile devices.
 
-For future work, we could separate work and life tasks into two different types of chronicles. The work would be this sequential style, with different tasks to complete. The life tasks would be different, instead opting for a “daily reminder” type of organization, where it reminds you to do the task daily or weekly as desired. That way a user could put “learning to play an instrument” and the weekly task be to practice that instrument. It could give encouraging messages when the task is set to completed. 
+In the future, we could opt to separate work and life tasks into different types of chronicles. The work would take on a sequential style, with dependent chains of tasks to complete. The life tasks would be changed, instead opting for a “daily reminder” type of organization, where it reminds you to do the task daily or weekly as desired, keeping up with "streaks". That way, a user could create a chronicle “learning to play an instrument” and add a weekly task to practice the instrument. It could display encouraging messages when the task is set to completed, and provide feedback when tasks are not regularly completed or are ignored.
+
+
 
 
 
