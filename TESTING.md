@@ -78,11 +78,11 @@ Type in the URL "https://chronicle.quest", which will take you straight to the l
 | 3. Click on the "Submit" button without entering any fields in. | Underneath the textbox for the title, a message appears stating that the chronicle must have a title. |
 | 4. Fill in the fields for type, description, due date, priority, and status. Click on the "Submit" button. | Underneath the textbox for the title, a message appears stating that the chronicle must have a title. |
 | 5. Enter in the title "My First Chronicle". Click on the "Submit" button. | Underneath the "Submit" button, a green text bubble will appear stating that the chronicle has been created successfully. |
-| 6. Close the form window. Refresh the dashboard page. | Under the section that shows a user's chronicles, a card will appear with the given title and due date. The color of this card will be grey. |
+| 6. Close the form window. | Under the section that shows a user's chronicles, a card will appear with the given title and due date. The color of this card will be grey. |
 | 7. Click on the newly created chronicle. | The user is redirected to the "/view-chronicle" page. Within it, the title, description, type, due date, and creation date is listed on the left side. The progress circle is set to 0% and there are no tasks listed in the chronicle. |
 | 8. Click on the "Dashboard" button in the navigation bar. Click on the green plus button. Select some type. Enter in the title "Driving Lessons". Click on the "set color" button. | A pop up window with several colors to choose from appear. |
 | 9. Select a color that is not grey. Click on the "OK" button. Click on the "Submit" button. | Underneath the "Submit" button, a green text bubble will appear stating that the chronicle has been created successfully. |
-| 10. Close the form window. Refresh the dashboard page. | The chronicle labelled "Driving Lessons" appears underneath the "My First Chronicle" chronicle. The "Driving Lessons" chronicle appears under the chosen color when the chronicle was created. |
+| 10. Close the form window. | The chronicle labelled "Driving Lessons" appears underneath the "My First Chronicle" chronicle. The "Driving Lessons" chronicle appears under the chosen color when the chronicle was created. |
 
 <h2>Test 6: Edit a Chronicle</h2>
 
@@ -105,12 +105,12 @@ Type in the URL "https://chronicle.quest", which will take you straight to the l
 | ----------- | ----------- |
 | 1.	Hover over the top right orange plus button. | A label that states “add a new task to chronicle” is displayed. |
 | 2.	Click on the top right orange plus button. | A pop-up form appears, prompting the user to create a new task. It asks for a title, description, start date, due date, and status. Only the title is marked as required. No fields are populated. |
-| 3.	Click the submit button. | Expected: Beneath the text box of title, it reminds the user in red text that they must enter a title. |
+| 3.	Click the submit button. | Beneath the text box of title, it reminds the user in red text that they must enter a title. |
 | 4.	In the form, fill in just the required title field with "Pay Driving Instructor" and click the submit button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
-| 5.	Close the form and reload the page. | The driving lessons chronicle now has a task with a title of "Pay Driving Instructor". |
+| 5.	Close the form. | The driving lessons chronicle now has a task with a title of "Pay Driving Instructor". |
 | 6. Click on the task labelled "Pay Driving Instructor". | The user is redirected to the "/view-task" page. It shows the title, an empty description and status, and a creation date. |
-| 7.	Click on the "add new task to chronicle" button. Enter the title as "Practice Driving". Fill in the rest of the fields with appropriate information and click submit. | Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
-| 8.	Close the form and reload the page. | Expected: The driving lessons chronicle now has two tasks, "Pay Driving Instructor" and "Practice Driving". |
+| 7.	Click on the "add new task to chronicle" button. Enter the title as "Practice Driving". The due date should be tomorrow's date. Fill in the rest of the fields with appropriate information and click submit. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
+| 8.	Close the form. | Expected: The driving lessons chronicle now has two tasks, "Pay Driving Instructor" and "Practice Driving". |
 | 9. Click on the task labelled "Practice Driving". | The user is redirected to the "/view-task" page. It shows the title, the description, the status, the start date, the due date, and a creation date. |
 
 <h2>Test 8: Create a Task outside of a Chronicle</h2>
@@ -119,14 +119,15 @@ Type in the URL "https://chronicle.quest", which will take you straight to the l
 
 | Step | Expected Results |
 | ----------- | ----------- |
-| 1. Click on the "Dashboard" button on the navigation bar. Hover over the left side orange button. | A label that states “add a new task” is displayed. |
-| 2.	Click on the "add a new task" button. | A pop-up form appears, prompting the user to create a new task. It asks for a title, description, start date, due date, and status. Only the title is marked as required. No fields are populated. |
-| 3.	Fill in form with all task information, including a title of "Water Plants". Set the due date to today and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
-| 4.	Close the form and reload the page. | The "Water Plants" task is added to the “today” section of the dashboard. |
-| 5.	Click on the “Add a new task” button again. Fill in form with all information, including a title of "Finish CSC 342 Project". Set the due date to tomorrow and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.  |
-| 6.	Close the form and reload the page. | The "Finish CSC 342 Project" task will be added to the “tomorrow” section of the dashboard. The "Water Plants" task is still set to be due today. |
-| 7.	Click one last time on the “Add a new task” button. Fill in form with all task information, including a title of "Study for Finals". Set the due date to three days ahead of the current date and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.|
-| 8.	Close the form and reload the page. | The "Study for Finals" task will be added to the “deadlines approaching” section of the dashboard. The other two tasks are in the appropriate sections from previous steps. |
+| 1. Click on the "Dashboard" button on the navigation bar. | The "Practice Driving" task that was created within the chronicle is now present on the right side of the dashboard under the tomorrow section. The "Pay Driving Instructor" task is not, as we did not set a due date. |
+| 2. Hover over the left side orange button. | A label that states “add a new task” is displayed. |
+| 3.	Click on the "add a new task" button. | A pop-up form appears, prompting the user to create a new task. It asks for a title, description, start date, due date, and status. Only the title is marked as required. No fields are populated. |
+| 4.	Fill in form with all task information, including a title of "Water Plants". Set the due date to today and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
+| 5.	Close the form. | The "Water Plants" task is added to the “today” section of the dashboard. |
+| 6.	Click on the “Add a new task” button again. Fill in form with all information, including a title of "Finish CSC 342 Project". Set the due date to tomorrow and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.  |
+| 7.	Close the form. | The "Finish CSC 342 Project" task will be added to the “tomorrow” section of the dashboard alongside the "Practice Driving" task. The "Water Plants" task is still set to be due today. |
+| 8.	Click one last time on the “Add a new task” button. Fill in form with all task information, including a title of "Study for Finals". Set the due date to three days ahead of the current date and do not select a chronicle. Click “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully.|
+| 9.	Close the form. | The "Study for Finals" task will be added to the “deadlines approaching” section of the dashboard. The other tasks are in the appropriate sections from previous steps. |
 
 <h2>Test 9: Edit a Task</h2>
 
@@ -145,4 +146,14 @@ Type in the URL "https://chronicle.quest", which will take you straight to the l
 | 9. Click on the top right green plus button. | A pop-up form appears. It has the same fields as the task creation form. Most of the fields are not populated. |
 | 10.	Change the due date to tomorrow and click on the “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully. |
 | 11.	Click the “Dashboard” button on the navigation bar. | The "Water Plants" task is now in the tomorrow section. No tasks are present in the today section. |
-| 12. Click on the "Log Out" button on the navigation bar. | User is logged out and taken back to the /login page. |
+
+<h2>Test 10: Calendar View</h2>
+
+<h4>Preconditions: Test 9</h4>
+
+| Step | Expected Results |
+| ----------- | ----------- |
+| 1. Click on the "Calendar" button on the navigation bar. | All of the tasks previously created are present in the calendar based on the appropriate due dates. No tasks are present today. "Water Plants", "Finish CSC 342 Project", and "Practice Driving" are all present for tomorrow's date. "Study for Finals" is due three days from the current date. |
+| 2. Click on the "Dashboard" button on the navigation bar. Click on the orange plus button to create a new task. Enter in "Christmas!" and set the due date to specifically be 12/25/2021. Click on the "Submit" button and close the form. | The task is successfully created, but does not appear in the dashboard as the due date is too far away. |
+| 3. Click on the "Calendar" button on the navigation bar. Change the month dropdown option to Dec. | The "Christmas!" task is listed under December 25th of 2021. |
+| 4. Click on the "Log Out" button on the navigation bar. | User is logged out and taken back to the /login page. |
