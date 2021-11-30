@@ -39,7 +39,7 @@ Our app “Chronicle” focused on solving the common college student problem of
 
 **Your reflection on the development process and project.**
 
-
+Over the course of our app's development, we carefully planned out which technologies to use and how each layer of the system would interact. This gave us an advantage in the later weeks of the project, as the structure we had created persisted through development and allowed us to put together the pieces of the backend and frontend without much difficulty. One of the biggest hurdles we experienced was with the "it works on my machine but not on yours" problem. Whether it be caused by different members using different operating systems, differing versions of Node and other dependencies, or by lack of experience with the tech stack causing us to overlook issues with simple fixes, we struggled to ensure a consistent development environment. In retrospect, we may have benefited from usilizing a containerized development environment, sharing a Docker image to avoid the operating system/dependency version issues. This would have also made deployment simpler, as we would have developed in the same environment as the production environment and could have automated certain things like dependency installation and server startup.
 
 **Any limitations and future work.**
 
