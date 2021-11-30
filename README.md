@@ -35,9 +35,18 @@
 
 **The problem your app solved**
 
+Our app “Chronicle” focused on solving the common college student problem of life-work balance and daily planning. Instead of the usual time-organized way of arranging tasks on a calendar, we utilized a sequential organization for tasks which allows for a sense of progression and completion. To do this we create “chronicles” a set of tasks declared as a group that the user wants to complete sequentially. These can be used to represent work projects with multiple milestones, or major life events that require multiple steps, and more.  
+
 **Your reflection on the development process and project.**
 
+
+
 **Any limitations and future work.**
+
+The current limitations of chronicle are we have no current way to send notifications to the users other than inside the chronicle website. We only had time and methods to set up one email sending form and it’s the one for the “About Us” page. We also currently have the website created with PC view in mind, so it might not look great on mobile.
+
+For future work, we could separate work and life tasks into two different types of chronicles. The work would be this sequential style, with different tasks to complete. The life tasks would be different, instead opting for a “daily reminder” type of organization, where it reminds you to do the task daily or weekly as desired. That way a user could put “learning to play an instrument” and the weekly task be to practice that instrument. It could give encouraging messages when the task is set to completed. 
+
 
 
 ## M2
