@@ -91,8 +91,8 @@ Type in the URL "https://chronicle.quest", which will take you straight to the l
 | Step | Expected Results |
 | ----------- | ----------- |
 | 1. Click on the chronicle labelled "Driving Lessons". | The title, type, and creation date are listed on the left side. The progress circle is set to 0% and the chronicle has no tasks associated with it. The title is surrounded by the color chosen during the chronicle creation. |
-| 2. Hover over the right hand **MAY NOT BE GREEN PLUS ANYMORE** button. | A label that states "edit chronicle" is displayed. |
-| 3. Click on the right hand **MAY NOT BE GREEN PLUS ANYMORE** button. | A pop-up form appears. The fields are the same as when creating a chronicle. Most of the fields are not populated. |
+| 2. Hover over the top right green plus button. | A label that states "edit chronicle" is displayed. |
+| 3. Click on the top right green plus button. | A pop-up form appears. The fields are the same as when creating a chronicle. Most of the fields are not populated. |
 | 4. Select a due date and enter in a description. Click on the "Submit" button. | Underneath the "Submit" button, a green text bubble will appear stating that the chronicle has been edited successfully. |
 | 5. Close the form. Click on the "Dashboard" button in the navigation bar. | The "Driving Lessons" chronicle now appears to have a due date associated with it with the selected due date present. |
 | 6. Click on the chronicle labelled "Driving Lessons". | The title, description, type, due date, and creation date are listed on the left side. The progress circle is set to 0% and the chronicle has no tasks associated with it. The title is surrounded by the color chosen during the chronicle creation. |
@@ -103,15 +103,15 @@ Type in the URL "https://chronicle.quest", which will take you straight to the l
 
 | Step | Expected Results |
 | ----------- | ----------- |
-| 1.	Hover over the right hand **MAY NOT BE GREEN PLUS ANYMORE** button. | A label that states “add a new task to chronicle” is displayed. |
-| 2.	Click on the right hand **MAY NOT BE GREEN PLUS ANYMORE** button. | A pop-up form appears, prompting the user to create a new task. It asks for a title, description, start date, due date, and status. Only the title is marked as required. No fields are populated. |
+| 1.	Hover over the top right orange plus button. | A label that states “add a new task to chronicle” is displayed. |
+| 2.	Click on the top right orange plus button. | A pop-up form appears, prompting the user to create a new task. It asks for a title, description, start date, due date, and status. Only the title is marked as required. No fields are populated. |
 | 3.	Click the submit button. | Expected: Beneath the text box of title, it reminds the user in red text that they must enter a title. |
 | 4.	In the form, fill in just the required title field with "Pay Driving Instructor" and click the submit button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
 | 5.	Close the form and reload the page. | The driving lessons chronicle now has a task with a title of "Pay Driving Instructor". |
 | 6. Click on the task labelled "Pay Driving Instructor". | The user is redirected to the "/view-task" page. It shows the title, an empty description and status, and a creation date. |
 | 7.	Click on the "add new task to chronicle" button. Enter the title as "Practice Driving". Fill in the rest of the fields with appropriate information and click submit. | Expected: Underneath the “Submit” button, a green text bubble will appear stating that a task was created successfully. |
 | 8.	Close the form and reload the page. | Expected: The driving lessons chronicle now has two tasks, "Pay Driving Instructor" and "Practice Driving". |
-| 9. Click on the task labelled "Practice Driving". | The user is redirected to the "/view-task" page. It shows the title, the description, the status, the start date, the due date, and a creation date. | |
+| 9. Click on the task labelled "Practice Driving". | The user is redirected to the "/view-task" page. It shows the title, the description, the status, the start date, the due date, and a creation date. |
 
 <h2>Test 8: Create a Task outside of a Chronicle</h2>
 
@@ -141,7 +141,7 @@ Type in the URL "https://chronicle.quest", which will take you straight to the l
 | 5.	Edit the "Pay Driving Instructor" task again and change the status to complete. Click on the "Submit" button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully. |
 | 6.	Close pop-up form and click on “Dashboard” button on the navigation bar. Click on the Driving Lessons chronicle. | The task now is complete, and the progress bar was updated to be half of a circle and displaying 50%. |
 | 7.	If the "Practice Driving" task is incomplete, repeat steps to edit task and change the status to complete. | The task now is complete, and the progress bar was updated to be a full circle and has a check mark in the middle, indicating it is 100% complete. |
-| 8.	Click on the “Dashboard” button on the navigation bar. 10.	Click on the "Water Plants" task due today. | User is redirected to view-task page. **(THIS ALSO DOESN’T WORK YET)** |
+| 8.	Click on the “Dashboard” button on the navigation bar. Click on the "Water Plants" task due today. | User is redirected to view-task page, showing the title, an empty description and status, the due date, and creation date. |
 | 9. Click on the top right green plus button. | A pop-up form appears. It has the same fields as the task creation form. Most of the fields are not populated. |
 | 10.	Change the due date to tomorrow and click on the “Submit” button. | Underneath the “Submit” button, a green text bubble will appear stating that a task was edited successfully. |
 | 11.	Click the “Dashboard” button on the navigation bar. | The "Water Plants" task is now in the tomorrow section. No tasks are present in the today section. |
