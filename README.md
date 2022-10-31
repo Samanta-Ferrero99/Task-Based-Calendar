@@ -1,6 +1,6 @@
 # WEBAPPS-10
 
-### Deployed Application
+### Deployed Application (Deprecated)
 
 > https://chronicle.quest
 
